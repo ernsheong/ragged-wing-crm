@@ -8,5 +8,36 @@
       -@person.errors.full_messages.each do |msg|
         %li= msg
 
+  = label :person, :first_name, 'First Name'
+  = text_field :person, 'first_name'
+
+  = label :person, :last_name, 'Last Name'
+  = text_field :person, 'last_name'
+
+  = label :person, :title, 'Title'
+  = select :person, :title, [ "Mr.", "Ms.", "Mrs." ]
+
+  = label :person, :phone_cell, 'Cell Phone'
+  = text_field :person, 'phone_cell'
+
+  = label :person, :phone_home, 'Home Phone'
+  = text_field :person, 'phone_home'
+
+  = label :person, :phone_office, 'Office Phone'
+  = text_field :person, 'phone_office'
+
+
+  = label :person, :email1, 'Primary Email'
+  = text_field :person, 'email1'
+
+  = label :person, :email2, 'Other Email'
+  = text_field :person, 'email2'
+
+  = label :person, :website2, 'Website 1'
+  = text_field :person, 'website1'
+  = label :person, :website2, 'Website 2'
+  = text_field :person, 'website2'
+
+
   %div.actions
     = f.submit

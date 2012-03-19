@@ -1,5 +1,33 @@
 %p#notice= notice
 
-%h1= "#{@person.first_name} #{@person.last_name}"
+%h1= "#{@person.title} #{@person.first_name} #{@person.last_name}"
+
+%ul
+  %li
+    Address 1 (TODO)
+  %li
+    Address 2 (TODO)
+  %li
+    Email 1:
+    = @person.email1
+  %li
+    Email 2:
+    = @person.email2
+  %li
+    Cell Phone:
+    = @person.phone_cell
+  %li
+    Home Phone:
+    = @person.phone_home
+  %li
+    Work Phone:
+    = @person.phone_office
+  %li
+    Website 1:
+    = @person.website1
+  %li
+    Website 2:
+    = @person.website2
+
 = link_to 'Edit', edit_person_path(@person)
 = link_to 'Back', people_path
