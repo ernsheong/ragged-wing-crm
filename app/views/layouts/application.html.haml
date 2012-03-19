@@ -21,7 +21,7 @@
             = form_tag({:controller => "people", :action => "search"}, :method => "get") do
               = select :person, :title, [ "people"]
               = text_field_tag(:q)
-              = submit_tag("Search", :class => "button")
+              = submit_tag("Go", :class => "button")
       %div#body.grid_12.alpha.omega
         = yield
       %div#footer.grid_12.alpha.omega.align_right &copy; 2012
