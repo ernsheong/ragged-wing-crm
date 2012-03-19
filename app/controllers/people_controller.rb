@@ -10,6 +10,11 @@ class PeopleController < ApplicationController
     end
   end
 
+
+  def search
+    @people = Person.search(params[:q]) # Array 
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show
