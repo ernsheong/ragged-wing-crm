@@ -1,6 +1,10 @@
 RaggedWing::Application.routes.draw do
+  
+  # People Controller Mappings
+  match 'people/search' => 'people#search'
   resources :people
-
+  
+  
   get "home/index"
 
   # The priority is based upon order of creation:
