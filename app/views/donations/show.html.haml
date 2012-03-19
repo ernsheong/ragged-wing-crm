@@ -1,0 +1,26 @@
+- if notice
+  %p#notice= notice
+
+%h1= "Details for: Donation TODO"
+
+%ul
+  %li
+    Donor Name:
+  %li
+    Amount: 
+    = @donation.amount
+  %li
+    Date: 
+    = @donation.date
+  %li
+    Payment Method
+    = @donation.payment_method
+  %li
+    Campaign
+    = @donation.campaign
+  %li
+    Solicitation Method
+    = @donation.solicitation_method
+
+= link_to 'Edit', edit_donation_path(@donation)
+= link_to 'Back', donations_path

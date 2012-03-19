@@ -1,0 +1,32 @@
+= form_for(@donation) do |f|
+  - if @donation.errors.any?
+    %div#iderror_explanation
+      %h2
+        =pluralize(@donation.errors.count, "error")
+        prohibited this donation from being saved:
+      %ul
+      -@donation.errors.full_messages.each do |msg|
+        %li= msg
+
+  -# TODO: Figure out how to identify right person in Person table
+  -#= label :donation, :title, 'Title'
+  -#= select :donation, :title, [ "Mr.", "Ms.", "Mrs." ]
+  = label :donation, :amount, 'Amount'
+  = text_field :donation, 'amount'
+  = label :donation, :date, 'Date'
+  = text_field :donation, 'date'
+  %br
+
+  = label :donation, :payment_method, 'Payment Method'
+  = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ]
+  %br
+  -# TODO: Have a Campaign table to store all campaigns?
+  = label :donation, :campaign, 'Campaign'
+  = select :donation, :campaign, ['Fund Raiser', 'Lovely Dinner']
+  -#@campaigns
+  %br
+  = label :donation, :solicitation_method, 'Solicitation Method'
+  = select :donation, :solicitation_method, ['Internet', 'E-mail', 'Phone', 'Donor Event']
+
+  %div.actions
+    = f.submit(:class => "button")

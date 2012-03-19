@@ -6,7 +6,7 @@ Feature: show a specific contact's profile page
 
 Background: contacts have been added to database
 
-  Given the following contacts exist:
+  Given the following people exist:
   | name                   | relationship | phone       | address |
   | Jon Lin                | scrumaster   | 1333333333  | addr_1  |
   | Kevin Tham             | donor        | 1111111111  | addr_2  |

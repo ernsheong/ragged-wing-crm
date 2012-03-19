@@ -1,0 +1,30 @@
+%h1 List of All Donations
+
+%table
+  %tr
+    %th Date
+    %th Donor Name
+    %th Amount
+    %th Payment Method
+    %th Campaign
+    %th Solicitation Method
+  - @donations.each do |donation|
+    %tr
+      %td
+        = link_to "#{donation.date}", donation
+      %td
+      -#  = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
+      %td
+        = donation.amount
+      %td
+        = donation.payment_method
+      %td
+        = donation.campaign
+      %td
+        = donation.solicitation_method
+      %td
+        = link_to 'Edit', edit_donation_path(donation)
+        = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete
+%br
+
+= link_to 'Add New Donation', new_donation_path

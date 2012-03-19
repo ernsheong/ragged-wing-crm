@@ -1,4 +1,4 @@
-Given /the following people in database/ do |people_table|
+Given /the following people exist/ do |people_table|
 	people_table.hashes.each do |person|
 		new_person = {:first_name => person['first_name'], :last_name => person['last_name']}
 		Person.create!(new_person)

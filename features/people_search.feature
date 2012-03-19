@@ -6,7 +6,7 @@ Feature: search for people by name
 
 Background: 
 
-  Given the following people in database:
+  Given the following people exist:
   | first_name     | last_name | 
   | Winston        | Chow      | 
   | Jonathan       | Lin       | 
