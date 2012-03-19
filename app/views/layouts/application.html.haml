@@ -9,4 +9,17 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = yield
+    %div#header.container_12
+      %h1 Ragged Wing CRM (version 1.0)
+    %br
+    %div#body.container_12
+      %div#content.grid_9.alpha
+        = yield
+      %div#dashboard.grid_3.omega
+        %div#dashboard-title.align_center
+          Menu
+        %ul#nav
+          %li= link_to "Home", "/"
+          %li= link_to "People", people_path
+    %br
+    %div#footer.container_12.align_right &copy; 2012

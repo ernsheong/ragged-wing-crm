@@ -1,15 +1,25 @@
-%h1 All People
+%h2 All People
 
 %table
   %tr
     %th Name
-    %th &nbsp;
+    %th Address
+    %th Email
+    %th Cell
     %th &nbsp;
   - @people.each do |person|
     %tr
-      %td= link_to "#{person.first_name} #{person.last_name}", person
-      %td= link_to 'Edit', edit_person_path(person)
-      %td= link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
+      %td
+        = link_to "#{person.first_name} #{person.last_name}", person
+      %td
+        = "TODO" #person.address1
+      %td
+        = person.email1
+      %td
+        = person.phone_cell
+      %td
+        = link_to 'Edit', edit_person_path(person)
+        = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
 
 %br
 
