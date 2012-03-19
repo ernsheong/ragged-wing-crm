@@ -12,7 +12,8 @@ class PeopleController < ApplicationController
 
 
   def search
-    @people = Person.search(params[:q]) # Array 
+    @people = Person.search(params[:q]) # Array
+    render "index"
   end
 
   # GET /people/1

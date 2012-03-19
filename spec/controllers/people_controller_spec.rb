@@ -41,17 +41,17 @@ describe PeopleController do
 
   describe "GET search" do 
     it "searches by first name and assigns results to @people" do 
-      get :search, {:q => {:first_name => 'John'}}, valid_session
+      get :search, {:q => 'John'}, valid_session
       assigns(:people).should eq([@person])
     end
 
     it "searches by last name and assigns results to @people" do 
-      get :search, {:q => {:last_name => 'Doe'}}, valid_session
+      get :search, {:q => 'Doe'}, valid_session
       assigns(:people).should eq([@person])
     end
 
-    it "searches by name and assigns results to @people" do
-      get :search, {:q => {:full_name => 'John Doe'}}, valid_session
+    it "searches by full name and assigns results to @people" do
+      get :search, {:q => 'John Doe'}, valid_session
       assigns(:people).should eq([@person])
     end
   end
