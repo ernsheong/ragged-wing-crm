@@ -11,31 +11,57 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312052334) do
+ActiveRecord::Schema.define(:version => 20120318055325) do
 
-  create_table "contacts", :force => true do |t|
+  create_table "addresses", :force => true do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "members", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "organization_id"
+    t.string   "role"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.integer  "person_id"
+    t.integer  "address_id"
+    t.string   "website"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "people", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
-    t.string   "role"
-    t.string   "phone_1"
-    t.string   "phone_2"
-    t.string   "phone_3"
-    t.string   "email_1"
-    t.string   "email_2"
-    t.string   "street_1"
-    t.string   "city_1"
-    t.string   "state_1"
-    t.string   "zip_1"
-    t.string   "country_1"
-    t.string   "street_2"
-    t.string   "city_2"
-    t.string   "state_2"
-    t.string   "zip_2"
-    t.string   "country_2"
-    t.string   "website_1"
-    t.string   "website_2"
+    t.string   "phone_cell"
+    t.string   "phone_home"
+    t.string   "phone_office"
+    t.string   "email1"
+    t.string   "email2"
+    t.integer  "address_id_1"
+    t.integer  "address_id_2"
+    t.string   "website1"
+    t.string   "website2"
     t.string   "other"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "type"
     t.boolean  "internal"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

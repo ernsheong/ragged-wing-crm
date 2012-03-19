@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "contacts/show" do
+describe "people/show" do
   before(:each) do
-    @contact = assign(:contact, stub_model(Contact))
+    @person = assign(:person, stub_model(Person))
   end
 
   it "renders attributes in <p>" do

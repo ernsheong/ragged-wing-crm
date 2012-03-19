@@ -1,5 +1,5 @@
 RaggedWing::Application.routes.draw do
-  resources :contacts
+  resources :people
 
   get "home/index"
 
