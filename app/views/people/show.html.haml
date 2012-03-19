@@ -1,0 +1,5 @@
+%p#notice= notice
+
+%h1= "#{@person.first_name} #{@person.last_name}"
+= link_to 'Edit', edit_person_path(@person)
+= link_to 'Back', people_path

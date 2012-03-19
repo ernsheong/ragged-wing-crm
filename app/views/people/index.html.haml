@@ -1,0 +1,16 @@
+%h1 All People
+
+%table
+  %tr
+    %th Name
+    %th &nbsp;
+    %th &nbsp;
+- @people.each do |person|
+  %tr
+    %td= link_to "#{person.first_name} #{person.last_name}", person
+    %td= link_to 'Edit', edit_person_path(person)
+    %td= link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
+
+%br
+
+= link_to 'Add New Person', new_person_path
