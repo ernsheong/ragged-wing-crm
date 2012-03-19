@@ -4,8 +4,10 @@ Feature: search for people by name
   So that I can find people to follow up with
   I want to be able to find people by their name
 
-Background: Given people in database
-  | first_name     | last_name |
+Background: 
+
+  Given the following people in database:
+  | first_name     | last_name | 
   | Winston        | Chow      | 
   | Jonathan       | Lin       | 
   | Kevin          | Tham      | 
@@ -13,11 +15,13 @@ Background: Given people in database
   
 
 Scenario: Find existing person
+  When I visit the home page
   When I enter "Kevin" in the searchbox
-  And  I press "Search"
+  And  I press "Go"
   Then I should see "Kevin"
 
 Scenario: Find non-existing person
+  When I visit the home page
   When I enter "Ivan" in the searchbox
-  And  I press "Search"
+  And  I press "Go"
   Then I should not see "Ivan"
