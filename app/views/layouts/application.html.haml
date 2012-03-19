@@ -9,17 +9,19 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    %div#header.container_12
-      %h1 Ragged Wing CRM (version 1.0)
-    %br
-    %div#body.container_12
-      %div#content.grid_9.alpha
+    %div#wrapper.container_12
+      %div#header.grid_12.alpha.omega
+        %h1#title
+          Ragged Wing CRM
+        %div#nav
+          %ul#nav_links
+            %li= link_to "Home", "/"
+            %li= link_to "People", people_path
+          %div#search
+            = form_tag({:controller => "people", :action => "search"}, :method => "get") do
+              = select :person, :title, [ "people"]
+              = text_field_tag(:q)
+              = submit_tag("Search", :class => "button")
+      %div#body.grid_12.alpha.omega
         = yield
-      %div#dashboard.grid_3.omega
-        %div#dashboard-title.align_center
-          Menu
-        %ul#nav
-          %li= link_to "Home", "/"
-          %li= link_to "People", people_path
-    %br
-    %div#footer.container_12.align_right &copy; 2012
+      %div#footer.grid_12.alpha.omega.align_right &copy; 2012

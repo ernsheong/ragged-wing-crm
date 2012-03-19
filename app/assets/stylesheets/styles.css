@@ -9,12 +9,7 @@ body {
   color: #444;
 }
 
-h1 {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 90px 10px 15px;
-  text-shadow: #fff 0 1px 0;
-}
-
+h1,
 h2,
 h3,
 h4,
@@ -24,11 +19,16 @@ h6 {
 }
 
 a {
-  color: #06c;
+  color: #0098D1;
 }
 
 a:hover {
-  color: #c60;
+  color: #C60;
+}
+
+a:active {
+  color: #FF9933;
+  text-shadow: 0 0 1em #FFCC99;
 }
 
 small {
@@ -44,6 +44,19 @@ small {
 
 .align_right {
   text-align: right;
+}
+
+input {
+  border: 1px solid #DDD;
+  padding: 7px 6px 5px 6px;
+}
+
+input.button {
+  padding:4px 8px;
+  font-size:14px;
+  color:#FFF;
+  background-color:#0098D1;
+  border-radius:5px;
 }
 
 /* `Data Table
@@ -118,43 +131,57 @@ code {
   padding: 0 2px;
 }
 
+h1 {
+  color:#0098D1;
+}
+
 /* `Header
 ----------------------------------------------------------------------------------------------------*/
 #header {
-  border-bottom: 5px solid #666;
+  margin:5px 0;
+  border-bottom: 5px solid #888;
 }
 #header h1 {
+  color:#888;
   margin-bottom:0;
 }
 
 /* `Nav
 ----------------------------------------------------------------------------------------------------*/
-#dashboard {
-  border:1px solid #666;
+#nav {
+  margin:4px 0;
+  border:2px solid #888;
+  padding:4px 4px 6px 0;
+  border-radius:5px;
 }
 
-#dashboard-title{
-  font-size:14px;
-  font-weight:bold;
-}
-
-ul#nav {
+ul#nav_links {
   margin:0;
-  padding: 2px 5px 2px 8px;
+  padding:6px 0 4px 6px;
+  display:inline-block;
   list-style-type: none;
 }
 
-ul#nav li {
+ul#nav_links li {
   margin:0;
-  padding:2px 0;
+  padding:4px 15px 0 0;
+  display:inline;
+  font-size:14px;
 }
 
-ul#nav a {
+#nav_links a {
   text-decoration:none;
 }
 
+#search {
+  display:inline;
+  float:right;
+}
+
+/* `Footer
+----------------------------------------------------------------------------------------------------*/
 #footer {
-  border-top:5px solid #666;
+  border-top:5px solid #888;
 }
 
 /* Table
