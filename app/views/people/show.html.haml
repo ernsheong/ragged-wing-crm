@@ -3,35 +3,41 @@
 
 %h1= "#{@person.title} #{@person.first_name} #{@person.last_name}"
 
-%h2 Address and Contact Information
-%ul
-  %li
-    Address 1:
-    - if @address1
-      = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
-  %li
-    Address 2:
-  %li
-    Email 1:
-    = @person.email1
-  %li
-    Email 2:
-    = @person.email2
-  %li
-    Cell Phone:
-    = @person.phone_cell
-  %li
-    Home Phone:
-    = @person.phone_home
-  %li
-    Work Phone:
-    = @person.phone_office
-  %li
-    Website 1:
-    = @person.website1
-  %li
-    Website 2:
-    = @person.website2
+
+%div
+  %h2 Address and Contact Information
+  %table
+    %tr
+      %td Address 1
+      %td
+        - if @address1 
+          = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
+    %tr
+      %td Address 2
+      %td
+        - if @address2 
+          = "#{@address2.street}, #{@address2.city}, #{@address2.state} #{@address2.zip}, #{@address2.country}"
+    %tr
+      %td Email 1
+      %td= @person.email1
+    %tr
+      %td Email 2
+      %td= @person.email2
+    %tr
+      %td Cell Phone:
+      %td= @person.phone_cell
+    %tr
+      %td Home Phone:
+      %td= @person.phone_home
+    %tr
+      %td Work Phone:
+      %td= @person.phone_office
+    %tr
+      %td Website 1:
+      %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
+    %tr
+      %td Website 2:
+      %td= @person.website2
 
 = link_to 'Edit', edit_person_path(@person)
 = link_to 'Back', people_path
