@@ -8,34 +8,58 @@
       -@person.errors.full_messages.each do |msg|
         %li= msg
 
-  = label :person, :title, 'Title'
-  = select :person, :title, [ "Mr.", "Ms.", "Mrs." ]
-  = label :person, :first_name, 'First Name'
-  = text_field :person, 'first_name'
-  = label :person, :last_name, 'Last Name'
-  = text_field :person, 'last_name'
-  %br
-
-  = label :person, :phone_cell, 'Cell Phone'
-  = text_field :person, 'phone_cell'
-  %br
-  = label :person, :phone_home, 'Home Phone'
-  = text_field :person, 'phone_home'
-  %br
-  = label :person, :phone_office, 'Office Phone'
-  = text_field :person, 'phone_office'
-  %br
-  = label :person, :email1, 'Primary Email'
-  = text_field :person, 'email1'
-  %br
-  = label :person, :email2, 'Other Email'
-  = text_field :person, 'email2'
-  %br
-  = label :person, :website2, 'Website 1'
-  = text_field :person, 'website1'
-  %br
-  = label :person, :website2, 'Website 2'
-  = text_field :person, 'website2'
-
+  %div.grid_5.alpha
+    %h2 Name
+    %table
+      %tr
+        %td= label :person, :title, 'Title'
+        %td= select :person, :title, [ "Mr.", "Ms.", "Mrs." ]
+      %tr
+        %td= label :person, :first_name, 'First Name'
+        %td= text_field :person, 'first_name'
+      %tr
+        %td= label :person, :last_name, 'Last Name'
+        %td= text_field :person, 'last_name'
+    %h2 Address
+    %table
+      %tr
+        %td= label :address1, :street, 'Street'
+        %td= text_field :address1, 'street'
+      %tr
+        %td= label :address1, :city, 'City'
+        %td= text_field :address1, 'city'
+      %tr
+        %td= label :address1, :state, 'State'
+        %td= text_field :address1, 'state'
+      %tr
+        %td= label :address1, :zip, 'Zip'
+        %td= text_field :address1, 'zip'
+      %tr
+        %td= label :address1, :country, 'Country'
+        %td= select :address1, :country, [ "USA" ]
+  %div.grid_7.omega
+    %h2 Contact Information
+    %table
+      %tr
+        %td= label :person, :phone_cell, 'Cell Phone'
+        %td= text_field :person, 'phone_cell'
+      %tr
+        %td= label :person, :phone_home, 'Home Phone'
+        %td= text_field :person, 'phone_home'
+      %tr
+        %td= label :person, :phone_office, 'Office Phone'
+        %td= text_field :person, 'phone_office'
+      %tr
+        %td= label :person, :email1, 'Primary Email'
+        %td= text_field :person, 'email1'
+      %tr
+        %td= label :person, :email2, 'Other Email'
+        %td= text_field :person, 'email2'
+      %tr
+        %td= label :person, :website2, 'Website 1'
+        %td= text_field :person, 'website1'
+      %tr
+        %td= label :person, :website2, 'Website 2'
+        %td= text_field :person, 'website2'
   %div.actions
     = f.submit(:class => "button")

@@ -1,13 +1,16 @@
 - if notice
   %p#notice= notice
 
-%h1= "Details for: #{@person.title} #{@person.first_name} #{@person.last_name}"
+%h1= "#{@person.title} #{@person.first_name} #{@person.last_name}"
 
+%h2 Address and Contact Information
 %ul
   %li
-    Address 1 (TODO)
+    Address 1:
+    - if @address1
+      = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
   %li
-    Address 2 (TODO)
+    Address 2:
   %li
     Email 1:
     = @person.email1

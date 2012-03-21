@@ -12,7 +12,8 @@
       %td
         = link_to "#{person.first_name} #{person.last_name}", person
       %td
-        = "TODO" #person.address1
+        - if person.address1
+          = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
       %td
         = person.email1
       %td
