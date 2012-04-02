@@ -11,7 +11,7 @@ gem 'paperclip'
 # gems used for testing and development
 group :development, :test do
   gem 'sqlite3'
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
@@ -29,7 +29,7 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.4'
   gem 'coffee-rails', '~> 3.2.2'
-
+  gem 'bootstrap-sass', '~> 2.0.2'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 

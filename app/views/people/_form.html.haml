@@ -1,6 +1,6 @@
-= form_for(@person) do |f|
+= form_for(@person, :html => { :class => "form-horizontal"} ) do |f|
   - if @person.errors.any?
-    %div#iderror_explanation
+    %div#error_explanation
       %h2
         =pluralize(@person.errors.count, "error")
         prohibited this person from being saved:
@@ -8,58 +8,72 @@
       -@person.errors.full_messages.each do |msg|
         %li= msg
 
-  %div.grid_5.alpha
-    %h2 Name
-    %table
-      %tr
-        %td= label :person, :title, 'Title'
-        %td= select :person, :title, [ "Mr.", "Ms.", "Mrs." ]
-      %tr
-        %td= label :person, :first_name, 'First Name'
-        %td= text_field :person, 'first_name'
-      %tr
-        %td= label :person, :last_name, 'Last Name'
-        %td= text_field :person, 'last_name'
-    %h2 Address
-    %table
-      %tr
-        %td= label :address1, :street, 'Street'
-        %td= text_field :address1, 'street'
-      %tr
-        %td= label :address1, :city, 'City'
-        %td= text_field :address1, 'city'
-      %tr
-        %td= label :address1, :state, 'State'
-        %td= text_field :address1, 'state'
-      %tr
-        %td= label :address1, :zip, 'Zip'
-        %td= text_field :address1, 'zip'
-      %tr
-        %td= label :address1, :country, 'Country'
-        %td= select :address1, :country, [ "USA" ]
-  %div.grid_7.omega
-    %h2 Contact Information
-    %table
-      %tr
-        %td= label :person, :phone_cell, 'Cell Phone'
-        %td= text_field :person, 'phone_cell'
-      %tr
-        %td= label :person, :phone_home, 'Home Phone'
-        %td= text_field :person, 'phone_home'
-      %tr
-        %td= label :person, :phone_office, 'Office Phone'
-        %td= text_field :person, 'phone_office'
-      %tr
-        %td= label :person, :email1, 'Primary Email'
-        %td= text_field :person, 'email1'
-      %tr
-        %td= label :person, :email2, 'Other Email'
-        %td= text_field :person, 'email2'
-      %tr
-        %td= label :person, :website2, 'Website 1'
-        %td= text_field :person, 'website1'
-      %tr
-        %td= label :person, :website2, 'Website 2'
-        %td= text_field :person, 'website2'
+  %fieldset
+    %legend Name
+    %div.control-group
+      = label :person, :title, 'Title', :class => "control-label"
+      %div.controls
+        = select :person, :title, [ "Mr.", "Ms.", "Mrs." ], {}, { :class => "span1" }
+    %div.control-group
+      = label :person, :first_name, 'First Name', :class => "control-label"
+      %div.controls
+        = text_field :person, 'first_name', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :last_name, 'Last Name', :class => "control-label"
+      %div.controls
+        = text_field :person, 'last_name', :class => "input-xlarge"
+  
+  %fieldset
+    %legend Address
+    %div.control-group
+      = label :address1, :street, 'Street', :class => "control-label"
+      %div.controls
+        = text_field :address1, 'street', :class => "input-xlarge"
+    %div.control-group
+      = label :address1, :city, 'City', :class => "control-label"
+      %div.controls
+        = text_field :address1, 'city', :class => "input-xlarge"
+    %div.control-group
+      = label :address1, :state, 'State', :class => "control-label"
+      %div.controls
+        = text_field :address1, 'state', :class => "input-xlarge"
+    %div.control-group
+      = label :address1, :zip, 'Zip', :class => "control-label"
+      %div.controls
+        = text_field :address1, 'zip', :class => "input-xlarge"
+    %div.control-group
+      = label :address1, :country, 'Country', :class => "control-label"
+      %div.controls
+        = select :address1, :country, [ "USA" ]
+  %fieldset
+    %legend Contact Information
+    %div.control-group
+      = label :person, :phone_cell, 'Cell Phone', :class => "control-label"
+      %div.controls
+        = text_field :person, 'phone_cell', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :phone_home, 'Home Phone', :class => "control-label"
+      %div.controls
+        = text_field :person, 'phone_home', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :phone_office, 'Office Phone', :class => "control-label"
+      %div.controls
+        = text_field :person, 'phone_office', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :email1, 'Primary Email', :class => "control-label"
+      %div.controls
+        = text_field :person, 'email1', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :email2, 'Other Email', :class => "control-label"
+      %div.controls
+        = text_field :person, 'email2', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :website2, 'Website 1', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website1', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :website2, 'Website 2', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website2', :class => "input-xlarge"
   %div.actions
-    = f.submit(:class => "button")
+    = f.submit(:class => "btn btn-primary")
