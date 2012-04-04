@@ -20,6 +20,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @address1 = @person.address1
+    @address2 = @person.address2
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -41,6 +42,7 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.find(params[:id])
     @address1 = @person.address1
+    @address2 = @person.address2
   end
 
   # POST /people
@@ -50,6 +52,9 @@ class PeopleController < ApplicationController
     @address = Address.new(params[:address1])
     @address.save!
     @person.address1 = @address
+    @address = Address.new(params[:address2])
+    @address.save!
+    @person.address2 = @address
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
@@ -72,6 +77,14 @@ class PeopleController < ApplicationController
       @address1 = Address.new(params[:address1])
       @address1.save!
       @person.address1 = @address1
+      @person.save!
+    end
+    if @person.address2
+      @person.address2.update_attributes(params[:address2])
+    else
+      @address2 = Address.new(params[:address2])
+      @address2.save!
+      @person.address2 = @address2
       @person.save!
     end
     # Update person
