@@ -46,6 +46,28 @@
       %div.controls
         = select :address1, :country, [ "USA" ]
   %fieldset
+    %legend Alternate Address
+    %div.control-group
+      = label :address2, :street, 'Street', :class => "control-label"
+      %div.controls
+        = text_field :address2, 'street', :class => "input-xlarge"
+    %div.control-group
+      = label :address2, :city, 'City', :class => "control-label"
+      %div.controls
+        = text_field :address2, 'city', :class => "input-xlarge"
+    %div.control-group
+      = label :address2, :state, 'State', :class => "control-label"
+      %div.controls
+        = text_field :address2, 'state', :class => "input-xlarge"
+    %div.control-group
+      = label :address2, :zip, 'Zip', :class => "control-label"
+      %div.controls
+        = text_field :address2, 'zip', :class => "input-xlarge"
+    %div.control-group
+      = label :address2, :country, 'Country', :class => "control-label"
+      %div.controls
+        = select :address2, :country, [ "USA" ]
+  %fieldset
     %legend Contact Information
     %div.control-group
       = label :person, :phone_cell, 'Cell Phone', :class => "control-label"
