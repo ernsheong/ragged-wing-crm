@@ -5,6 +5,10 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
 
+# login gems
+gem "ruby-openid"
+gem "rack-openid"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
