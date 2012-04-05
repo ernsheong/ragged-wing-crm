@@ -21,9 +21,13 @@
             %li= link_to "Donations", donations_path
           %div#search
             = form_tag({:controller => "people", :action => "search"}, :method => "get") do
-              = select :person, :title, [ "people"]
+              = select :person, :title, ["People"]
               = text_field_tag(:q)
-              = submit_tag("Go", :class => "button")
+              = submit_tag("Search", :class => "button")
+          %div#filter
+            = form_tag({:controller => "people", :action => "filter"}, :method => "get") do
+              = select :person, :title, [''] + Relationship.list
+              = submit_tag("Filter", :class => "button")
       %div#body.grid_12.alpha.omega
         = yield
       %div#footer.grid_12.alpha.omega.align_right &copy; 2012
