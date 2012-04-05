@@ -61,5 +61,21 @@
       %tr
         %td= label :person, :website2, 'Website 2'
         %td= text_field :person, 'website2'
+    %h2 Relationship to Ragged Wing
+    %table
+      %tr Internal Relationship(s):
+      %br
+      - @internal.each do |elt|
+        %tr= label :person, :relationships, elt
+        %tr= check_box_tag "relationships[]", "#{elt}", @person.has_relationship?(elt), :id => elt
+      %br
+      %br
+      %tr External Relationship(s):
+      %br 
+      - @external.each do |elt|
+        %tr= label :person, :relationships, elt
+        %tr= check_box_tag "relationships[]", "#{elt}", @person.has_relationship?(elt), :id => elt
+
+
   %div.actions
     = f.submit(:class => "button")
