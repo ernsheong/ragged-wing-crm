@@ -6,6 +6,8 @@ RaggedWing::Application.routes.draw do
   match 'people/search' => 'people#search'
   resources :people
   
+  # for login
+  resource :session
   
   get "home/index"
 
