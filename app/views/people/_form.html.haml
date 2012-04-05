@@ -90,12 +90,30 @@
       %div.controls
         = text_field :person, 'email2', :class => "input-xlarge"
     %div.control-group
-      = label :person, :website2, 'Website 1', :class => "control-label"
+      = label :person, :website1, 'Website 1', :class => "control-label"
       %div.controls
         = text_field :person, 'website1', :class => "input-xlarge"
     %div.control-group
       = label :person, :website2, 'Website 2', :class => "control-label"
       %div.controls
         = text_field :person, 'website2', :class => "input-xlarge"
+
+  
+  %fieldset
+    %legend Relationship to Ragged Wing
+    %div.control-group
+      %label.control-label Internal Relationship(s):
+      %div.controls
+        - @internal.each do |elt|
+          %label.checkbox
+            = elt
+            = check_box_tag "relationships[]", elt, @person.has_relationship?(elt), :id => elt
+    %div.control-group
+      %label.control-label External Relationship(s):
+      %div.controls
+        - @external.each do |elt|
+          %label.checkbox
+            = elt
+            = check_box_tag "relationships[]", elt, @person.has_relationship?(elt), :id => elt
   %div.actions
     = f.submit(:class => "btn btn-primary")

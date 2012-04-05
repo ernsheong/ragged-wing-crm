@@ -38,6 +38,9 @@
     %tr
       %td Website 2:
       %td= @person.website2
+    %tr
+      %td Relationship to Ragged Wing:
+      %td= @person.print_relationships
 
 = link_to 'Edit', edit_person_path(@person), :class => "btn"
 = link_to 'Back', people_path, :class => "btn"

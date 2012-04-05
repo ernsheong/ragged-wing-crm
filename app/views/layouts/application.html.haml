@@ -19,6 +19,10 @@
               -# %li= link_to "Organizations", organizations_path
               %li= link_to "Donations", donations_path
           %div
+            = form_tag({:controller => "people", :action => "filter"}, :method => "get") do
+              = select :person, :title, [''] + Relationship.list
+              = submit_tag("Filter", :class => "button")
+          %div
             = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
               -# = select :person, :title, [ "people"]
               = text_field_tag(:q, "Search", :class => "search-query")
