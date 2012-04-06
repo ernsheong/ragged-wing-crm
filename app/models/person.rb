@@ -24,7 +24,7 @@ class Person < ActiveRecord::Base
 
 
   def has_relationship?(name)
-    self.relationships(true).each do |rel|
+    self.relationships.each do |rel|
         if rel.name == name
             return true
         end
@@ -60,6 +60,9 @@ class Person < ActiveRecord::Base
         end
       end
     end
+
+    # reload cache
+    self.relationships(true)
   end
 
 
