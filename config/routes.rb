@@ -5,6 +5,7 @@ RaggedWing::Application.routes.draw do
   # People Controller Mappings
   match 'people/search' => 'people#search'
   resources :people
+  match 'people/filter' => 'people#filter'
   
   
   get "home/index"

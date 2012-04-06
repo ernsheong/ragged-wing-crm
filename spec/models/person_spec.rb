@@ -56,6 +56,13 @@ describe Person do
   end
 
   describe "#save_relationships" do 
+    it "should not delete or add relationships they are not updated" do 
+      @person.save_relationships(['Donor', 'Volunteer', 'Audience'])
+      @person.has_relationship?('Audience').should be_true
+      @person.has_relationship?('Donor').should be_true
+      @person.has_relationship?('Volunteer').should be_true
+    end
+
     it "should delete relationships that are not in update" do 
       @person.save_relationships(['Donor', 'Volunteer'])
       @person.has_relationship?('Audience').should be_false
