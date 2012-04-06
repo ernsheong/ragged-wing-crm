@@ -37,11 +37,14 @@ class Person < ActiveRecord::Base
     # remove relationships not in update
     # - run through all existing relationships
     # - if relationship does not exist in update, delete
-    self.relationships.each do |elt|
-      unless update.include?(elt.name)
-        Relationship.destroy(elt.id)
+    unless self.relationships.nil?
+      self.relationships.each do |elt|
+        unless update.include?(elt.name)
+          Relationship.destroy(elt.id)
+        end
       end
     end
+    
 
     # reload cache
     self.relationships(true)
@@ -49,17 +52,20 @@ class Person < ActiveRecord::Base
     # add relationships in update that are not already existing
     # - run through relationships in update
     # - if it is not already in DB create new relationships
-    update.each do |elt|
-      if self.relationships.blank?
-        Relationship.create!(:person_id => self.id, :name => elt)
-      else
-        self.relationships.each do |r|
-          unless r.name == elt
-            Relationship.create!(:person_id => self.id, :name => elt)
+    unless update.nil?
+      update.each do |elt|
+        if self.relationships.blank?
+          Relationship.create!(:person_id => self.id, :name => elt)
+        else
+          self.relationships.each do |r|
+            unless r.name == elt
+              Relationship.create!(:person_id => self.id, :name => elt)
+            end
           end
         end
       end
     end
+
 
     # reload cache
     self.relationships(true)
