@@ -6,6 +6,8 @@ describe "people/new" do
   end
 
   it "renders new person form" do
+  	@internal = Relationship.internal
+  	@external = Relationship.external
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers

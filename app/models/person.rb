@@ -37,6 +37,10 @@ class Person < ActiveRecord::Base
     # remove relationships not in update
     # - run through all existing relationships
     # - if relationship does not exist in update, delete
+    if update.nil?
+      return
+    end
+
     self.relationships.each do |elt|
       unless update.include?(elt.name)
         Relationship.destroy(elt.id)
