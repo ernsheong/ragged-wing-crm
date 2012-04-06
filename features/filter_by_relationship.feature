@@ -9,7 +9,7 @@ Background: contacts have been added to database
   Given the following contacts exist:
   | first_name     | last_name | relationship |
   | Winston        | Chow      | Volunteer    |
-  | Jonathan       | Lin       | Director     |
+  | Jonathan       | Lin       | Employee     |
   | Kevin          | Tham      | Donor        |
   | Peter          | Hu        | Volunteer    |
   
