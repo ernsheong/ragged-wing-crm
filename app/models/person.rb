@@ -24,7 +24,7 @@ class Person < ActiveRecord::Base
 
 
   def has_relationship?(name)
-    self.relationships(true).each do |rel|
+    self.relationships.each do |rel|
         if rel.name == name
             return true
         end
@@ -60,6 +60,9 @@ class Person < ActiveRecord::Base
         end
       end
     end
+
+    # reload cache
+    self.relationships(true)
   end
 
 
@@ -70,6 +73,14 @@ class Person < ActiveRecord::Base
       result << elt.name
     end
     result.sort.join(', ')
+  end
+
+
+  def self.filter(relationship)
+    if relationship.blank?
+      return Person.all
+    end 
+    Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
   end
 
 end

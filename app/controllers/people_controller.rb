@@ -14,6 +14,12 @@ class PeopleController < ApplicationController
     render "index"
   end
 
+  def filter
+    @people = Person.filter(params[:filter])
+    @selected = params[:filter]
+    render "index"
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show

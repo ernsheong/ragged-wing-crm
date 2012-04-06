@@ -2,11 +2,17 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @person = Person.create!(:first_name => 'John', :last_name => 'Doe', :title => 'Mr.', :phone_cell => '1-510-123-4567',
+    @person = Person.create!(:first_name => 'John', :last_name => 'Doe', :phone_cell => '1-510-123-4567',
+      :email1 => 'abc@berkeley.edu')
+    @person1 = Person.create!(:first_name => 'Ben', :last_name => 'Bitdiddle', :phone_cell => '1-510-123-4567',
       :email1 => 'abc@berkeley.edu')
     ['Donor', 'Volunteer', 'Audience'].each do |rel|
       Relationship.create!(:person_id => @person.id, :name => rel)
     end
+    ['Volunteer', 'Audience', 'Employee'].each do |rel|
+      Relationship.create!(:person_id => @person1.id, :name => rel)
+    end
+
   end
   
   describe ".search" do 
@@ -94,4 +100,12 @@ describe Person do
     end
   end
 
+  describe ".filter" do 
+    it "should return all the people who have that relationship" do 
+      Person.filter("Volunteer").should eq([@person, @person1])
+      Person.filter("Audience").should eq([@person, @person1])
+      Person.filter("Donor").should eq([@person])
+      Person.filter("Employee").should eq([@person1])
+    end
+  end
 end

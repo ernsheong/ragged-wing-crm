@@ -1,9 +1,9 @@
 %h1 List of All People
 %br
-%div.controls
-  = form_tag({:controller => "people", :action => "search"}, :method => "get") do
-    = select :person, :title, ['Please Select'] + Relationship.list
-    = submit_tag( "Filter", :class => "btn btn-primary")
+%div.btn-toolbar
+  = form_tag({:controller => "people", :action => "filter"}, :method => "get") do
+    = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Select a relationship"}
+    = submit_tag( "Filter", {:class => "btn-group"})
 
 %table.table
   %thead

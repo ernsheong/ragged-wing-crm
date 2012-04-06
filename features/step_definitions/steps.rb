@@ -15,7 +15,7 @@ When /^I visit the (?:root|home) page$/ do
 end
 
 When /^I visit "([^"]*)"$/ do |arg1|
-  visit("#{arg1}")
+  visit arg1
 end
 
 When /^I click "([^"]*)"$/ do |arg1|
@@ -74,5 +74,10 @@ Then /^the following should be checked: (.*)$/ do |selection|
     page.should have_checked_field(text)
   end
 end
+
+When /^I select "([^"]*)"$/ do |arg1|
+  select arg1, :from => "filter"
+end
+
 
 
