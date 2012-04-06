@@ -75,4 +75,12 @@ class Person < ActiveRecord::Base
     result.sort.join(', ')
   end
 
+
+  def self.filter(relationship)
+    if relationship.blank?
+      return Person.all
+    end 
+    Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
+  end
+
 end

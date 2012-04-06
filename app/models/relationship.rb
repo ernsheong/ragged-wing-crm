@@ -4,11 +4,11 @@ class Relationship < ActiveRecord::Base
 	attr_accessible :person_id, :name
 
 	def self.internal
-		['Core Artist', 'Contributing Artist', 'Volunteer', 'Donor', 'Audience', 'Partner', 'Employee']
+		["Audience", "Contributing Artist", "Core Artist", "Donor", "Employee", "Partner", "Volunteer"]
 	end
 
 	def self.external
-		['Collaborator', 'Business Partner', 'Contract Worker', 'Consultant', 'Other']
+		["Business Partner", "Collaborator", "Consultant", "Contract Worker", "Other"] 
 	end
 
 	def self.list

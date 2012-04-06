@@ -6,29 +6,30 @@ Feature: Ability to feature contacts based on relationship
 
 Background: contacts have been added to database
 
-  Given the following contacts exist:
-  | first_name     | last_name | relationship |
+  Given the following people exist:
+  | first_name     | last_name | relationships |
   | Winston        | Chow      | Volunteer    |
   | Jonathan       | Lin       | Employee     |
   | Kevin          | Tham      | Donor        |
   | Peter          | Hu        | Volunteer    |
+
+  And I visit "/people"
   
 Scenario: no relationships selected
-  When I am on the home page
-  And I press "Filter"
-  Then I should see the following contacts: Winston Chow, Jonathan Lin, Kevin Tham, Peter Hu
+  When I press "Filter"
+  Then I should see: Winston Chow, Jonathan Lin, Kevin Tham, Peter Hu
   
 Scenario: restrict contacts to ones with a "Volunteer" relationship
-  When I select the "Volunteer" relationship
-  Then I press "Filter"
-  Then I should see the following contacts: Winston Chow, Peter Hu
-  And I should not see the following contacts: Jonathan Lin, Kevin Tham
+  When I select "Volunteer"
+  And I press "Filter"
+  Then I should see: Winston Chow, Peter Hu
+  And I should not see: Jonathan Lin, Kevin Tham
   
 Scenario: restrict contacts to ones with a "Employee" relationship
-  When I select the "Employee" relationship
-  Then I press "Filter"
-  Then I should see the following contacts: Jonathan Lin
-  And I should not see the following contacts: Winston Chow, Kevin Tham, Peter Hu
+  When I select "Employee"
+  And I press "Filter"
+  Then I should see: Jonathan Lin
+  And I should not see: Winston Chow, Kevin Tham, Peter Hu
   
 
   
