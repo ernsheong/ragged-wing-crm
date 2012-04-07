@@ -2,15 +2,15 @@ Feature: second line for address, and second address in form
 
   As an admin
   So that I can store an alternate address for contacts
-  I want to see a second address when viewing a contact , and have the fields to enter another address
+  I want to see a second address when viewing a contact and have the fields to enter another address
 
 Background: 
 
   Given the following people exist:
-  | first_name     | last_name | Address1 | Address2 |
+  | first_name     | last_name | address1 | address2 |
   | Jonathan       | Lin       | addr1    | addr2    |
   
-  And I am on the people page
+  And I visit "/people"
 
 Scenario: Two addresses visible when viewing a contact
   Given I am on the profile page for "Jonathan Lin"
@@ -22,7 +22,7 @@ Scenario: Two addresses visible when viewing a contact
 Scenario: Fields for entering 2 addresses when creating a new contact
   When I press "Add New Person"
   Then I should see "Address 1"
-  And I should see "Address 2"
+  And I should see "Alternate Address"
   When I fill in "address1_street" with "street1"
   And I fill in "address2_street" with "street2"
   And I press "Create Person"
