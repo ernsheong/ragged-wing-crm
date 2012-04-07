@@ -41,6 +41,9 @@
     %tr
       %td Relationship to Ragged Wing:
       %td= @person.print_relationships
+  %br
+  %h3 Notes
+  = text_area :person, "print_notes", :height => 210, :width => 800, :rows => 8, :cols => 40
 
 = link_to 'Edit', edit_person_path(@person), :class => "btn"
 = link_to 'Back', people_path, :class => "btn"

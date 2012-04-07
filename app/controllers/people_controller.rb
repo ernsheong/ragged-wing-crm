@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -50,6 +51,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
+    @notes = @person.notes.first
+
     @internal = Relationship.internal
     @external = Relationship.external
   end
@@ -61,6 +64,8 @@ class PeopleController < ApplicationController
     @person.address1 = Address.create!(params[:address1])
     @person.address2 = Address.create!(params[:address2])
     @person.save_relationships(params[:relationships])
+
+    @person.create_note(params[:notes])
 
     respond_to do |format|
       if @person.save
@@ -95,6 +100,10 @@ class PeopleController < ApplicationController
     end
 
     @person.save_relationships(params[:relationships])
+
+    if params[:notes]
+      @person.notes.first.update_attributes(params[:notes])
+    end
 
     # Update person
     respond_to do |format|

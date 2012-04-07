@@ -4,6 +4,7 @@ class Person < ActiveRecord::Base
   has_many :organizations, :through => :members
   has_many :relationships, :dependent => :destroy, :autosave => true  # delete relationship in Relationship table if person deleted
   has_many :donations
+  has_many :notes
 
 
   def self.search(q)
@@ -82,6 +83,18 @@ class Person < ActiveRecord::Base
     result.sort.join(', ')
   end
 
+  def create_note(update)
+    if update.nil?
+      Note.create!(:person_id => self.id, :body => "")
+      return
+    end
+
+    Note.create!(:person_id => self.id, :body => update[:body])
+  end
+
+  def print_notes
+    self.notes.first.body
+  end
 
   def self.filter(relationship)
     if relationship.blank?
