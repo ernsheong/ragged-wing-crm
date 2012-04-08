@@ -5,7 +5,6 @@ class Person < ActiveRecord::Base
   has_many :relationships, :dependent => :destroy, :autosave => true  # delete relationship in Relationship table if person deleted
   has_many :donations
 
-
   def self.search(q)
     q = q.downcase
     results = Person.where("lower(first_name) = ? or lower(last_name) = ?", q, q)
@@ -33,16 +32,32 @@ class Person < ActiveRecord::Base
   end
 
 
+  def relationship_list
+    list = []
+    self.relationships.each do |rel|
+      list << rel.name
+    end
+    list.sort
+  end
+
+
   def save_relationships(update)
     if update.nil?
       return
     end
 
+    # add relationships if no relationships
+
     # remove relationships not in update
     # - run through all existing relationships
     # - if relationship does not exist in update, delete
 
-    unless self.relationships.nil?
+    if self.relationships(true).nil?
+      update.each do |elt|
+        Relationship.create!(:person_id => self.id, :name => elt)
+      end
+      return 
+    else
       self.relationships.each do |elt|
         unless update.include?(elt.name)
           Relationship.destroy(elt.id)
@@ -57,14 +72,8 @@ class Person < ActiveRecord::Base
     # - run through relationships in update
     # - if it is not already in DB create new relationships
     update.each do |elt|
-      if self.relationships.blank?
+      unless self.relationship_list.include? elt
         Relationship.create!(:person_id => self.id, :name => elt)
-      else
-        self.relationships.each do |r|
-          unless r.name == elt
-            Relationship.create!(:person_id => self.id, :name => elt)
-          end
-        end
       end
     end
 

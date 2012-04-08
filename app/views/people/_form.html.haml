@@ -11,18 +11,6 @@
   %fieldset
     %legend Name
     %div.control-group
-      = label :person, :title, 'Job Title', :class => "control-label"
-      %div.controls
-        = text_field :person, 'title', :class => "input-xlarge"
-    %div.control-group
-      = label :person, :role, 'Role', :class => "control-label"
-      %div.controls
-        = text_field :person, 'role', :class => "input-xlarge"
-    %div.control-group
-      = label :person, :company, 'Company', :class => "control-label"
-      %div.controls
-        = text_field :person, 'company', :class => "input-xlarge"
-    %div.control-group
       = label :person, :first_name, 'First Name', :class => "control-label"
       %div.controls
         = text_field :person, 'first_name', :class => "input-xlarge"
@@ -30,6 +18,18 @@
       = label :person, :last_name, 'Last Name', :class => "control-label"
       %div.controls
         = text_field :person, 'last_name', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :company, 'Company', :class => "control-label"
+      %div.controls
+        = text_field :person, 'company', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :title, 'Job Title', :class => "control-label"
+      %div.controls
+        = text_field :person, 'title', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :role, 'Role', :class => "control-label"
+      %div.controls
+        = text_field :person, 'role', :class => "input-xlarge"
   
   %fieldset
     %legend Address

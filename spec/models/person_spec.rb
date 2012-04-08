@@ -50,6 +50,12 @@ describe Person do
     end
   end
 
+  describe "#relationship_list" do 
+    it "returns a sorted array of all relationships" do 
+      @person.relationship_list.should eq(['Audience', 'Donor', 'Volunteer'])
+    end
+  end
+
   describe "#has_relationship" do 
     it "verifies that the person indeed has those relationships with RWE" do 
       @person.has_relationship?('Donor').should be_true
