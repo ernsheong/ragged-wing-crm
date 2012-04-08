@@ -26,8 +26,8 @@
         %td
           = person.phone_cell
         %td
-          = link_to 'Edit', edit_person_path(person)
-          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
+          = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
+          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
 
 %br
 
