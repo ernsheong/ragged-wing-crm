@@ -12,38 +12,58 @@
     %h2 Information
     %table.table.table-condensed
       %tr
-        %td Address 1
+        %td
+          %i.icon-home
+          Address 1
         %td
           - if @address1 
             = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
       %tr
-        %td Address 2
+        %td
+          %i.icon-home
+          Address 2
         %td
           - if @address2 
             = "#{@address2.street}, #{@address2.city}, #{@address2.state} #{@address2.zip}, #{@address2.country}"
       %tr
-        %td Email 1
+        %td
+          %i.icon-envelope
+          Email 1
         %td= mail_to @person.email1
       %tr
-        %td Email 2
+        %td
+          %i.icon-envelope
+          Email 2
         %td= mail_to @person.email2
       %tr
-        %td Cell Phone:
+        %td
+          %i.icon-comment
+          Cell Phone:
         %td= @person.phone_cell
       %tr
-        %td Home Phone:
+        %td
+          %i.icon-comment
+          Home Phone:
         %td= @person.phone_home
       %tr
-        %td Work Phone:
+        %td
+          %i.icon-comment
+          Work Phone:
         %td= @person.phone_office
       %tr
-        %td Website 1:
+        %td
+          %i.icon-list-alt
+          Website 1:
         %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
       %tr
-        %td Website 2:
+        %td
+          %i.icon-list-alt
+          Website 2:
         %td= @person.website2
       %tr
-        %td Relationship to Ragged Wing:
+        %td
+          %i.icon-user
+          Relationship to Ragged Wing:
         %td= @person.print_relationships
 
 
