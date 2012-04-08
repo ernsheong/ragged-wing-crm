@@ -8,9 +8,8 @@
       -@donation.errors.full_messages.each do |msg|
         %li= msg
 
-  -# TODO: Figure out how to identify right person in Person table
-  -#= label :donation, :title, 'Title'
-  -#= select :donation, :title, [ "Mr.", "Ms.", "Mrs." ]
+  = f.hidden_field :person_id, :value => @person.id
+
   = label :donation, :amount, 'Amount'
   = text_field :donation, 'amount'
   = label :donation, :date, 'Date'

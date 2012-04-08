@@ -10,7 +10,8 @@
 %div.row
   %div.span12
     = link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
-    = link_to 'Add a donation', '#', :class => "btn"
+    = link_to 'Add a donation', new_donation_path(:person_id => @person.id), :class => "btn"
+
 %div.row
   %div.span12
     %h2 Information
