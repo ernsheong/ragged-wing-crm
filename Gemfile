@@ -11,13 +11,16 @@ gem 'paperclip'
 # gems used for testing and development
 group :development, :test do
   gem 'sqlite3'
-  gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'ruby-debug19', :require => 'ruby-debug'
+end
+
+group :test do 
+  gem 'cucumber-rails'
 end
 
 # gems used in production

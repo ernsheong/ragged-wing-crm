@@ -1,12 +1,16 @@
 - if notice
   %p#notice= notice
 
-%h1= "#{@person.title} #{@person.first_name} #{@person.last_name}"
+%h1= "#{@person.first_name} #{@person.last_name}"
+%h2= "#{@person.title}, #{@person.company}" 
 
 
 %div
   %h2 Address and Contact Information
   %table
+    %tr 
+      %td Role
+      %td= @person.role
     %tr
       %td Address 1
       %td
