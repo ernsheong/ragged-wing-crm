@@ -22,7 +22,7 @@
           - if person.address1
             = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
         %td
-          = person.email1
+          = mail_to person.email1
         %td
           = person.phone_cell
         %td
