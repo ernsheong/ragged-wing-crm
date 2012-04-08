@@ -2,7 +2,10 @@
   %p#notice= notice
 
 %h1= "#{@person.first_name} #{@person.last_name}"
-%h2= "#{@person.title}, #{@person.company}" 
+%h2
+  = "#{@person.title}"
+  -if not @person.company.empty?
+    = "at #{@person.company}" 
 
 %div.row
   %div.span12
