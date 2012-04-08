@@ -98,14 +98,21 @@
       %div.controls
         = text_field :person, 'email2', :class => "input-xlarge"
     %div.control-group
-      = label :person, :website1, 'Website 1', :class => "control-label"
+      = label :person, :website1, 'Company Website', :class => "control-label"
       %div.controls
-        = text_field :person, 'website1', :class => "input-xlarge", :placeholder => "websitename.com"
+        = text_field :person, 'website1', :class => "input-xlarge", :placeholder => "companyname.com"
     %div.control-group
-      = label :person, :website2, 'Website 2', :class => "control-label"
+      = label :person, :website2, 'Organization Website', :class => "control-label"
       %div.controls
-        = text_field :person, 'website2', :class => "input-xlarge", :placeholder => "websitename.com"
-
+        = text_field :person, 'website2', :class => "input-xlarge", :placeholder => "organizationname.org"
+    %div.control-group
+      = label :person, :website3, 'Personal Profile 1', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website3', :class => "input-xlarge", :placeholder => "facebook.com/name"
+    %div.control-group
+      = label :person, :website4, 'Personal Profile 2', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website4', :class => "input-xlarge", :placeholder => "linkedin.com/name"
   
   %fieldset
     %legend Relationship to Ragged Wing

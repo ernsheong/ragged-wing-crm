@@ -63,13 +63,23 @@
       %tr
         %td
           %i.icon-list-alt
-          Website 1:
+          Company Website:
         %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
       %tr
         %td
           %i.icon-list-alt
-          Website 2:
+          Organization Website:
         %td= content_tag(:a, "#{@person.website2}", :href => "http://www.#{@person.website2}")
+      %tr
+        %td
+          %i.icon-list-alt
+          Personal Profile 1:
+        %td= content_tag(:a, "#{@person.website3}", :href => "http://www.#{@person.website3}")
+      %tr
+        %td
+          %i.icon-list-alt
+          Personal Profile 2:
+        %td= content_tag(:a, "#{@person.website4}", :href => "http://www.#{@person.website4}")
       %tr
         %td
           %i.icon-user
