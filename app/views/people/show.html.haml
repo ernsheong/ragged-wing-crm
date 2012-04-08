@@ -4,12 +4,12 @@
 %h1= "#{@person.first_name} #{@person.last_name}"
 %h2
   = "#{@person.title}"
-  -if not @person.company.empty?
+  -if not @person.company.blank?
     = "at #{@person.company}" 
 
 %div.row
   %div.span12
-    = link_to 'Edit Information', edit_person_path(@person), :class => "btn"
+    = link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
     = link_to 'Add a donation', '#', :class => "btn"
 %div.row
   %div.span12

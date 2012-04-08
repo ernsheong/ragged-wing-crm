@@ -57,7 +57,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.create!(params[:person])
+    @person = Person.new(params[:person])
     @person.address1 = Address.create!(params[:address1])
     @person.address2 = Address.create!(params[:address2])
     @person.save_relationships(params[:relationships])

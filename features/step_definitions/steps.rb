@@ -46,7 +46,7 @@ end
 When /^I edit "([^"]*)"$/ do |arg1|
   visit('/people')
   click_link arg1
-  click_link 'Edit'
+  click_link 'edit'
 end
 
 When /^I check: (.*)$/ do |selection|
@@ -99,6 +99,13 @@ end
 When /^I select "([^"]*)"$/ do |arg1|
   select arg1, :from => "filter"
 end
+
+When /^I filter$/ do 
+  click_button "filter"
+end
+
+
+
 
 
 
