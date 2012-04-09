@@ -90,4 +90,13 @@ ActiveRecord::Schema.define(:version => 20120408195216) do
     t.string   "name"
   end
 
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "identifier_url"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
 end
