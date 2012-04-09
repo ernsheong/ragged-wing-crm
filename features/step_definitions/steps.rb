@@ -1,3 +1,8 @@
+When /I view person "(.*)"/ do |name|
+  visit('/people')
+  click_link name
+end
+
 Given /the following people exist/ do |people_table|
 	people_table.hashes.each do |person|
 		new_person = {:first_name => person['first_name'], :last_name => person['last_name']}
@@ -103,6 +108,7 @@ end
 When /^I filter$/ do 
   click_button "filter"
 end
+
 
 
 
