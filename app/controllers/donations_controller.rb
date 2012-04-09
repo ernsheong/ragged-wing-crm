@@ -43,8 +43,6 @@ class DonationsController < ApplicationController
   # POST /donations
   # POST /donations.json
   def create
-    new_donation = params[:donation]
-    new_donation['date'] = Date.parse new_donation['date']
     @donation = Donation.new(params[:donation])
 
     respond_to do |format|
