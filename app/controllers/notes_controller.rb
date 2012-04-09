@@ -37,18 +37,19 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
+    @person = Person.find(@note.person_id)
   end
 
   # POST /notes
   # POST /notes.json
   def create
     new_note = params[:note]
-    new_note['date'] = Date.parse new_note['date']
     @note = Note.new(params[:note])
+    @person = Person.find(params[:note][:person_id])
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to @person, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
         format.html { render action: "new" }
@@ -61,10 +62,11 @@ class NotesController < ApplicationController
   # PUT /notes/1.json
   def update
     @note = Note.find(params[:id])
+    @person = Person.find(@note.person_id)
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to @person, notice: 'Note was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,10 +79,11 @@ class NotesController < ApplicationController
   # DELETE /notes/1.json
   def destroy
     @note = Note.find(params[:id])
+    @person = Person.find(@note.person_id)
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notes_url }
+      format.html { redirect_to @person }
       format.json { head :no_content }
     end
   end

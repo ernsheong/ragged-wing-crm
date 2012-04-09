@@ -102,4 +102,23 @@
     - else
       No donations...
 
+%div.row
+  %div.span12
+    %h2 Notes
+    - if @person.notes
+      %table.table.table-condensed
+        %tr
+          %th Notes
+          %th Last Updated
+          %th Actions
+        - @person.notes.each do |n|
+          %tr
+            %td= n.body[0,30]
+            %td= n.updated_at
+            %td
+              = link_to 'Edit', edit_note_path(n), :class => "btn btn-mini"
+              = link_to 'Delete', n, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+    - else
+      No Notes
+
 = link_to 'Back', people_path, :class => "btn"

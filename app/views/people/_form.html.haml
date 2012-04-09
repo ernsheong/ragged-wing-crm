@@ -131,12 +131,5 @@
             = elt
             = check_box_tag "relationships[]", elt, @person.has_relationship?(elt), :id => elt
 
-  %fieldset
-    %legend Notes
-    %div.control-group
-      = label :notes, :body, 'Notes', :class => "control-label"
-      %div.controls
-        = text_area :notes, "body", :class => "input-xlarge", :rows => 14, :style => "width:500px;"
-
   %div.actions
     = f.submit(:class => "btn btn-primary")

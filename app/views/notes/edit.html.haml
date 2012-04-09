@@ -1,0 +1,6 @@
+%h1= "Edit Details for: TODO"
+
+= render 'form'
+
+= link_to 'Delete', @note, confirm: 'Are you sure?', method: :delete
+= link_to 'Back', @person
