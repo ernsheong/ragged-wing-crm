@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
