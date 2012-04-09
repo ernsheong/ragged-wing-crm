@@ -1,16 +1,33 @@
-!!!
-%html
+!!! 5
+%html{:lang => "en"}
   %head
     %meta{"http-equiv" =>"Content-Type", :content => "text/html; charset=utf-8"}
+    
+    - # Prevent Crawlers from indexing our web app (e.g. Google)
     %meta{:name => "robots", :content => "noindex"}
+
+    - # Control layout on mobile browsers, see https://developer.mozilla.org/en/Mobile/Viewport_meta_tag
+    %meta{:name => "viewport", :content =>"width=device-width, initial-scale=1.0"}
+    
     %title RaggedWing
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
+    
+    - # Enable IE (less than 9.0) compatiblity with HTML5 elements
+    /[if lt IE 9]
+      %script{ :src => 'http://html5shim.googlecode.com/svn/trunk/html5.js' }
+
+    - # Protect from CSRF
     = csrf_meta_tags
+
   %body
     %div.navbar.navbar-fixed-top
       %div.navbar-inner
         %div.container-fluid
+          %a.btn.btn-navbar{:data => {:toggle => "collapse", :target => ".nav-collapse"}}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
           %a.brand{:href => "/"}
             Ragged Wing CRM
           %div.nav-collapse
@@ -18,11 +35,10 @@
               %li= link_to "People", people_path
               -# %li= link_to "Organizations", organizations_path
               %li= link_to "Donations", donations_path
-          %div
-            = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
-              -# = select :person, :title, [ "people"]
-              = text_field_tag(:q, "Search", :class => "search-query")
-              = submit_tag("Go", :class => "btn-navbar")
+              %li
+                = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
+                  -# = select :person, :title, [ "people"]
+                  = text_field_tag(:q, "Search", :class => "search-query")
+                  = submit_tag("Go", :class => "btn-navbar")
     %div.container-fluid
       = yield
-    %div.container-fluid &copy; 2012

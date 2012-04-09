@@ -1,34 +1,36 @@
-%h1 List of All People
-%br
-%div.btn-toolbar
-  = form_tag({:controller => "people", :action => "filter"}, :method => "get") do
-    = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Select a relationship"}
-    = submit_tag( "Filter", {:class => "btn-group"})
+%h1 All People
 
-%table.table
-  %thead
-    %tr
-      %th Name
-      %th Address
-      %th Email
-      %th Cell
-      %th Actions
-  %tbody
-    - @people.each do |person|
-      %tr
-        %td
-          = link_to "#{person.first_name} #{person.last_name}", person
-        %td
-          - if person.address1
-            = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
-        %td
-          = person.email1
-        %td
-          = person.phone_cell
-        %td
-          = link_to 'Edit', edit_person_path(person)
-          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
+= form_tag({:controller => "people", :action => "filter"}, :method => "get", :class => "form-inline") do
+  %div.row
+    %div.span3
+      = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
+    %div.span9
+      %div.pull-right
+        = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
+        = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
 
-%br
-
-= link_to 'Add New Person', new_person_path, :class => "btn"
+%div.row
+  %div.span12
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Address
+          %th Email
+          %th Cell
+          %th Actions
+      %tbody
+        - @people.each do |person|
+          %tr
+            %td
+              = link_to "#{person.first_name} #{person.last_name}", person
+            %td
+              - if person.address1
+                = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
+            %td
+              = mail_to person.email1
+            %td
+              = person.phone_cell
+            %td
+              = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
+              = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

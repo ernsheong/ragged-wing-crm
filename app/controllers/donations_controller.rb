@@ -27,7 +27,7 @@ class DonationsController < ApplicationController
   # GET /donations/new.json
   def new
     @donation = Donation.new
-
+    @person = Person.find(params[:person_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @donation }

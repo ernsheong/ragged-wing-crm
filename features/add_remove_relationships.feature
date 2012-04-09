@@ -35,4 +35,10 @@ Scenario: update relationships
 	And I press "Update Person"
 	Then I should see "Collaborator, Employee"
 
+@no-duplicates
+Scenario: ensure that there are no duplicates
+	When I edit "Winston Chow"
+	And I press "Update Person"
+	Then I should not see "Employee, Employee, Volunteer, Volunteer"
+
   

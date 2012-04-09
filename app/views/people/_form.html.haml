@@ -11,10 +11,6 @@
   %fieldset
     %legend Name
     %div.control-group
-      = label :person, :title, 'Title', :class => "control-label"
-      %div.controls
-        = select :person, :title, [ "Mr.", "Ms.", "Mrs." ], {}, { :class => "span1" }
-    %div.control-group
       = label :person, :first_name, 'First Name', :class => "control-label"
       %div.controls
         = text_field :person, 'first_name', :class => "input-xlarge"
@@ -22,6 +18,18 @@
       = label :person, :last_name, 'Last Name', :class => "control-label"
       %div.controls
         = text_field :person, 'last_name', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :company, 'Company', :class => "control-label"
+      %div.controls
+        = text_field :person, 'company', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :title, 'Job Title', :class => "control-label"
+      %div.controls
+        = text_field :person, 'title', :class => "input-xlarge"
+    %div.control-group
+      = label :person, :role, 'Role', :class => "control-label"
+      %div.controls
+        = text_field :person, 'role', :class => "input-xlarge"
   
   %fieldset
     %legend Address
@@ -72,15 +80,15 @@
     %div.control-group
       = label :person, :phone_cell, 'Cell Phone', :class => "control-label"
       %div.controls
-        = text_field :person, 'phone_cell', :class => "input-xlarge"
+        = text_field :person, 'phone_cell', :class => "input-xlarge", :placeholder => "123-456-7890"
     %div.control-group
       = label :person, :phone_home, 'Home Phone', :class => "control-label"
       %div.controls
-        = text_field :person, 'phone_home', :class => "input-xlarge"
+        = text_field :person, 'phone_home', :class => "input-xlarge", :placeholder => "123-456-7890"
     %div.control-group
       = label :person, :phone_office, 'Office Phone', :class => "control-label"
       %div.controls
-        = text_field :person, 'phone_office', :class => "input-xlarge"
+        = text_field :person, 'phone_office', :class => "input-xlarge", :placeholder => "123-456-7890"
     %div.control-group
       = label :person, :email1, 'Primary Email', :class => "control-label"
       %div.controls
@@ -90,14 +98,21 @@
       %div.controls
         = text_field :person, 'email2', :class => "input-xlarge"
     %div.control-group
-      = label :person, :website1, 'Website 1', :class => "control-label"
+      = label :person, :website1, 'Company Website', :class => "control-label"
       %div.controls
-        = text_field :person, 'website1', :class => "input-xlarge"
+        = text_field :person, 'website1', :class => "input-xlarge", :placeholder => "companyname.com"
     %div.control-group
-      = label :person, :website2, 'Website 2', :class => "control-label"
+      = label :person, :website2, 'Organization Website', :class => "control-label"
       %div.controls
-        = text_field :person, 'website2', :class => "input-xlarge"
-
+        = text_field :person, 'website2', :class => "input-xlarge", :placeholder => "organizationname.org"
+    %div.control-group
+      = label :person, :website3, 'Personal Profile 1', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website3', :class => "input-xlarge", :placeholder => "facebook.com/name"
+    %div.control-group
+      = label :person, :website4, 'Personal Profile 2', :class => "control-label"
+      %div.controls
+        = text_field :person, 'website4', :class => "input-xlarge", :placeholder => "linkedin.com/name"
   
   %fieldset
     %legend Relationship to Ragged Wing

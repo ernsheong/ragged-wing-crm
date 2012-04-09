@@ -6,6 +6,7 @@
 %ul
   %li
     Donor Name:
+    = "#{@donation.donor.first_name} #{@donation.donor.last_name}"
   %li
     Amount: 
     = @donation.amount
