@@ -37,6 +37,7 @@ class DonationsController < ApplicationController
   # GET /donations/1/edit
   def edit
     @donation = Donation.find(params[:id])
+    @person = @donation.donor
   end
 
   # POST /donations
