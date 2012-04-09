@@ -86,9 +86,20 @@
           %i.icon-user
           Relationship to Ragged Wing:
         %td= @person.print_relationships
-%br
-%h3 Notes
-= text_area :person, "print_notes", :height => 210, :width => 800, :rows => 8, :cols => 40
-%br
+
+%div.row
+  %div.span12
+    %h2 Donations Made
+    - if @person.donations
+      %table.table.table-condensed
+        %tr
+          %th Date
+          %th Amount
+        - @person.donations.each do |d|
+          %tr
+            %td= d.date
+            %td= d.amount
+    - else
+      No donations...
 
 = link_to 'Back', people_path, :class => "btn"
