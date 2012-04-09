@@ -130,5 +130,6 @@
           %label.checkbox
             = elt
             = check_box_tag "relationships[]", elt, @person.has_relationship?(elt), :id => elt
+
   %div.actions
     = f.submit(:class => "btn btn-primary")

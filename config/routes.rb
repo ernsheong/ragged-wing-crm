@@ -1,6 +1,7 @@
 RaggedWing::Application.routes.draw do
   
   resources :donations
+  resources :notes
 
   # People Controller Mappings
   match 'people/filter' => 'people#filter'
