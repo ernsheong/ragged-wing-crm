@@ -16,3 +16,5 @@
 
 app/controllers/.DS_Store
 coverage
+
+db/.DS_Store

@@ -1,5 +1,6 @@
 RaggedWing::Application.routes.draw do
   
+  resources :events
   resources :donations
   resources :notes
 
