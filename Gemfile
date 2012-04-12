@@ -17,6 +17,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'ruby-debug19', :require => 'ruby-debug'
+  # TODO: fix this ugliness
+  if RUBY_VERSION.include? '1.9.3'
+    gem 'linecache19', '0.5.13', 
+  else
+    gem 'linecache19', '0.5.12'
+  end
 end
 
 group :test do 
