@@ -8,6 +8,13 @@ RaggedWing::Application.routes.draw do
   match 'people/search' => 'people#search'
   resources :people
   
+  # for login
+  resources :users do
+    resource :additional_info
+  end
+  
+  resource :session
+
   get "home/index"
 
   # The priority is based upon order of creation:

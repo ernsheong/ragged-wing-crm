@@ -7,6 +7,10 @@ gem 'paperclip'
 gem 'execjs'
 gem 'therubyracer'
 
+# login gems
+gem "ruby-openid"
+gem "rack-openid"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
