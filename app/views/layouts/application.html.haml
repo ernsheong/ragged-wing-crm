@@ -23,6 +23,11 @@
               -# = select :person, :title, [ "people"]
               = text_field_tag(:q, "Search", :class => "search-query")
               -#= submit_tag("Go", :class => "btn")
+          %div.nav-collapse
+            %ul.nav
+              -if signed_in?
+                %li= link_to "logged in as #{current_user.email}", root_path
+                %li= link_to 'Sign Out', session_path, :method => :delete
     %div.container-fluid
       = yield
     %div.container-fluid &copy; 2012

@@ -7,6 +7,10 @@ RaggedWing::Application.routes.draw do
   resources :people
   
   # for login
+  resources :users do
+    resource :additional_info
+  end
+  
   resource :session
   
   get "home/index"
