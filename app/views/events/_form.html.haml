@@ -1,0 +1,39 @@
+= form_for(@event) do |f|
+  - if @event.errors.any?
+    %div#iderror_explanation
+      %h2
+        =pluralize(@event.errors.count, "error") 
+        prohibited this event from being saved:
+      %ul
+      -@event.errors.full_messages.each do |msg|
+        %li= msg
+
+  %legend Details
+  %div.control-group
+    = f.label :name, :class => "control-label"
+    %div.controls
+      = f.text_field :name, :class => "input-xlarge"
+  %div.control-group
+    = f.label :event_type, 'Type', :class => "control-label"
+    %div.controls 
+      = f.select :event_type, @events, :class => "input-xlarge"
+  %div.control-group
+    = f.label :description, :class => "control-label"
+    %div.controls
+      = f.text_area :description, :class => "input-xlarge", :rows => 4
+
+  %legend When
+  %div.control-group
+    = f.label :date, :class => "control-label"
+    %div.controls
+      = f.date_select :date
+  %div.control-group
+    = f.label :start_time, :class => "control-label"
+    %div.controls
+      = f.time_select :start_time, :minute_step => 30, :ampm => true
+  %div.control-group
+    = f.label :end_time, :class => "control-label"
+    %div.controls
+      = f.time_select :end_time, :minute_step => 30, :ampm => true
+  %div.actions
+    = f.submit

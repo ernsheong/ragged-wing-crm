@@ -1,0 +1,21 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @event.name
+%p
+  %b Type:
+  = @event.event_type
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Date:
+  = @event.date.strftime('%A, %d %B %Y')
+%p
+  %b Start Time:
+  = @event.start_time.strftime('%l:%M %p')
+%p
+  %b End Time:
+  = @event.end_time.strftime('%l:%M %p')
+= link_to 'Edit', edit_event_path(@event)
+= link_to 'Back', events_path

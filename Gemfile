@@ -4,6 +4,7 @@ gem 'rails', '3.2.2'
 gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
+gem "erb2haml", :group => :development
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

@@ -1,0 +1,32 @@
+%h1 Events
+%br
+%div.row 
+  %div.span3  
+    = link_to 'Add New Event', new_event_path, :class => "btn btn-primary", :id => "new_event"
+
+%table.table.table-striped
+  %thead 
+    %tr
+      %th Name
+      %th Type
+      %th Description
+      %th Date
+      %th Start Time
+      %th End Time
+      %th
+      %th
+
+  %tbody
+  - @events.each do |event|
+    %tr
+      %td= link_to "#{event.name}", event
+      %td= event.event_type
+      %td= event.description
+      %td= event.date
+      %td= event.start_time.strftime('%l:%M %p')
+      %td= event.end_time.strftime('%l:%M %p')
+      %td
+      %td
+        = link_to 'Edit', edit_event_path(event), :class => "btn btn-mini"
+        = link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
+
