@@ -35,6 +35,7 @@
               %li= link_to "People", people_path
               -# %li= link_to "Organizations", organizations_path
               %li= link_to "Donations", donations_path
+              %li= link_to "Events", events_path
               %li
                 = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
                   -# = select :person, :title, [ "people"]

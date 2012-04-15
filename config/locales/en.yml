@@ -3,3 +3,15 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    attributes:
+      event:
+        name: "Event name"
+    errors:
+      models:
+        event:
+          attributes:
+            name:
+              blank: "is required!"

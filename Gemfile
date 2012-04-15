@@ -10,6 +10,7 @@ gem 'therubyracer'
 # login gems
 gem "ruby-openid"
 gem "rack-openid"
+gem "erb2haml", :group => :development
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

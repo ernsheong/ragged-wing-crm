@@ -17,4 +17,6 @@
 app/controllers/.DS_Store
 coverage
 
+
 Gemfile.lock
+db/.DS_Store
