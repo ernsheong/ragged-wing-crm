@@ -3,11 +3,24 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @years = (2005..Time.now.year).entries
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
     end
+  end
+
+  def filter
+    @events = Event.filter(params[:filter])
+    @years = (2005..Time.now.year).entries
+    @selected = params[:filter]
+    if params[:filter].blank?
+      flash[:notice] = "Showing all events"
+    else 
+      flash[:notice] = "Showing all events in #{@selected}"
+    end
+    render "index"
   end
 
   # GET /events/1
@@ -49,7 +62,8 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
-        format.html { render action: "new" }
+        @events = Event.event_list
+        format.html { render action: "new"}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -65,6 +79,7 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
+        @events = Event.event_list
         format.html { render action: "edit" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end

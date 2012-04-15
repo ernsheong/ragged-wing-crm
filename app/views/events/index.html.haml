@@ -1,8 +1,15 @@
 %h1 Events
 %br
-%div.row 
-  %div.span3  
-    = link_to 'Add New Event', new_event_path, :class => "btn btn-primary", :id => "new_event"
+= form_tag({:controller => "events", :action => "filter"}, :method => "get", :class => "form-inline") do
+  %div.row-fluid
+    %div.span3  
+      = link_to 'Add New Event', new_event_path, :class => "btn btn-primary", :id => "new_event"
+    %div.span9
+      %div.pull-right
+        = select_tag "filter", options_for_select(@years, @selected), {:prompt => "Filter by Year"}
+        = submit_tag( "Go", {:class => "btn", :id => "filter"})
+
+%h3#notice= notice  
 
 %table.table.table-striped
   %thead 
@@ -21,8 +28,8 @@
     %tr
       %td= link_to "#{event.name}", event
       %td= event.event_type
-      %td= event.description
-      %td= event.date
+      %td{:style => "width:45%;"}= event.description
+      %td= event.date.strftime('%d %B %Y')
       %td= event.start_time.strftime('%l:%M %p')
       %td= event.end_time.strftime('%l:%M %p')
       %td
