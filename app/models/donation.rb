@@ -12,7 +12,7 @@ class Donation < ActiveRecord::Base
 	end
 
 	def self.total_amount(donations)
-		donations.inject do |sum, elt|
+		donations.inject(0) do |sum, elt|
       sum + elt.amount
     end
   end
