@@ -1,6 +1,6 @@
-%h1= "Edit Details for: #{@person.title} #{@person.first_name} #{@person.last_name}"
+%h1= "Edit #{@person.first_name} #{@person.last_name}'s Profile"
 
 = render 'form'
 
-= link_to 'Show', @person
-= link_to 'Back', people_path
+= link_to 'Show', @person, :class => 'btn'
+= link_to 'Back', people_path, :class => 'btn'

@@ -2,123 +2,29 @@
   %p#notice= notice
 
 %h1= "#{@person.first_name} #{@person.last_name}"
+
 %h2
   = "#{@person.title}"
   -if not @person.company.blank?
     = "at #{@person.company}" 
 %br
-%div.row
-  %div.span12
-    = link_to 'Edit Information', edit_person_path(@person), :class => "btn btn-primary", :id => "edit"
-    = link_to 'Add a Donation', new_donation_path(:person_id => @person.id), :id => "new_donation", :class => "btn"
-    = link_to 'Add a Note', new_note_path(:person_id => @person.id), :id => "new_note", :class => "btn"
 
 %div.row
   %div.span12
-    %h2 Information
-    %table.table.table-condensed
-      %tr
-        %td
-          %i.icon-home
-          Role
-        %td= @person.role
-      %tr
-        %td
-          %i.icon-home
-          Address 1
-        %td
-          - if @address1 
-            = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
-      %tr
-        %td
-          %i.icon-home
-          Address 2
-        %td
-          - if @address2 
-            = "#{@address2.street}, #{@address2.city}, #{@address2.state} #{@address2.zip}, #{@address2.country}"
-      %tr
-        %td
-          %i.icon-envelope
-          Email 1
-        %td= mail_to @person.email1
-      %tr
-        %td
-          %i.icon-envelope
-          Email 2
-        %td= mail_to @person.email2
-      %tr
-        %td
-          %i.icon-comment
-          Cell Phone
-        %td= @person.phone_cell
-      %tr
-        %td
-          %i.icon-comment
-          Home Phone
-        %td= @person.phone_home
-      %tr
-        %td
-          %i.icon-comment
-          Work Phone
-        %td= @person.phone_office
-      %tr
-        %td
-          %i.icon-list-alt
-          Company Website
-        %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
-      %tr
-        %td
-          %i.icon-list-alt
-          Organization Website
-        %td= content_tag(:a, "#{@person.website2}", :href => "http://www.#{@person.website2}")
-      %tr
-        %td
-          %i.icon-list-alt
-          Personal Profile 1
-        %td= content_tag(:a, "#{@person.website3}", :href => "http://www.#{@person.website3}")
-      %tr
-        %td
-          %i.icon-list-alt
-          Personal Profile 2
-        %td= content_tag(:a, "#{@person.website4}", :href => "http://www.#{@person.website4}")
-      %tr
-        %td
-          %i.icon-user
-          Relationship to Ragged Wing
-        %td= @person.print_relationships
-
-%div.row
-  %div.span12
-    %h2 Donations Made
-    - if @person.donations
-      %table.table.table-condensed
-        %tr
-          %th Date
-          %th Amount
-        - @person.donations.each do |d|
-          %tr
-            %td= d.date
-            %td= number_to_currency(d.amount)
-    - else
-      No donations...
-
-%div.row
-  %div.span12
-    %h2 Notes
-    - if @person.notes
-      %table.table.table-condensed
-        %tr
-          %th Notes
-          %th Last Updated
-          %th Actions
-        - @person.notes.each do |n|
-          %tr
-            %td{:style => "width:60%;"}= n.body
-            %td= n.updated_at.strftime('%F %l:%M %p')
-            %td
-              = link_to 'Edit', edit_note_path(n), :class => "btn btn-mini"
-              = link_to 'Delete', n, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
-    - else
-      No Notes
+    %div.tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{:href => "#1", :data => {:toggle => "tab"}} Profile
+        %li
+          %a{:href => "#2", :data => {:toggle => "tab"}} Notes
+        %li
+          %a{:href => "#3", :data => {:toggle => "tab"}} Donations
+    %div.tab-content
+      %div.tab-pane.active#1
+        = render 'profile'
+      %div.tab-pane#2
+        = render 'notes'
+      %div.tab-pane#3
+        = render 'donations'
 
 = link_to 'Back', people_path, :class => "btn"

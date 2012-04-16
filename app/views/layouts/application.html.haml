@@ -38,11 +38,17 @@
               %li= link_to "Events", events_path
               %li
                 = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
-                  -# = select :person, :title, [ "people"]
-                  = text_field_tag(:q, "Search", :class => "search-query")
+                  = text_field_tag(:q, nil, {:class => "search-query",:placeholder => "Search..."})
                   = submit_tag("Go", :class => "btn-navbar")
               -if signed_in?
                 %li= link_to "logged in as #{current_user.email}", root_path
                 %li= link_to 'Sign Out', session_path, :method => :delete
     %div.container-fluid
+      %noscript
+        %div.row
+          %div.span12
+            %div.alert.alert-error
+              %h4.alert-heading
+                Warning!
+              Please enable JavaScript.
       = yield

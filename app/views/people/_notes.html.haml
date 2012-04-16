@@ -1,0 +1,19 @@
+%div.pull-right= link_to 'Add a note', new_note_path(:person_id => @person.id), :id => "new_note", :class => "btn"
+
+%h2 Notes
+
+- if @person.notes
+  %table.table.table-condensed
+    %tr
+      %th Notes
+      %th Last Updated
+      %th Actions
+    - @person.notes.each do |n|
+      %tr
+        %td{:style => "width:60%;"}= n.body
+        %td= n.updated_at.strftime('%F %l:%M %p')
+        %td
+          = link_to 'Edit', edit_note_path(n), :class => "btn btn-mini"
+          = link_to 'Delete', n, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+- else
+  No Notes
