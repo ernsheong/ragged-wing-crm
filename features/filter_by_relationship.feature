@@ -1,4 +1,4 @@
-Feature: Ability to feature contacts based on relationship
+Feature: Ability to filter contacts based on relationship
  
   As an admin
   I want to filter contacts by relationship
