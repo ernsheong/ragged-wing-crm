@@ -24,7 +24,8 @@ describe EventsController do
   # Event. As you add validations to Event, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:name => "Fundraiser", :date => Date.parse("2012-01-01"), 
+      :start_time => Time.now, :end_time => Time.now + 1.hour}
   end
   
   # This should return the minimal set of values that should be in the session

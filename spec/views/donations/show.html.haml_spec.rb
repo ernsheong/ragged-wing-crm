@@ -7,6 +7,7 @@ describe "donations/show" do
     @person.stub(:id).and_return("1")
     @person.stub(:first_name).and_return("Bob")
     @person.stub(:last_name).and_return("Hu")
+    @donation.stub(:donor).and_return(@person)
   end
 
   it "renders attributes in <p>" do
