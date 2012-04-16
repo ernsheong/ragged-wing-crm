@@ -5,7 +5,16 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
 gem 'execjs'
-gem 'therubyracer'
+
+# dont include 'therubyracer' on windows
+platforms :ruby do
+  gem 'therubyracer'
+end
+
+# login gems
+gem "ruby-openid"
+gem "rack-openid"
+gem "erb2haml", :group => :development
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

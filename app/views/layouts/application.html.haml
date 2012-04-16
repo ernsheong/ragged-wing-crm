@@ -35,10 +35,14 @@
               %li= link_to "People", people_path
               -# %li= link_to "Organizations", organizations_path
               %li= link_to "Donations", donations_path
+              %li= link_to "Events", events_path
               %li
                 = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
                   = text_field_tag(:q, nil, {:class => "search-query",:placeholder => "Search..."})
                   = submit_tag("Go", :class => "btn-navbar")
+              -if signed_in?
+                %li= link_to "logged in as #{current_user.email}", root_path
+                %li= link_to 'Sign Out', session_path, :method => :delete
     %div.container-fluid
       %noscript
         %div.row

@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
   has_many :relationships, :dependent => :destroy, :autosave => true  # delete relationship in Relationship table if person deleted
   has_many :donations
   has_many :notes, :dependent => :destroy
+  validates_presence_of :first_name, :message => "must have a first name!"
+  validates_presence_of :last_name, :message => "must have a last name!"  
 
   def self.search(q)
     q = q.downcase
@@ -112,4 +114,9 @@ class Person < ActiveRecord::Base
     Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
   end
 
+  def get_donations_between_dates(start_date, end_date)
+    self.donations.find_all do |elt|
+      elt.date > start_date && elt.date < end_date
+    end
+  end
 end

@@ -1,13 +1,24 @@
 RaggedWing::Application.routes.draw do
   
+  # Event Controller Mappings
+  match 'events/filter' => 'events#filter'
+  resources :events
+  
   resources :donations
   resources :notes
-
+  
   # People Controller Mappings
   match 'people/filter' => 'people#filter'
   match 'people/search' => 'people#search'
   resources :people
   
+  # for login
+  resources :users do
+    resource :additional_info
+  end
+  
+  resource :session
+
   get "home/index"
 
   # The priority is based upon order of creation:
