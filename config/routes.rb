@@ -1,5 +1,7 @@
 RaggedWing::Application.routes.draw do
   
+  resources :organizations
+
   # Event Controller Mappings
   match 'events/filter' => 'events#filter'
   resources :events
