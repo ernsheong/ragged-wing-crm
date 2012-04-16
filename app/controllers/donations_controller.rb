@@ -12,6 +12,21 @@ class DonationsController < ApplicationController
     end
   end
 
+  def search_by_amount
+    @donations = Donation.search_by_specific_amount(params[:amount])
+    render "index"
+  end
+
+  def search_by_amount_range
+    @donations = Donation.search_by_range_amount(params[:min], params[:max])
+    render "index"
+  end
+
+  def search_by_date_range
+    @donations = Donation.get_donations_between_dates(params[:start], params[:end])
+    render "index"
+  end
+
   # GET /donations/1
   # GET /donations/1.json
   def show
