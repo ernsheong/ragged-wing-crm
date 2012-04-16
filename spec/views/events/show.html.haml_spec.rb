@@ -5,7 +5,10 @@ describe "events/show" do
     @event = assign(:event, stub_model(Event,
       :name => "Name",
       :type => "Type",
-      :description => "Description"
+      :description => "Description",
+      :date => Date.parse("2012-01-01"), 
+      :start_time => Time.now, 
+      :end_time => Time.now + 1.hour
     ))
   end
 

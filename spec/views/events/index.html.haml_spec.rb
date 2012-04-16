@@ -5,18 +5,26 @@ describe "events/index" do
     assign(:events, [
       stub_model(Event,
         :name => "Name",
-        :type => "Type",
-        :description => "Description"
+        :event_type => "Type",
+        :description => "Description",
+        :date => Date.parse("2012-01-01"), 
+        :start_time => Time.now, 
+        :end_time => Time.now + 1.hour
       ),
       stub_model(Event,
         :name => "Name",
-        :type => "Type",
-        :description => "Description"
+        :event_type => "Type",
+        :description => "Description",
+        :date => Date.parse("2012-01-01"), 
+        :start_time => Time.now, 
+        :end_time => Time.now + 1.hour
       )
     ])
   end
 
   it "renders a list of events" do
+    @events = Event.all
+    @years = (2005..Time.now.year).entries
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Name".to_s, :count => 2
