@@ -52,7 +52,8 @@
     %div.control-group
       = label :address1, :country, 'Country', :class => "control-label"
       %div.controls
-        = select :address1, :country, [ "USA" ]
+        = select :address1, :country, options_for_select(Person.countries)
+
   %fieldset
     %legend Alternate Address
     %div.control-group
@@ -74,7 +75,7 @@
     %div.control-group
       = label :address2, :country, 'Country', :class => "control-label"
       %div.controls
-        = select :address2, :country, [ "USA" ]
+        = select :address2, :country, options_for_select(Person.countries)
   %fieldset
     %legend Contact Information
     %div.control-group
