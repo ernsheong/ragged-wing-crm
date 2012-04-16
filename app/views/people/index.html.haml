@@ -2,12 +2,12 @@
 
 = form_tag({:controller => "people", :action => "filter"}, :method => "get", :class => "form-inline") do
   %div.row
-    %div.span3
-      = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
-    %div.span9
+    %div.span12
       %div.pull-right
         = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
         = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
+        = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
+
 
 %div.row
   %div.span12
@@ -15,6 +15,7 @@
       %thead
         %tr
           %th Name
+          %th Relationship
           %th Address
           %th Email
           %th Cell
@@ -24,6 +25,11 @@
           %tr
             %td
               = link_to "#{person.first_name} #{person.last_name}", person
+            %td
+              - unless person.relationships.empty?
+                - person.relationships.each do |r|
+                  = r.name
+                  %br
             %td
               - if person.address1
                 = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
