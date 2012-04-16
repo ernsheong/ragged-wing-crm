@@ -17,4 +17,8 @@ class Donation < ActiveRecord::Base
     end
   end
 
+  def self.get_donations_between_dates(start_date, end_date)
+    Donation.where("date between ? and ?", start_date, end_date).all
+  end
+
 end
