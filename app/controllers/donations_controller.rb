@@ -27,6 +27,11 @@ class DonationsController < ApplicationController
     render "index"
   end
 
+  def filter_donations
+    @donations = Donation.filter_donations(params[:min], params[:max], params[:start], params[:end])
+    render "index"
+  end
+
   # GET /donations/1
   # GET /donations/1.json
   def show

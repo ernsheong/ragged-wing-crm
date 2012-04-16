@@ -1,18 +1,11 @@
 %h1 Donations
 
-= form_tag({:controller => "donations", :action => "search_by_amount"}, :method => "get", :class => "navbar-search") do
-  = text_field_tag(:amount, nil, {:class => "search-query",:placeholder => "Search by amount..."})
-  = submit_tag("Search", :class => "btn-navbar")
-
-= form_tag({:controller => "donations", :action => "search_by_amount_range"}, :method => "get", :class => "navbar-search") do
+= form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
   = text_field_tag(:max, nil, {:class => "search-query",:placeholder => "Max Amount..."})
-  = submit_tag("Search", :class => "btn-navbar")
-
-= form_tag({:controller => "donations", :action => "search_by_date_range"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:start, nil, {:class => "search-query",:placeholder => "Start Date..."})
   = text_field_tag(:end, nil, {:class => "search-query",:placeholder => "End Date..."})
-  = submit_tag("Search", :class => "btn-navbar")
+  = submit_tag("Update Listing", {:class => "btn", :id => "filter"})
 
 %table.table.table-striped
   %thead

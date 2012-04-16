@@ -9,6 +9,7 @@ RaggedWing::Application.routes.draw do
   match 'donations/search_by_amount' => 'donations#search_by_amount'
   match 'donations/search_by_amount_range' => 'donations#search_by_amount_range'
   match 'donations/search_by_date_range' => 'donations#search_by_date_range'
+  match 'donations/filter_donations' => 'donations#filter_donations'
   resources :donations
 
   resources :notes
