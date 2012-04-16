@@ -5,7 +5,11 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
 gem 'execjs'
-gem 'therubyracer'
+
+# dont include 'therubyracer' on windows
+platforms :ruby do
+  gem 'therubyracer'
+end
 
 # login gems
 gem "ruby-openid"
