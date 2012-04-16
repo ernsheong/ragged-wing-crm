@@ -1,7 +1,7 @@
-%h1 All People
-
+%h1 People
+%br
 = form_tag({:controller => "people", :action => "filter"}, :method => "get", :class => "form-inline") do
-  %div.row
+  %div.row-fluid
     %div.span3
       = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
     %div.span9
@@ -9,28 +9,26 @@
         = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
         = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
 
-%div.row
-  %div.span12
-    %table.table.table-condensed
-      %thead
-        %tr
-          %th Name
-          %th Address
-          %th Email
-          %th Cell
-          %th Actions
-      %tbody
-        - @people.each do |person|
-          %tr
-            %td
-              = link_to "#{person.first_name} #{person.last_name}", person
-            %td
-              - if person.address1
-                = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
-            %td
-              = mail_to person.email1
-            %td
-              = person.phone_cell
-            %td
-              = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
-              = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Address
+      %th Email
+      %th Phone
+      %th Actions
+  %tbody
+    - @people.each do |person|
+      %tr
+        %td
+          = link_to "#{person.first_name} #{person.last_name}", person
+        %td
+          - if person.address1
+            = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
+        %td
+          = mail_to person.email1
+        %td
+          = person.phone_cell
+        %td
+          = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
+          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

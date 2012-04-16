@@ -13,7 +13,7 @@
     - @donations.each do |donation|
       %tr
         %td
-          = link_to "#{donation.date}", donation
+          = link_to "#{donation.date.strftime('%-d %B %Y')}", donation
         %td
           = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
         %td
@@ -25,5 +25,5 @@
         %td
           = donation.solicitation_method
         %td
-          = link_to 'Edit', edit_donation_path(donation)
-          = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete
+          = link_to 'Edit', edit_donation_path(donation), :class => "btn btn-mini"
+          = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

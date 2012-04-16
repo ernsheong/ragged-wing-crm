@@ -9,8 +9,7 @@
         %li= msg
 
   = f.hidden_field :person_id, :value => @person.id
-
-  = label :note, :body, 'Notes'
+  %br
   = text_area :note, 'body', :rows => 14, :style => "width:500px"
 
   %div.actions

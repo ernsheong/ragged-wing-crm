@@ -1,27 +1,47 @@
 - if notice
   %p#notice= notice
 
-%h1= "Details for this Donation"
+%h1= "#{@donation.donor.first_name} #{@donation.donor.last_name}'s Donation Details"
+%br
+%div.row
+  %div.span12
+    = link_to 'Edit Donation', edit_donation_path(@donation), :class => "btn btn-primary"
+%br 
 
-%ul
-  %li
-    Donor Name:
-    = "#{@donation.donor.first_name} #{@donation.donor.last_name}"
-  %li
-    Amount: 
-    = @donation.amount
-  %li
-    Date: 
-    = @donation.date
-  %li
-    Payment Method
-    = @donation.payment_method
-  %li
-    Campaign
-    = @donation.campaign
-  %li
-    Solicitation Method
-    = @donation.solicitation_method
+%div.row
+  %div.span12
+    %table.table.table-condensed
+      %tr 
+        %h2 Details
+      %tr
+        %td
+          %i.icon-user
+          Donor Name
+        %td= "#{@donation.donor.first_name} #{@donation.donor.last_name}"
+      %tr
+        %td
+          %i.icon-plus
+          Amount
+        %td= @donation.amount
+      %tr
+        %td
+          %i.icon-calendar
+          Date
+        %td= @donation.date.strftime('%A, %d %B %Y')
+      %tr
+        %td
+          %i.icon-lock
+          Payment Method
+        %td= @donation.payment_method
+      %tr
+        %td
+          %i.icon-th-list
+          Campaign
+        %td= @donation.campaign
+      %tr
+        %td
+          %i.icon-th-list
+          Solicitation Method
+        %td= @donation.solicitation_method
 
-= link_to 'Edit', edit_donation_path(@donation)
-= link_to 'Back', donations_path
+= link_to 'Back', donations_path, :class => "btn"

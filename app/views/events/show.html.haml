@@ -5,7 +5,7 @@
 %br
 %div.row
   %div.span12
-    = link_to 'Edit Event', edit_event_path(@event), :class => "btn"
+    = link_to 'Edit Event', edit_event_path(@event), :class => "btn btn-primary"
 %br
 
 %div.row
@@ -16,7 +16,7 @@
       %tr
         %td
           %i.icon-star
-          Type:
+          Event Type
         %td= @event.event_type
       %tr
         %td
@@ -26,17 +26,17 @@
       %tr
         %td
           %i.icon-calendar
-          Date:
+          Date
         %td= @event.date.strftime('%A, %d %B %Y')
       %tr
         %td
           %i.icon-time
-          Start Time:
+          Start Time
         %td= @event.start_time.strftime('%l:%M %p')
       %tr
         %td
           %i.icon-time
-          End Time:
+          End Time
         %td= @event.end_time.strftime('%l:%M %p')
 
 = link_to 'Back', events_path, :class => "btn"

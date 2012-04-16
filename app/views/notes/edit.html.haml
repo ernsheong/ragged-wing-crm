@@ -1,6 +1,6 @@
-%h1= "Edit Details for: TODO"
+%h1= "Edit #{@person.first_name} #{@person.last_name}'s Note"
 
 = render 'form'
 
-= link_to 'Delete', @note, confirm: 'Are you sure?', method: :delete
-= link_to 'Back', @person
+= link_to 'Delete', @note, confirm: 'Are you sure?', method: :delete, :class => "btn"
+= link_to 'Back', @person, :class => "btn"
