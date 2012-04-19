@@ -15,3 +15,5 @@
 /tmp
 
 app/controllers/.DS_Store
+
+coverage/
