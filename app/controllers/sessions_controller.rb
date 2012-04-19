@@ -21,11 +21,10 @@ class SessionsController < ApplicationController
                               :email => ax.get_single('http://axschema.org/contact/email'))
         if user
           session[:user_id] = user.id
-          redirect_to(session[:redirect_to] || root_path)
         else
           flash[:error] = "Invalid Username/Password"
-          redirect_to root_path
         end
+        redirect_to root_path
       when :failure
         render :action => 'problem'
       else
