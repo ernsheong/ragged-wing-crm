@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-  skip_before_filter :ensure_signed_in
+  skip_filter :verify_authenticity_token
+  skip_filter :ensure_signed_in
   
   def new
     response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
@@ -19,8 +19,13 @@ class SessionsController < ApplicationController
         user = User.where(:identifier_url => openid.display_identifier).first
         user ||= User.create!(:identifier_url => openid.display_identifier,
                               :email => ax.get_single('http://axschema.org/contact/email'))
-        session[:user_id] = user.id
-        redirect_to(session[:redirect_to] || root_path)
+        if user
+          session[:user_id] = user.id
+          redirect_to(session[:redirect_to] || root_path)
+        else
+          flash[:error] = "Invalid Username/Password"
+          redirect_to root_path
+        end
       when :failure
         render :action => 'problem'
       else

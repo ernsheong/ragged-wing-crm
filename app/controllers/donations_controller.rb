@@ -1,6 +1,8 @@
 require 'date'
 
 class DonationsController < ApplicationController
+  before_filter :ensure_signed_in
+
   # GET /donations
   # GET /donations.json
   def index

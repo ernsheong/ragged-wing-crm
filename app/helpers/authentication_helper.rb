@@ -18,7 +18,7 @@ module AuthenticationHelper
     unless signed_in? && User.find_by_id(session[:user_id])
       session[:user_id] = nil
       session[:redirect_to] = request.fullpath
-      redirect_to(new_session_path)
+      redirect_to(root_path)
     end
   end
   
