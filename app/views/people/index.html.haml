@@ -29,7 +29,7 @@
               %br
         %td
           - if person.address1
-            = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
+            = person.address1.to_s
         %td
           = mail_to person.email1
         %td
