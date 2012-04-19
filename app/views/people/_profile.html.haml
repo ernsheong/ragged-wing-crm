@@ -16,15 +16,15 @@
       %i.icon-home
       Address 1
     %td
-      - if @address1 
-        = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
+      - if @person.address1 
+        = @person.address1.to_s
   %tr
     %td
       %i.icon-home
       Address 2
     %td
-      - if @address2 
-        = "#{@address2.street}, #{@address2.city}, #{@address2.state} #{@address2.zip}, #{@address2.country}"
+      - if @person.address2 
+        = @person.address2.to_s
   %tr
     %td
       %i.icon-envelope

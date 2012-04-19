@@ -50,7 +50,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-
+    @selected = @address1.country unless @address1 == nil
+    @selected2 = @address2.country unless @address2 == nil
     @internal = Relationship.internal
     @external = Relationship.external
   end
