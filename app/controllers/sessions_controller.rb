@@ -17,10 +17,13 @@ class SessionsController < ApplicationController
       when :success
         ax = OpenID::AX::FetchResponse.from_success_response(openid)
         user = User.where(:identifier_url => openid.display_identifier).first
-        user ||= User.create!(:identifier_url => openid.display_identifier,
-                              :email => ax.get_single('http://axschema.org/contact/email'))
-        session[:user_id] = user.id
-        redirect_to(session[:redirect_to] || root_path)
+        if user
+          session[:user_id] = user.id
+          redirect_to(session[:redirect_to] || root_path)
+        else
+          flash[:error] = "Invalid Username/Password"
+          redirect_to root_path
+        end
       when :failure
         render :action => 'problem'
       else
