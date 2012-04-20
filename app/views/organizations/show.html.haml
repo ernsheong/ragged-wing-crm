@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @organization.name
+%p
+  %b Person:
+  = @organization.person
+%p
+  %b Address:
+  = @organization.address
+%p
+  %b Website:
+  = @organization.website
+%p
+  %b Org type:
+  = @organization.org_type
+= link_to 'Edit', edit_organization_path(@organization)
+|
+\#{link_to 'Back', organizations_path}

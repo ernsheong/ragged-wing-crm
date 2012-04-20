@@ -1,0 +1,23 @@
+%h1 Listing organizations
+%table
+  %tr
+    %th Name
+    %th Person
+    %th Address
+    %th Website
+    %th Org type
+    %th
+    %th
+    %th
+  - @organizations.each do |organization|
+    %tr
+      %td= organization.name
+      %td= organization.person
+      %td= organization.address
+      %td= organization.website
+      %td= organization.org_type
+      %td= link_to 'Show', organization
+      %td= link_to 'Edit', edit_organization_path(organization)
+      %td= link_to 'Destroy', organization, confirm: 'Are you sure?', method: :delete
+%br/
+= link_to 'New Organization', new_organization_path
