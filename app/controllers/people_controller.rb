@@ -1,5 +1,4 @@
 class PeopleController < ApplicationController
-  #before_filter :ensure_signed_in
   # GET /people
   # GET /people.json
   def index
@@ -27,7 +26,6 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -52,7 +50,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-
+    @selected = @address1.country unless @address1 == nil
+    @selected2 = @address2.country unless @address2 == nil
     @internal = Relationship.internal
     @external = Relationship.external
   end
