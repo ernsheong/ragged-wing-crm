@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
     @organizations = Organization.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @organizations }
     end
   end
@@ -14,6 +14,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     @organization = Organization.find(params[:id])
+    @address = Address.find_by_id(@organization.address_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,6 +36,10 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1/edit
   def edit
     @organization = Organization.find(params[:id])
+    @address = Address.find_by_id(@organization.address_id)
+    @person = Person.find_by_id(@organization.person_id)
+    @state = @address.state
+    @country = @address.country
   end
 
   # POST /organizations
@@ -46,7 +51,6 @@ class OrganizationsController < ApplicationController
       address_id: @address.id}
     @organization = Organization.new(new_organization)
     
-
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
@@ -62,9 +66,13 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1.json
   def update
     @organization = Organization.find(params[:id])
+    @address = Address.find_by_id(@organization.address_id)
+    org = params[:organization]
+    updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], 
+      address_id: @address.id}
 
     respond_to do |format|
-      if @organization.update_attributes(params[:organization])
+      if @organization.update_attributes(updated_attributes) and @address.update_attributes(params[:address])
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { head :no_content }
       else

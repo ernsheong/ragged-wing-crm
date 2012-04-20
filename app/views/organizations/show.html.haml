@@ -1,19 +1,42 @@
-%p#notice= notice
-%p
-  %b Name:
-  = @organization.name
-%p
-  %b Person:
-  = @organization.person
-%p
-  %b Address:
-  = @organization.address
-%p
-  %b Website:
-  = @organization.website
-%p
-  %b Org type:
-  = @organization.org_type
-= link_to 'Edit', edit_organization_path(@organization)
-|
-\#{link_to 'Back', organizations_path}
+- if notice
+  %p#notice= notice
+
+%h1= "#{@organization.name}"
+%br
+%div.row
+  %div.span12
+    = link_to 'Edit Organization', edit_organization_path(@organization), :class => "btn btn-primary"
+%br 
+
+%div.row
+  %div.span12
+    %table.table.table-condensed
+      %tr 
+        %h2 Details
+      %tr
+        %td
+          %i.icon-book
+          Organization Name
+        %td= "#{@organization.name}"
+      %tr
+        %td
+          %i.icon-user
+          Contact Person
+        %td= @organization.person
+      %tr
+        %td
+          %i.icon-th-list
+          Address
+        %td= "#{@address.street}, #{@address.city}, #{@address.state} #{@address.zip}, #{@address.country}"
+      %tr
+        %td
+          %i.icon-home
+          Website
+        %td= content_tag(:a, "#{@organization.website}", :href => "http://www.#{@organization.website}")
+      %tr
+        %td
+          %i.icon-cog
+          Organization Type
+        %td= @organization.org_type
+
+= link_to 'Back', organizations_path, :class => "btn"
