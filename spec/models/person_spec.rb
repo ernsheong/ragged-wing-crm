@@ -42,6 +42,24 @@ describe Person do
       Person.search('john doe').should eq([@person])
       Person.search('JOHN DoE').should eq([@person])
     end
+
+    it "searches for people by abbreviated first name" do 
+      Person.search('joh').should eq([@person])
+    end
+
+    it "searches for people by abbreviated last name" do 
+      Person.search('bitdi').should eq([@person1])
+    end
+
+    it "searches for people by both abbreviated first and last names" do 
+      Person.search('joh do').should eq([@person])
+    end
+  end
+
+  describe "#fullname" do 
+    it "should concatenate the first name and the last name" do 
+      @person.fullname.should eq ('John Doe')
+    end
   end
 
   describe ".find_all_by_full_name" do 

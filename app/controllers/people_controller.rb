@@ -11,7 +11,10 @@ class PeopleController < ApplicationController
 
   def search
     @people = Person.search(params[:q]) # Array
-    render "index"
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @people }
+    end
   end
 
   def filter

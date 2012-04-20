@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
 gem 'execjs'
+gem 'rails3-jquery-autocomplete'
 
 # dont include 'therubyracer' on windows
 platforms :ruby do
