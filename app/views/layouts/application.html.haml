@@ -40,8 +40,8 @@
                 %li= link_to "Events", events_path
             %div
               = form_tag({:controller => "people", :action => "search"}, :method => "get", :class => "navbar-search") do
-                  = text_field_tag(:q, nil, {:class => "search-query",:placeholder => "Search..."})
-                  = submit_tag("Go", :class => "btn-navbar")
+                = text_field_tag(:q, nil, {:class => "search-query",:placeholder => "Search..."})
+                = submit_tag("Go", :class => "btn-navbar")
             %div.nav-collapse
               %ul.nav
                 %li= link_to "logged in as #{current_user.email}", root_path

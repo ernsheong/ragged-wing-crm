@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     @organization = Organization.find(params[:id])
-    @address = Address.find_by_id(@organization.address_id)
+    @address = @organization.address
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,8 +36,8 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1/edit
   def edit
     @organization = Organization.find(params[:id])
-    @address = Address.find_by_id(@organization.address_id)
-    @person = Person.find_by_id(@organization.person_id)
+    @address = @organization.address
+    @person = @organization.person
     @state = @address.state
     @country = @address.country
   end

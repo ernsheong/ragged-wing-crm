@@ -2,6 +2,7 @@ class Donation < ActiveRecord::Base
 	belongs_to :donor, :class_name => 'Person', :foreign_key => "person_id"
 	belongs_to :point_of_contact, :class_name => 'Person', :foreign_key => "point_of_contact_id"
 	belongs_to :organization
+  validates_presence_of :amount, :date
 
 	def self.search_by_specific_amount(amount)
 		Donation.where("amount = ?", amount).all
@@ -32,5 +33,4 @@ class Donation < ActiveRecord::Base
     end_date = Donation.maximum('date') if end_date.blank?
     Donation.where("amount between ? and ? AND date between ? and ?", min, max, start_date, end_date).all
   end
-
 end

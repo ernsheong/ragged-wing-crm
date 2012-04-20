@@ -13,6 +13,8 @@ en:
         name: "Person name" 
       organization:
         name: "Organization name" 
+      donation:
+        amount: "Amount"
     errors:
       models:
         event:
@@ -28,4 +30,8 @@ en:
         organization:
           attributes:
             name:
-              blank: "is required!"         
+              blank: "is required!"       
+        donation:
+          attributes:
+            amount:
+              blank: "is required!"  

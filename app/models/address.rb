@@ -16,7 +16,8 @@ class Address < ActiveRecord::Base
       address[0..index-1]
     else
       address << self.country
-    end        
+    end    
+  end    
 
   def self.countries
     [ "United States", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", 
