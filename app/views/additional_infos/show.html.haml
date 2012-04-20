@@ -1,0 +1,12 @@
+%h2= @title = "Additional Info"
+.content
+  = form_for @user, :url => user_additional_info_path(@user) do |f|
+    - if @user.first_name.blank?
+      %div
+        = f.label :first_name
+        = f.text_field :first_name
+    - if @user.last_name.blank?
+      %div
+        = f.label :last_name
+        = f.text_field :last_name
+    = f.submit

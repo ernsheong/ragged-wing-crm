@@ -1,0 +1,32 @@
+Feature: ability to add information about organizations
+
+	As an admin
+	So that I can keep track of all the organization info related to my organization
+	I want to be able to add information about organizations
+
+Background 
+
+	Given the following organizations exist: 
+
+	|	name			| 	website				| 		org_type		|	street		|	city	|	state 	| 	zip		| country 	|
+	|	The Art Group	|	artgroup.org 		|	Arts Organization 	|	101 Durant Ave.	| Berkeley	| CA 	| 	94720	|	United States	|
+	|	Arts Foundation	|	artsfoundation.org 	| 	Foundation			|	101 Fulton St.	| Berkeley	| CA 	| 	12345	|	United States	|
+
+	And I visit "/organizations"
+
+Scenario: view information from database
+	
+	Then I should see: The Art Group, artgroup.org
+	And I should see: Arts Foundation, artsfoundation.org
+
+Scenario: ability to add information and show its page
+	When I add "The Berkeley Foundation" with website "berkeleyf.org" and type "Foundation"
+	And I view "The Berkeley Foundation"
+	Then I should see: The Berkeley Foundation, berkeleyf.org
+
+Scenario: add contact person
+	When I edit "The Art Group"
+	And I fill in "Jonathan Lin" for "Contact Person"
+	And I save
+	When I view "The Art Group"
+	Then I should see "Jonathan Lin"

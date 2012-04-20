@@ -1,0 +1,32 @@
+%h1 Organizations
+%br
+= form_tag({:controller => "organizations", :action => "filter"}, :method => "get", :class => "form-inline") do
+  %div.row-fluid
+    %div.span3  
+      = link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Organization Name
+      %th Contact Person
+      %th Address
+      %th Website
+      %th Organization Type
+      %th1
+      %th
+      %th
+
+  %tbody
+  - @organizations.each do |organization|
+    %tr
+      %td= link_to "#{organization.name}", organization
+      %td= Person.find_by_id(organization.person)
+      %td= Address.find_by_id(organization.address)
+      %td= content_tag(:a, "#{organization.website}", :href => "http://www.#{organization.website}")
+      %td= organization.org_type
+      %td
+        = link_to 'Edit', edit_organization_path(organization), :class => "btn btn-mini"
+        = link_to 'Destroy', organization, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+%br/
+= link_to 'New Organization', new_organization_path
