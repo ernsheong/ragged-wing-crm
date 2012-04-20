@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+
   #before_filter :ensure_signed_in
   # GET /people
   # GET /people.json
@@ -12,7 +13,10 @@ class PeopleController < ApplicationController
 
   def search
     @people = Person.search(params[:q]) # Array
-    render "index"
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @people }
+    end
   end
 
   def filter

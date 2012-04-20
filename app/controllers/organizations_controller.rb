@@ -40,7 +40,12 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(params[:organization])
+    @address = Address.create!(params[:address])
+    org = params[:organization]
+    new_organization = {name: org['name'], website: org['website'], org_type: org['org_type'], 
+      address_id: @address.id}
+    @organization = Organization.new(new_organization)
+    
 
     respond_to do |format|
       if @organization.save

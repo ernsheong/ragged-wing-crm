@@ -12,7 +12,9 @@ RaggedWing::Application.routes.draw do
   # People Controller Mappings
   match 'people/filter' => 'people#filter'
   match 'people/search' => 'people#search'
-  resources :people
+  resources :people do 
+    get :autocomplete_person_first_name, :on => :collection
+  end
   
   # for login
   resources :users do

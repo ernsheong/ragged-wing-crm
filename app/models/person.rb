@@ -6,24 +6,26 @@ class Person < ActiveRecord::Base
   has_many :donations
   has_many :notes, :dependent => :destroy
   validates_presence_of :first_name, :message => "must have a first name!"
-  validates_presence_of :last_name, :message => "must have a last name!"  
+  validates_presence_of :last_name, :message => "must have a last name!"
 
   def self.search(q)
     q = q.downcase
-    results = Person.where("lower(first_name) = ? or lower(last_name) = ?", q, q)
+    results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%").all
     results << Person.find_all_by_full_name(q)
-    results.flatten
+    results.flatten.uniq
   end
-
 
   # searches for all persons with the full name in small case
   def self.find_all_by_full_name(value)
     name = value.split(/\s+/)
     first_name = name[0]
     last_name = name[1]
-    Person.where("lower(first_name) = ? AND lower(last_name) = ?", first_name, last_name).all
+    Person.where("lower(first_name) LIKE ? AND lower(last_name) LIKE ?", "%#{first_name}%", "%#{last_name}%").all
   end
 
+  def fullname
+    [first_name, last_name].join(" ")
+  end
 
   def has_relationship?(name)
     self.relationships.each do |rel|
