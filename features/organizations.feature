@@ -13,6 +13,7 @@ Background:
 	| Stanford	| Private Entity| stanford.edu	| 100 Palo		| Alto 		| 12345	| CA 	|
 
 	And I visit "/organizations"
+	And I am logged in
 
 Scenario: I can view organizations
 	
