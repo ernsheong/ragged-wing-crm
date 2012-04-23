@@ -1,6 +1,8 @@
 require 'date'
 
 class DonationsController < ApplicationController
+  before_filter :ensure_signed_in
+
   # GET /donations
   # GET /donations.json
   def index
@@ -10,6 +12,26 @@ class DonationsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @donations }
     end
+  end
+
+  def search_by_amount
+    @donations = Donation.search_by_specific_amount(params[:amount])
+    render "index"
+  end
+
+  def search_by_amount_range
+    @donations = Donation.search_by_range_amount(params[:min], params[:max])
+    render "index"
+  end
+
+  def search_by_date_range
+    @donations = Donation.get_donations_between_dates(params[:start], params[:end])
+    render "index"
+  end
+
+  def filter_donations
+    @donations = Donation.filter_donations(params[:min], params[:max], params[:start], params[:end])
+    render "index"
   end
 
   # GET /donations/1
@@ -27,7 +49,7 @@ class DonationsController < ApplicationController
   # GET /donations/new.json
   def new
     @donation = Donation.new
-
+    @person = Person.find(params[:person_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @donation }
@@ -37,13 +59,12 @@ class DonationsController < ApplicationController
   # GET /donations/1/edit
   def edit
     @donation = Donation.find(params[:id])
+    @person = @donation.donor
   end
 
   # POST /donations
   # POST /donations.json
   def create
-    new_donation = params[:donation]
-    new_donation['date'] = Date.parse new_donation['date']
     @donation = Donation.new(params[:donation])
 
     respond_to do |format|

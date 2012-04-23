@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405044410) do
+ActiveRecord::Schema.define(:version => 20120416060730) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(:version => 20120405044410) do
     t.datetime "updated_at",          :null => false
   end
 
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.string   "event_type"
+    t.text     "description"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "members", :force => true do |t|
     t.integer  "person_id"
     t.integer  "organization_id"
@@ -45,12 +56,19 @@ ActiveRecord::Schema.define(:version => 20120405044410) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "notes", :force => true do |t|
+    t.integer  "person_id"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.integer  "person_id"
     t.integer  "address_id"
     t.string   "website"
-    t.string   "type"
+    t.string   "org_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -68,17 +86,19 @@ ActiveRecord::Schema.define(:version => 20120405044410) do
     t.integer  "address_id_2"
     t.string   "website1"
     t.string   "website2"
-    t.string   "other"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "role"
+    t.string   "company"
+    t.string   "website3"
+    t.string   "website4"
   end
 
   create_table "relationships", :force => true do |t|
     t.integer  "person_id"
-    t.string   "type"
-    t.boolean  "internal"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "users", :force => true do |t|

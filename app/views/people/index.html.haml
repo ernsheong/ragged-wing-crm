@@ -1,12 +1,22 @@
-%h1 List of All People
-
-%table.table
+%h1 People
+%br
+= form_tag({:controller => "people", :action => "filter"}, :method => "get", :class => "form-inline") do
+  %div.row-fluid
+    %div.span12
+      %div.pull-left
+        = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
+      %div.pull-right
+        = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
+        = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
+        
+%table.table.table-striped
   %thead
     %tr
       %th Name
+      %th Relationship(s)
       %th Address
       %th Email
-      %th Cell
+      %th Phone
       %th Actions
   %tbody
     - @people.each do |person|
@@ -14,16 +24,17 @@
         %td
           = link_to "#{person.first_name} #{person.last_name}", person
         %td
-          - if person.address1
-            = "#{person.address1.street}, #{person.address1.city}, #{person.address1.state} #{person.address1.zip}, #{person.address1.country}"
+          - unless person.relationships.empty?
+            - person.relationships.each do |r|
+              = r.name
+              %br
         %td
-          = person.email1
+          - if person.address1
+            = person.address1.to_s
+        %td
+          = mail_to person.email1
         %td
           = person.phone_cell
         %td
-          = link_to 'Edit', edit_person_path(person)
-          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete
-
-%br
-
-= link_to 'Add New Person', new_person_path, :class => "btn"
+          = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
+          = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

@@ -1,43 +1,30 @@
 - if notice
   %p#notice= notice
 
-%h1= "#{@person.title} #{@person.first_name} #{@person.last_name}"
+%h1= "#{@person.first_name} #{@person.last_name}"
 
+%h2
+  = "#{@person.title}"
+  -if not @person.company.blank?
+    = "at #{@person.company}" 
+%br
 
-%div
-  %h2 Address and Contact Information
-  %table
-    %tr
-      %td Address 1
-      %td
-        - if @address1 
-          = "#{@address1.street}, #{@address1.city}, #{@address1.state} #{@address1.zip}, #{@address1.country}"
-    %tr
-      %td Address 2
-      %td
-        - if @address2 
-          = "#{@address2.street}, #{@address2.city}, #{@address2.state} #{@address2.zip}, #{@address2.country}"
-    %tr
-      %td Email 1
-      %td= @person.email1
-    %tr
-      %td Email 2
-      %td= @person.email2
-    %tr
-      %td Cell Phone:
-      %td= @person.phone_cell
-    %tr
-      %td Home Phone:
-      %td= @person.phone_home
-    %tr
-      %td Work Phone:
-      %td= @person.phone_office
-    %tr
-      %td Website 1:
-      %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
-    %tr
-      %td Website 2:
-      %td= @person.website2
+%div.row
+  %div.span12
+    %div.tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{:href => "#1", :data => {:toggle => "tab"}} Profile
+        %li
+          %a{:href => "#2", :data => {:toggle => "tab"}} Notes
+        %li
+          %a{:href => "#3", :data => {:toggle => "tab"}} Donations
+    %div.tab-content
+      %div.tab-pane.active#1
+        = render 'profile'
+      %div.tab-pane#2
+        = render 'notes'
+      %div.tab-pane#3
+        = render 'donations'
 
-= link_to 'Edit', edit_person_path(@person), :class => "btn"
 = link_to 'Back', people_path, :class => "btn"

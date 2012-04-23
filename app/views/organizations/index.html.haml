@@ -1,0 +1,30 @@
+%h1 Organizations
+%br
+= link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
+%br
+%br
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Organization Type
+      %th Contact Person
+      %th Address
+      %th Website
+      %th Actions
+  %tbody
+    - @organizations.each do |organization|
+      %tr
+        %td
+          = link_to "#{organization.name}", organization
+        %td
+          = organization.org_type
+        %td 
+          = organization.person
+        %td
+          = "#{organization.address.street}, #{organization.address.city}, #{organization.address.state} #{organization.address.zip}, #{organization.address.country}"
+        %td
+          = content_tag(:a, "#{organization.website}", :href => "http://www.#{organization.website}")
+        %td
+          = link_to 'Edit', edit_organization_path(organization), :class => "btn btn-mini"
+          = link_to 'Delete', organization, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

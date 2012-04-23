@@ -1,5 +1,4 @@
 class PeopleController < ApplicationController
-  before_filter :ensure_signed_in
   # GET /people
   # GET /people.json
   def index
@@ -10,9 +9,17 @@ class PeopleController < ApplicationController
     end
   end
 
-
   def search
     @people = Person.search(params[:q]) # Array
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @people }
+    end
+  end
+
+  def filter
+    @people = Person.filter(params[:filter])
+    @selected = params[:filter]
     render "index"
   end
 
@@ -32,6 +39,8 @@ class PeopleController < ApplicationController
   # GET /people/new.json
   def new
     @person = Person.new
+    @internal = Relationship.internal
+    @external = Relationship.external
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,23 +53,29 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
+    @selected = @address1.country unless @address1 == nil
+    @selected2 = @address2.country unless @address2 == nil
+    @internal = Relationship.internal
+    @external = Relationship.external
   end
 
   # POST /people
   # POST /people.json
   def create
     @person = Person.new(params[:person])
-    @address = Address.new(params[:address1])
-    @address.save!
-    @person.address1 = @address
-    @address = Address.new(params[:address2])
-    @address.save!
-    @person.address2 = @address
+    @person.address1 = Address.create!(params[:address1])
+    @person.address2 = Address.create!(params[:address2])
+    @person.save_relationships(params[:relationships])
+
+    
+
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render json: @person, status: :created, location: @person }
       else
+        @internal = Relationship.internal
+        @external = Relationship.external    
         format.html { render action: "new" }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -75,19 +90,21 @@ class PeopleController < ApplicationController
     if @person.address1
       @person.address1.update_attributes(params[:address1])
     else
-      @address1 = Address.new(params[:address1])
-      @address1.save!
+      @address1 = Address.create!(params[:address1])
       @person.address1 = @address1
       @person.save!
     end
+
     if @person.address2
       @person.address2.update_attributes(params[:address2])
     else
-      @address2 = Address.new(params[:address2])
-      @address2.save!
+      @address2 = Address.create!(params[:address2])
       @person.address2 = @address2
       @person.save!
     end
+
+    @person.save_relationships(params[:relationships])
+
     # Update person
     respond_to do |format|
       if @person.update_attributes(params[:person])
@@ -103,8 +120,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
-    #@person = Person.find(params[:id])
-    #@person.destroy
     Person.destroy(params[:id])
 
     respond_to do |format|

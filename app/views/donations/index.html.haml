@@ -1,4 +1,11 @@
-%h1 List of All Donations
+%h1 Donations
+
+= form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
+  = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
+  = text_field_tag(:max, nil, {:class => "search-query",:placeholder => "Max Amount..."})
+  = text_field_tag(:start, nil, {:class => "search-query",:placeholder => "Start Date..."})
+  = text_field_tag(:end, nil, {:class => "search-query",:placeholder => "End Date..."})
+  = submit_tag("Update Listing", {:class => "btn", :id => "filter"})
 
 %table.table.table-striped
   %thead
@@ -13,9 +20,9 @@
     - @donations.each do |donation|
       %tr
         %td
-          = link_to "#{donation.date}", donation
+          = link_to "#{donation.date.strftime('%-d %B %Y')}", donation
         %td
-        -#  = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
+          = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
         %td
           = donation.amount
         %td
@@ -25,8 +32,5 @@
         %td
           = donation.solicitation_method
         %td
-          = link_to 'Edit', edit_donation_path(donation)
-          = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete
-%br
-
-= link_to 'Add New Donation', new_donation_path, :class => "btn"
+          = link_to 'Edit', edit_donation_path(donation), :class => "btn btn-mini"
+          = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"

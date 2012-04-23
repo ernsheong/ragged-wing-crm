@@ -1,0 +1,50 @@
+= form_for(@organization, html: {:class => 'form-horizontal'}) do |f|
+  - if @organization.errors.any?
+    %div#iderror_explanation
+      %h2
+        =pluralize(@organization.errors.count, "error") 
+        prohibited this organization from being saved:
+      %ul
+      -@organization.errors.full_messages.each do |msg|
+        %li= msg
+
+  %legend Details
+  %div.control-group
+    = f.label :name, 'Organization Name', :class => "control-label"
+    %div.controls
+      = f.text_field :name, :class => "input-xlarge"
+  %div.control-group
+    = f.label :org_type, 'Organization Type', :class => "control-label"
+    %div.controls 
+      = f.select :org_type, Organization.org_types, :class => "input-xlarge"
+  %div.control-group
+    = f.label :person, 'Contact Person', :class => "control-label"
+    %div.controls
+      = f.text_field :person, :class => "input-xlarge"
+  %div.control-group
+    = f.label :website, :class => "control-label"
+    %div.controls
+      = f.text_field :website, :class => "input-xlarge"
+
+  %legend Address
+  %div.control-group
+    = label :address, :street, 'Street', :class => "control-label"
+    %div.controls
+      = text_field :address, 'street', :class => "input-xlarge"
+  %div.control-group
+    = label :address, :city, 'City', :class => "control-label"
+    %div.controls
+      = text_field :address, 'city', :class => "input-xlarge"
+  %div.control-group
+    = label :address, :zip, 'Zip', :class => "control-label"
+    %div.controls.docs-input-sizes
+      = text_field :address, 'zip', :class => "input-xlarge span2"
+      = select :address, 'state', options_for_select(Address.US_states, @state), {}, :class => "span1"
+      
+  %div.control-group
+    = label :address, :country, 'Country', :class => "control-label"
+    %div.controls
+      = select :address, :country, options_for_select(Address.countries, @country)
+
+  %div.actions
+    = f.submit(:class => "btn btn-primary")

@@ -1,0 +1,77 @@
+%div.pull-right= link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
+
+%h2
+  = "#{@person.title}"
+  -if not @person.company.blank?
+    = "at #{@person.company}" 
+
+%table.table.table-condensed
+  %trw
+    %td
+      %i.icon-home
+      Role
+    %td= @person.role
+  %tr
+    %td
+      %i.icon-home
+      Address 1
+    %td
+      - if @person.address1 
+        = @person.address1.to_s
+  %tr
+    %td
+      %i.icon-home
+      Address 2
+    %td
+      - if @person.address2 
+        = @person.address2.to_s
+  %tr
+    %td
+      %i.icon-envelope
+      Email 1
+    %td= mail_to @person.email1
+  %tr
+    %td
+      %i.icon-envelope
+      Email 2
+    %td= mail_to @person.email2
+  %tr
+    %td
+      %i.icon-comment
+      Cell Phone
+    %td= @person.phone_cell
+  %tr
+    %td
+      %i.icon-comment
+      Home Phone
+    %td= @person.phone_home
+  %tr
+    %td
+      %i.icon-comment
+      Work Phone
+    %td= @person.phone_office
+  %tr
+    %td
+      %i.icon-list-alt
+      Company Website
+    %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
+  %tr
+    %td
+      %i.icon-list-alt
+      Organization Website
+    %td= content_tag(:a, "#{@person.website2}", :href => "http://www.#{@person.website2}")
+  %tr
+    %td
+      %i.icon-list-alt
+      Personal Profile 1
+    %td= content_tag(:a, "#{@person.website3}", :href => "http://www.#{@person.website3}")
+  %tr
+    %td
+      %i.icon-list-alt
+      Personal Profile 2
+    %td= content_tag(:a, "#{@person.website4}", :href => "http://www.#{@person.website4}")
+  %tr
+    %td
+      %i.icon-user
+      Relationship to Ragged Wing
+    %td= @person.print_relationships

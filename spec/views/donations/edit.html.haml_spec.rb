@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "donations/edit" do
   before(:each) do
     @donation = assign(:donation, stub_model(Donation))
+    @person = mock_model(Person)
+    @person.stub(:id).and_return("1")
   end
 
   it "renders the edit donation form" do

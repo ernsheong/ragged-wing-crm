@@ -4,10 +4,18 @@ gem 'rails', '3.2.2'
 gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
+gem 'execjs'
+gem 'rails3-jquery-autocomplete'
+
+# dont include 'therubyracer' on windows
+platforms :ruby do
+  gem 'therubyracer'
+end
 
 # login gems
 gem "ruby-openid"
 gem "rack-openid"
+gem "erb2haml", :group => :development
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,12 +23,22 @@ gem "rack-openid"
 # gems used for testing and development
 group :development, :test do
   gem 'sqlite3'
-  gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  # TODO: fix this ugliness
+  #if RUBY_VERSION.include? '1.9.3'
+  gem 'linecache19', '0.5.13'
+  #else
+    #gem 'linecache19', '0.5.12'
+  #end
+end
+
+group :test do 
+  gem 'cucumber-rails'
 end
 
 # gems used in production

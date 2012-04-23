@@ -24,7 +24,7 @@ describe DonationsController do
   # Donation. As you add validations to Donation, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:amount => "20", :date => "4/4/2012", :payment_method => "Cash"}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -52,7 +52,8 @@ describe DonationsController do
 
   describe "GET new" do
     it "assigns a new donation as @donation" do
-      get :new, {}, valid_session
+      Person.stub(:find)
+      get :new, {:person_id => "1"}, valid_session
       assigns(:donation).should be_a_new(Donation)
     end
   end

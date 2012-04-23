@@ -3,3 +3,35 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    attributes:
+      event:
+        name: "Event name"
+      person:
+        name: "Person name" 
+      organization:
+        name: "Organization name" 
+      donation:
+        amount: "Amount"
+    errors:
+      models:
+        event:
+          attributes:
+            name:
+              blank: "is required!"
+        person:
+          attributes:
+            first_name:
+              blank: "is required!"
+            last_name:
+              blank: "is required!"    
+        organization:
+          attributes:
+            name:
+              blank: "is required!"       
+        donation:
+          attributes:
+            amount:
+              blank: "is required!"  

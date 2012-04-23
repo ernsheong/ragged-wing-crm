@@ -14,4 +14,6 @@
 /log/*.log
 /tmp
 
-app/controllers/.DS_Store
+coverage
+
+.DS_Store
