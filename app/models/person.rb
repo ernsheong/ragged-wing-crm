@@ -1,3 +1,5 @@
+require 'google_chart'
+
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
   belongs_to :address2, :class_name => 'Address', :foreign_key => "address_id_2"
@@ -114,9 +116,36 @@ class Person < ActiveRecord::Base
     Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
   end
 
-  def get_donations_between_dates(start_date, end_date)
+  def get_bc_between_dates(start_date, end_date)
     self.donations.find_all do |elt|
       elt.date > start_date && elt.date < end_date
+    end
+  end
+  
+  def graph_donations_by_year(person)
+    @donations = Donation.where(:person_id => person)
+    if @donations                   
+      @donations_by_date = @donations.order("date")              
+      earliest_date = @donations_by_date.first.date.year
+      latest_date = @donations_by_date.last.date.year
+      data = Hash.new(0)            
+      @donations_by_date.each do |donation|
+        data[donation.date.year] += donation.amount                
+      end                 
+      (earliest_date..latest_date).each do |year|
+        if data[year] == 0
+          data[year] = 0
+        end
+      end
+      data = Hash[data.sort]
+      max_donation = data.values.max
+      bc = GoogleChart::BarChart.new('600x350', "Donation Amount by Year", :vertical, false)      
+      bc.data "donations", data.values, '0000ff'      
+      bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
+      bc.axis :y, :range => [0,max_donation], :color => 'ff00ff', :font_size => 16          
+      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)           
+      bc.show_legend = false;               
+      @graph = bc.to_url
     end
   end
   

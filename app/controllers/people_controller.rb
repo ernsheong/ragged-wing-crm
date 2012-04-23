@@ -1,3 +1,5 @@
+require 'google_chart'
+
 class PeopleController < ApplicationController
   #before_filter :ensure_signed_in
   # GET /people
@@ -27,7 +29,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-
+    @graph = @person.graph_donations_by_year(params[:id])    
+               
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -126,4 +129,5 @@ class PeopleController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

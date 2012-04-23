@@ -10,5 +10,8 @@
       %tr
         %td= d.date
         %td= number_to_currency(d.amount)
+                       
+  %img{:src => @graph}  
+    
 - else
   No donations...
