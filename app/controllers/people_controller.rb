@@ -53,14 +53,16 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-    @selected = @address1.country unless @address1 == nil
-    @selected2 = @address2.country unless @address2 == nil
+    @state1 = @address1.state unless @address1 == nil
+    @state2 = @address2.state unless @address2 == nil
+    @country1 = @address1.country unless @address1 == nil
+    @country2 = @address2.country unless @address2 == nil
     @internal = Relationship.internal
     @external = Relationship.external
   end
 
   # POST /people
-  # POST /people.json
+  # POST /people.json 
   def create
     @person = Person.new(params[:person])
     @person.address1 = Address.create!(params[:address1])
@@ -75,7 +77,7 @@ class PeopleController < ApplicationController
         format.json { render json: @person, status: :created, location: @person }
       else
         @internal = Relationship.internal
-        @external = Relationship.external    
+        @external = Relationship.external
         format.html { render action: "new" }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end

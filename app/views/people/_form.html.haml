@@ -42,17 +42,14 @@
       %div.controls
         = text_field :address1, 'city', :class => "input-xlarge"
     %div.control-group
-      = label :address1, :state, 'State', :class => "control-label"
-      %div.controls
-        = text_field :address1, 'state', :class => "input-xlarge"
-    %div.control-group
       = label :address1, :zip, 'Zip', :class => "control-label"
-      %div.controls
-        = text_field :address1, 'zip', :class => "input-xlarge"
+      %div.controls.docs-input-sizes
+        = text_field :address1, 'zip', :class => "input-xlarge span2"
+        = select :address, 'state', options_for_select(Address.US_states, @state1), {}, :class => "span1"
     %div.control-group
       = label :address1, :country, 'Country', :class => "control-label"
       %div.controls
-        = select :address1, :country, options_for_select(Address.countries)
+        = select :address1, :country, options_for_select(Address.countries, @country1)
 
   %fieldset
     %legend Alternate Address
@@ -65,17 +62,14 @@
       %div.controls
         = text_field :address2, 'city', :class => "input-xlarge"
     %div.control-group
-      = label :address2, :state, 'State', :class => "control-label"
-      %div.controls
-        = text_field :address2, 'state', :class => "input-xlarge"
-    %div.control-group
       = label :address2, :zip, 'Zip', :class => "control-label"
-      %div.controls
-        = text_field :address2, 'zip', :class => "input-xlarge"
+      %div.controls.docs-input-sizes
+        = text_field :address2, 'zip', :class => "input-xlarge span2"
+        = select :address, 'state', options_for_select(Address.US_states, @state2), {}, :class => "span1"
     %div.control-group
       = label :address2, :country, 'Country', :class => "control-label"
       %div.controls
-        = select :address2, :country, options_for_select(Address.countries)
+        = select :address2, :country, options_for_select(Address.countries, @country2)
         
   %fieldset
     %legend Contact Information
