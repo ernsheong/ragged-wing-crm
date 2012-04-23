@@ -13,19 +13,19 @@
   = label :donation, :amount, 'Amount'
   = text_field :donation, 'amount'
   = label :donation, :date, 'Date'
-  = date_select :donation, :date
+  = date_select :donation, :date, {}, :class => "controls docs-input-sizes span2"
   %br
 
   = label :donation, :payment_method, 'Payment Method'
-  = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ]
+  = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ], {}, :class => "controls docs-input-sizes span2"
   %br
   -# TODO: Have a Campaign table to store all campaigns?
   = label :donation, :campaign, 'Campaign'
-  = select :donation, :campaign, ['Fund Raiser', 'Lovely Dinner']
+  = select :donation, :campaign, ['Fund Raiser', 'Lovely Dinner'], {}, :class => "controls docs-input-sizes span2"
   -#@campaigns
   %br
   = label :donation, :solicitation_method, 'Solicitation Method'
-  = select :donation, :solicitation_method, ['Internet', 'E-mail', 'Phone', 'Donor Event']
+  = select :donation, :solicitation_method, ['Internet', 'E-mail', 'Phone', 'Donor Event'], {}, :class => "controls docs-input-sizes span2"
 
   %div.actions
     = f.submit(:class => "btn btn-primary")

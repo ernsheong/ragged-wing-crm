@@ -1,4 +1,4 @@
-= form_for(@event, html: {class: 'form-horizontal'}) do |f|
+= form_for(@event, html: {:class => 'form-horizontal'}) do |f|
   - if @event.errors.any?
     %div#iderror_explanation
       %h2
@@ -25,15 +25,15 @@
   %legend When
   %div.control-group
     = f.label :date, :class => "control-label"
-    %div.controls
-      = f.date_select :date
+    %div.controls.docs-input-sizes
+      = f.date_select :date, {}, :class => "span2"
   %div.control-group
     = f.label :start_time, :class => "control-label"
-    %div.controls
-      = f.time_select :start_time, :minute_step => 30, :ampm => true
+    %div.controls.docs-input-sizes
+      = f.time_select :start_time, {:minute_step => 30, :ampm => true}, {:class => "span2"}
   %div.control-group
     = f.label :end_time, :class => "control-label"
-    %div.controls
-      = f.time_select :end_time, :minute_step => 30, :ampm => true
+    %div.controls.docs-input-sizes
+      = f.time_select :end_time, {:minute_step => 30, :ampm => true}, {:class => "span2"}
   %div.actions
-    = f.submit(class: "btn btn-primary")
+    = f.submit(:class => "btn btn-primary")
