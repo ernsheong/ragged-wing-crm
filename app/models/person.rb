@@ -126,7 +126,7 @@ class Person < ActiveRecord::Base
   
   def graph_donations_by_year(person)
     @donations = Donation.where(:person_id => person)
-    if @donations                   
+    if not @donations.empty?
       @donations_by_date = @donations.order("date")              
       earliest_date = @donations_by_date.first.date.year
       latest_date = @donations_by_date.last.date.year
