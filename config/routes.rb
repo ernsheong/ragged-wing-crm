@@ -1,5 +1,4 @@
 RaggedWing::Application.routes.draw do
-  
   resources :organizations
 
   # Event Controller Mappings

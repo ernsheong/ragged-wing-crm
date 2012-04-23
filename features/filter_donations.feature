@@ -12,7 +12,7 @@ Background: donations have been added to database
   | 10         | 2005-03-03      |
   | 100        | 2006-03-03      |
   | 1000       | 2007-03-03      |
-
+  And I am logged in
   And I visit "/donations"
   
 Scenario: no year selected

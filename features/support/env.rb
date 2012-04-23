@@ -58,3 +58,10 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+ActionController::Base.class_eval do
+  private
+   def begin_open_id_authentication(identifier_url, options = {})
+     yield OpenIdAuthentication::Result.new(:successful), identifier_url, nil
+   end 
+end
+

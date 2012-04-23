@@ -109,13 +109,4 @@ When /^I filter$/ do
   click_button "filter"
 end
 
-Given /^I am logged in$/ do
-  visit("session/new")
-  fill_in("Email", :with => "raggedwing169")
-  fill_in("Passwd", :with => "berkeley169")
-  click_button("Sign in")
-end
-
-
-
 

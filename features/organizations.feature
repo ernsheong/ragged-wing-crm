@@ -4,7 +4,7 @@ Feature: Add organizations to the database
 	So that I can keep track of the organizations that my organization is related to
 	I want to be able to add and edit organization details to the database
 
-Background: 
+Background:
 
 	Given the following organizations exist:
 
@@ -12,8 +12,8 @@ Background:
 	| Berkeley	| Public Entity	| berkeley.edu	| 101 Durant	| Berkeley 	| 94720	| CA 	|
 	| Stanford	| Private Entity| stanford.edu	| 100 Palo		| Alto 		| 12345	| CA 	|
 
-	And I visit "/organizations"
 	And I am logged in
+	And I visit "/organizations"
 
 Scenario: I can view organizations
 	

@@ -11,6 +11,8 @@ Background: contacts have been added to database
   | first_name        | last_name  |
   | Jon               | Lin        |
   | Kevin             | Tham       |
+
+  And I am logged in
   
 Scenario: Add a donation
   When I view person "Kevin Tham"

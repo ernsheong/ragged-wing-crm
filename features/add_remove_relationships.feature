@@ -11,6 +11,7 @@ Background: these contacts have been added to database
   | Winston        	| Chow      | Volunteer, Employee |
   | Jonathan       	| Lin       | Donor, Volunteer    |
   | Kevin 			| Tham		|					|
+  And I am logged in
 
 @see
 Scenario: see relationships
