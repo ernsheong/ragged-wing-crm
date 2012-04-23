@@ -22,7 +22,7 @@
         %td
           %i.icon-plus
           Amount
-        %td= @donation.amount
+        %td= number_to_currency(@donation.amount)
       %tr
         %td
           %i.icon-calendar
