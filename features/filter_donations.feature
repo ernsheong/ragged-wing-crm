@@ -17,27 +17,30 @@ Background: donations have been added to database
   
 Scenario: no year selected
   When I filter 
-  Then I should see: 2012-03-03, 2005-03-03, 2006-03-03, 2007-03-03
+  Then I should see: 3 March 2012, 3 March 2005, 3 March 2006, 3 March 2007
   
 Scenario: min and max entered
   When I fill in "0" for min and "10" for max
   And I filter
-  Then I should see: 2012-03-03, 2005-03-03
+  Then I should see: 3 March 2012, 3 March 2005
   When I fill in "2000" for min
   And I filter
-  Then I should not see: 2012-03-03, 2005-03-03, 2006-03-03, 2007-03-03
+  Then I should not see: 3 March 2012, 3 March 2005, 3 March 2006, 3 March 2007
 
 Scenario: start and end date entered
   When I fill in "2012-03-03" for start date
   And I filter
-  Then I should see: 2012-03-03
+  Then I should see: 3 March 2012
   When I fill in "2005-03-03" for start date and "2007-04-03" for end date
-  Then I should see: 2005-03-03, 2006-03-03, 2007-03-03
+  And I filter
+  Then I should see: 3 March 2005, 3 March 2006, 3 March 2007
 
 Scenario: min, max, start, end all entered
   When I fill in "0" for min and "10" for max
   And I fill in "2006-03-03" for start date and "2007-04-03" for end date
-  Then I should not see: 2012-03-03, 2005-03-03, 2006-03-03, 2007-03-03
+  And I filter
+  Then I should not see: 3 March 2012, 3 March 2005, 3 March 2006, 3 March 2007
   When I fill in "1000" for min
   And I fill in "2006-03-03" for start date and "2007-04-03" for end date
-  Then I should see: 2007-03-03
+  And I filter
+  Then I should see: 3 March 2007

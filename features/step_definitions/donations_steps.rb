@@ -15,3 +15,25 @@ When /^I add a new donation of "([^"]*)" on "([^"]*)"$/ do |amt, date|
   fill_in('Date', :with => date)
   click_button('Create Donation')
 end
+
+
+When /^I fill in "([^"]*)" for min and "([^"]*)" for max$/ do |arg1, arg2|
+  fill_in('min', :with => arg1)
+  fill_in('max', :with => arg2)
+end
+
+When /^I fill in "([^"]*)" for min$/ do |arg1|
+  fill_in('min', :with => arg1)
+end
+
+When /^I fill in "([^"]*)" for start date$/ do |arg1|
+  fill_in('start', :with => arg1)
+  #fill_in('start', :with => Date.strptime(arg1, '%Y-%m-%d'))
+end
+
+When /^I fill in "([^"]*)" for start date and "([^"]*)" for end date$/ do |arg1, arg2|
+  fill_in('start', :with => arg1)
+  fill_in('end', :with => arg2)
+  #fill_in('start', :with => Date.strptime(arg1, '%Y-%m-%d'))
+  #fill_in('end', :with => Date.strptime(arg2, '%Y-%m-%d'))
+end

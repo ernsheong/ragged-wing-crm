@@ -27,10 +27,21 @@ class Donation < ActiveRecord::Base
   end
 
   def self.filter_donations(min, max, start_date, end_date)
+    
+    
     min = 0 if min.blank?
     max = Donation.maximum('amount') if max.blank?
-    start_date = Donation.minimum('date') if start_date.blank?
-    end_date = Donation.maximum('date') if end_date.blank?
+    
+    if start_date.blank?
+      start_date = Donation.minimum('date') 
+    else
+      start_date = Date.strptime(start_date, '%Y-%m-%d')
+    end
+    if end_date.blank?
+      end_date = Donation.maximum('date') 
+    else
+      end_date = Date.strptime(end_date, '%Y-%m-%d')
+    end
     Donation.where("amount between ? and ? AND date between ? and ?", min, max, start_date, end_date).all
   end
 end
