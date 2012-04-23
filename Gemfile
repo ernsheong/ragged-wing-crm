@@ -17,6 +17,8 @@ gem "ruby-openid"
 gem "rack-openid"
 gem "erb2haml", :group => :development
 
+gem "gchartrb", "~> 0.8"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -28,7 +30,9 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'ruby-debug19', :require => 'ruby-debug'       
+  gem "ruby-debug-base19", "~> 0.11.25"
+  gem 'ffi', '1.0.9'
   # TODO: fix this ugliness
   #if RUBY_VERSION.include? '1.9.3'
   gem 'linecache19', '0.5.13'

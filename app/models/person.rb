@@ -1,3 +1,5 @@
+require 'google_chart'
+
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
   belongs_to :address2, :class_name => 'Address', :foreign_key => "address_id_2"
@@ -116,10 +118,40 @@ class Person < ActiveRecord::Base
     Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
   end
 
-  def get_donations_between_dates(start_date, end_date)
+  def get_bc_between_dates(start_date, end_date)
     self.donations.find_all do |elt|
       elt.date > start_date && elt.date < end_date
     end
   end
   
+  def graph_donations_by_year(person)
+    @donations = Donation.where(:person_id => person)
+    if @donations                   
+      @donations_by_date = @donations.order("date")              
+      earliest_date = @donations_by_date.first.date.year
+      latest_date = @donations_by_date.last.date.year
+      data = Hash.new(0)            
+      @donations_by_date.each do |donation|
+        data[donation.date.year] += donation.amount                
+      end                 
+      (earliest_date..latest_date).each do |year|
+        if data[year] == 0
+          data[year] = 0
+        end
+      end
+      data = Hash[data.sort]
+      max_donation = data.values.max
+      bc = GoogleChart::BarChart.new('600x350', "Donation Amount by Year", :vertical, false)      
+      bc.data "donations", data.values, '0000ff'      
+      bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
+      bc.axis :y, :range => [0,max_donation], :color => 'ff00ff', :font_size => 16          
+      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)           
+      bc.show_legend = false;               
+      @graph = bc.to_url
+    end
+  end
+  
+  def self.countries
+    ["", "USA", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua & Deps", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Rep", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Congo {Democratic Rep}", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland {Republic}", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea North", "Korea South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar, {Burma}", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russian Federation", "Rwanda", "St Kitts & Nevis", "St Lucia", "Saint Vincent & the Grenadines", "Samoa", "San Marino", "Sao Tome & Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
+  end
 end
