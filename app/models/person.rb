@@ -118,7 +118,7 @@ class Person < ActiveRecord::Base
     Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
   end
 
-  def get_bc_between_dates(start_date, end_date)
+  def get_donations_between_dates(start_date, end_date)
     self.donations.find_all do |elt|
       elt.date > start_date && elt.date < end_date
     end
