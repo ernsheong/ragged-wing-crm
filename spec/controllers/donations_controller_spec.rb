@@ -20,6 +20,13 @@ require 'spec_helper'
 
 describe DonationsController do
 
+  before(:each) do
+    AuthenticationHelper.stub(:signed_in?).and_return(true)
+
+    # Hack, TODO: remove and add a fixture for a User
+    User.stub(:find_by_id).and_return(true)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Donation. As you add validations to Donation, be sure to
   # update the return value of this method accordingly.
@@ -31,7 +38,7 @@ describe DonationsController do
   # in order to pass any filters (e.g. authentication) defined in
   # DonationsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    { }
   end
 
   describe "GET index" do

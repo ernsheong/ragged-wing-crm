@@ -1,4 +1,6 @@
 class OrganizationsController < ApplicationController
+  before_filter :ensure_signed_in
+
   # GET /organizations
   # GET /organizations.json
   def index
@@ -38,8 +40,8 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @address = @organization.address
     @person = @organization.person
-    @state = @address.state
-    @country = @address.country
+    @state = @address.state unless @address.nil?
+    @country = @address.country unless @address.nil?
   end
 
   # POST /organizations
@@ -68,8 +70,11 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @address = Address.find_by_id(@organization.address_id)
     org = params[:organization]
-    updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], 
-      address_id: @address.id}
+    if @address
+      updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: @address.id}
+    else
+      updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: nil}
+    end
 
     respond_to do |format|
       if @organization.update_attributes(updated_attributes) and @address.update_attributes(params[:address])

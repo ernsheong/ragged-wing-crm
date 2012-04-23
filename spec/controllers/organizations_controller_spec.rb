@@ -20,11 +20,17 @@ require 'spec_helper'
 
 describe OrganizationsController do
 
+  before(:each) do
+    AuthenticationHelper.stub(:signed_in?).and_return(true)
+    # Hack, TODO: remove and add a fixture for a User
+    User.stub(:find_by_id).and_return(true)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Organization. As you add validations to Organization, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    { :name => "name" }
   end
   
   # This should return the minimal set of values that should be in the session

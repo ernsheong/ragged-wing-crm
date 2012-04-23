@@ -1,6 +1,8 @@
 require 'google_chart'
 
 class PeopleController < ApplicationController
+  before_filter :ensure_signed_in
+
   # GET /people
   # GET /people.json
   def index
