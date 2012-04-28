@@ -34,3 +34,5 @@
         %td
           = link_to 'Edit', edit_donation_path(donation), :class => "btn btn-mini"
           = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+
+= paginate @donations

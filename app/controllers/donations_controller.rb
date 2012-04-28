@@ -7,7 +7,7 @@ class DonationsController < ApplicationController
   # GET /donations
   # GET /donations.json
   def index
-    @donations = Donation.order(sort_column + " " + sort_direction)
+    @donations = Donation.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
     # @donations = Donation.all
 
     respond_to do |format|
