@@ -6,6 +6,8 @@ gem 'haml'
 gem 'paperclip'
 gem 'execjs'
 gem 'rails3-jquery-autocomplete'
+gem 'eventmachine', '1.0.0.beta.4.1', :platforms => [:mswin, :mingw]
+gem 'thin'
 
 # dont include 'therubyracer' on windows
 platforms :ruby do
@@ -34,11 +36,11 @@ group :development, :test do
   gem "ruby-debug-base19", "~> 0.11.25"
   gem 'ffi', '1.0.9'
   # TODO: fix this ugliness
-  #if RUBY_VERSION.include? '1.9.3'
-  gem 'linecache19', '0.5.13'
-  #else
-    #gem 'linecache19', '0.5.12'
-  #end
+  if RUBY_VERSION.include? '1.9.3'
+    gem 'linecache19', '0.5.13'
+  else
+    gem 'linecache19', '0.5.12'
+  end
 end
 
 group :test do 
