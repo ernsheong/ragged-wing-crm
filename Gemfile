@@ -7,10 +7,10 @@ gem 'paperclip'
 gem 'execjs'
 gem 'rails3-jquery-autocomplete'
 
-if RUBY_PLATFORM.downcase.include?("mswin")
-  gem 'eventmachine', '1.0.0.beta.4.1' 
-else
+if RUBY_PLATFORM.downcase.include?("ruby")
   gem 'eventmachine'
+else
+  gem 'eventmachine', '1.0.0.beta.4.1' 
 end
 
 gem 'thin'
