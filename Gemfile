@@ -6,7 +6,13 @@ gem 'haml'
 gem 'paperclip'
 gem 'execjs'
 gem 'rails3-jquery-autocomplete'
-gem 'eventmachine', '1.0.0.beta.4.1', :platforms => [:mswin, :mingw]
+
+if RUBY_PLATFORM.downcase.include?("mswin")
+  gem 'eventmachine', '1.0.0.beta.4.1' 
+else
+  gem 'eventmachine'
+end
+
 gem 'thin'
 
 # dont include 'therubyracer' on windows
