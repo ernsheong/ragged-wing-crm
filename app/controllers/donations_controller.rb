@@ -7,7 +7,7 @@ class DonationsController < ApplicationController
   # GET /donations
   # GET /donations.json
   def index
-    @donations = Donation.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    @donations = Donation.order(sort_column + " " + sort_direction).page(params[:page])
     # @donations = Donation.all
 
     respond_to do |format|
@@ -111,7 +111,7 @@ class DonationsController < ApplicationController
   private
   
   def sort_column
-    Donation.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    Donation.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
   end
   
   def sort_direction

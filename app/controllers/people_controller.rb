@@ -2,11 +2,12 @@ require 'google_chart'
 
 class PeopleController < ApplicationController
   before_filter :ensure_signed_in
+  helper_method :sort_column, :sort_direction
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = Person.order(sort_column + " " + sort_direction).page(params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }
@@ -146,6 +147,16 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  
+  def sort_column
+    Person.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end

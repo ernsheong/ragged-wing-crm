@@ -28,3 +28,5 @@
         %td
           = link_to 'Edit', edit_organization_path(organization), :class => "btn btn-mini"
           = link_to 'Delete', organization, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+
+= paginate @organizations
