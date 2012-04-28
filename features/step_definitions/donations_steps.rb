@@ -40,6 +40,8 @@ end
 #   on the same page
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  e1 = e1.gsub(/(?<spec>[\$\.])/, '$' => '\$', '.' => '\.')
+  e2 = e2.gsub(/(?<spec>[\$\.])/, '$' => '\$', '.' => '\.')
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
   #match_pattern = /(.)*#{e1}(.*)#{e2}(.*)/m

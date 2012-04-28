@@ -44,4 +44,9 @@ Scenario: sort donations by campaign
 
 Scenario: sort donations by date
   When I click "Date"
-  Then I should see "6 April 1968" before "12 June 1981"
+  Then I should see "21 June 2000" before "6 April 1968"
+  And I should see "10 August 2011" before "5 November 2004"
+  When I click "Date"
+  And I should see "5 November 2004" before "10 August 2011"
+  Then I should see "6 April 1968" before "21 June 2000"
+  
