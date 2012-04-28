@@ -10,12 +10,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Date
-      %th Donor Name
-      %th Amount
-      %th Payment Method
-      %th Campaign
-      %th Solicitation Method
+      %th= sortable "date", "Date"
+      %th= sortable "person_id", "Donor Name"
+      %th= sortable "amount", "Amount"
+      %th= sortable "payment_method", "Payment Method"
+      %th= sortable "campaign", "Campaign"
+      %th= sortable "solicitation_method", "Solicitation Method"
   %tbody
     - @donations.each do |donation|
       %tr
