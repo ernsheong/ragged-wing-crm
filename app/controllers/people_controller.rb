@@ -13,6 +13,14 @@ class PeopleController < ApplicationController
     end
   end
 
+  def auto
+    @people = Person.find_all_by_full_name(params[:term].downcase).select("id, first_name, last_name")
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @people }
+    end
+  end
+
   def search
     @people = Person.search(params[:q]) # Array
     respond_to do |format|

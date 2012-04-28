@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
 
   def self.search(q)
     q = q.downcase
-    results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%").all
+    results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
     results << Person.find_all_by_full_name(q)
     results.flatten.uniq
   end
@@ -22,7 +22,7 @@ class Person < ActiveRecord::Base
     name = value.split(/\s+/)
     first_name = name[0]
     last_name = name[1]
-    Person.where("lower(first_name) LIKE ? AND lower(last_name) LIKE ?", "%#{first_name}%", "%#{last_name}%").all
+    Person.where("lower(first_name) LIKE ? AND lower(last_name) LIKE ?", "%#{first_name}%", "%#{last_name}%")
   end
 
   def fullname
