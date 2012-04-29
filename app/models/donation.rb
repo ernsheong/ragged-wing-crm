@@ -1,3 +1,5 @@
+require 'csv'
+
 class Donation < ActiveRecord::Base
 	belongs_to :donor, :class_name => 'Person', :foreign_key => "person_id"
 	belongs_to :point_of_contact, :class_name => 'Person', :foreign_key => "point_of_contact_id"
@@ -26,9 +28,7 @@ class Donation < ActiveRecord::Base
     Donation.where("date between ? and ?", start_date, end_date).all
   end
 
-  def self.filter_donations(min, max, start_date, end_date)
-    
-    
+  def self.filter_donations(min, max, start_date, end_date)       
     min = 0 if min.blank?
     max = Donation.maximum('amount') if max.blank?
     
@@ -43,5 +43,18 @@ class Donation < ActiveRecord::Base
       end_date = Date.strptime(end_date, '%Y-%m-%d')
     end
     Donation.where("amount between ? and ? AND date between ? and ?", min, max, start_date, end_date).all
-  end
+  end   
+  
+  def self.generate_donation_csv
+    CSV.open("public/donations.csv", "wb") do |csv|
+      csv << ["Donor", "Amount", "Date", "Payment Method", "Campaign", "Solicitation Method"]
+      Donation.find(:all).each do |d|
+        if d.donor        
+          csv << [d.donor.first_name + " " + d.donor.last_name, d.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
+        elsif d.organization
+          csv << [d.organization.named.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
+        end        
+      end
+    end    
+  end    
 end

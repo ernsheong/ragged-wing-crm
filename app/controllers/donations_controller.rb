@@ -1,4 +1,5 @@
 require 'date'
+require 'csv'
 
 class DonationsController < ApplicationController
   before_filter :ensure_signed_in
@@ -12,6 +13,11 @@ class DonationsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @donations }
     end
+  end
+
+  def download    
+    Donation.generate_donation_csv          
+    send_file("#{Rails.root}/public/donations.csv", :type => "application/csv")    
   end
 
   def search_by_amount

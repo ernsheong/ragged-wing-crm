@@ -10,8 +10,14 @@
       %tr
         %td= d.date
         %td= number_to_currency(d.amount)
-                       
-  %img{:src => @graph}  
-    
+  %div
+    %center
+      Donation Amount by Year
+      %br/                               
+      %img{:src => @amount_graph, :style => ""}
+      %br/                         
+      Donation Frequency by Year
+      %br/ 
+      %img{:src => @freq_graph}       
 - else
   No donations...

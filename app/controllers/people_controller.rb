@@ -33,7 +33,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-    @graph = @person.graph_donations_by_year(params[:id])    
+    @amount_graph = @person.graph_donations_by_year(params[:id])
+    @freq_graph = @person.donation_freq_by_year(params[:id])    
                
     respond_to do |format|
       format.html # show.html.erb

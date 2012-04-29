@@ -1,4 +1,6 @@
-%h1 Donations
+%h1 Donations 
+= button_to "Download", "/donations/download"
+
 
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
