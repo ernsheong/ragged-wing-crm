@@ -12,11 +12,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Name
+      %th= sortable "first_name", "Name"
       %th Relationship(s)
       %th Address
-      %th Email
-      %th Phone
+      %th= sortable "email1", "Email"
+      %th= sortable "phone_cell", "Phone"
       %th Actions
   %tbody
     - @people.each do |person|
@@ -38,3 +38,5 @@
         %td
           = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
           = link_to 'Delete', person, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+
+= paginate @people

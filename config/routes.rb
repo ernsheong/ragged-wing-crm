@@ -19,6 +19,7 @@ RaggedWing::Application.routes.draw do
   # People Controller Mappings
   match 'people/filter' => 'people#filter'
   match 'people/search' => 'people#search'
+  match 'people/auto'
   resources :people
 
   # for login

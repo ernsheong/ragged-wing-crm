@@ -3,11 +3,13 @@ require 'csv'
 
 class DonationsController < ApplicationController
   before_filter :ensure_signed_in
+  helper_method :sort_column, :sort_direction
 
   # GET /donations
   # GET /donations.json
   def index
-    @donations = Donation.all
+    @donations = Donation.order(sort_column + " " + sort_direction).page(params[:page])
+    # @donations = Donation.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -110,5 +112,15 @@ class DonationsController < ApplicationController
       format.html { redirect_to donations_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  
+  def sort_column
+    Donation.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end
