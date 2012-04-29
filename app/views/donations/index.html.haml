@@ -1,5 +1,5 @@
 %h1 Donations 
-= button_to "Download", "/donations/download"
+= button_to "Download as CSV", "/donations/download"
 
 
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do

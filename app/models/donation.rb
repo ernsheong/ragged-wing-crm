@@ -52,7 +52,7 @@ class Donation < ActiveRecord::Base
         if d.donor        
           csv << [d.donor.first_name + " " + d.donor.last_name, d.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
         elsif d.organization
-          csv << [d.organization.named.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
+          csv << [d.organization.name.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
         end        
       end
     end    

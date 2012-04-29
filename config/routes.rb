@@ -20,6 +20,7 @@ RaggedWing::Application.routes.draw do
   match 'people/filter' => 'people#filter'
   match 'people/search' => 'people#search'
   match 'people/auto'
+  match 'people/download' => 'people#download'
   resources :people
 
   # for login

@@ -13,6 +13,11 @@ class PeopleController < ApplicationController
       format.json { render json: @people }
     end
   end
+  
+  def download    
+    Person.generate_people_csv          
+    send_file("#{Rails.root}/public/people.csv", :type => "application/csv")    
+  end
 
   def auto
     if params[:term]
