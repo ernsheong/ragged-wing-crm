@@ -1,0 +1,21 @@
+%h2= "Donations Under #{@campaign.name}"
+- if @campaign.donations
+  %table.table.table-condensed
+    %tr
+      %th Date
+      %th Amount
+    - @campaign.donations.each do |d|
+      %tr
+        %td= d.date
+        %td= number_to_currency(d.amount)
+  %div
+    %center
+      Donation Amount by Year
+      %br/                               
+      %img{:src => @amount_graph, :style => ""}
+      %br/                         
+      Donation Frequency by Year
+      %br/ 
+      %img{:src => @freq_graph}       
+- else
+  No donations...
