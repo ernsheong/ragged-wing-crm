@@ -31,7 +31,7 @@
           Address
         %td
           -if @address
-            = "#{@address.street}, #{@address.city}, #{@address.state} #{@address.zip}, #{@address.country}"
+            = @address.to_s
       %tr
         %td
           %i.icon-home
