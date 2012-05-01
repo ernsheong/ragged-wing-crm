@@ -22,12 +22,16 @@
         %td
           %i.icon-user
           Contact Person
-        %td= @organization.person
+        %td
+          - if @organization.person
+            = link_to "#{@organization.person.first_name} #{@organization.person.last_name}", person_path(@organization.person)
       %tr
         %td
           %i.icon-th-list
           Address
-        %td= "#{@address.street}, #{@address.city}, #{@address.state} #{@address.zip}, #{@address.country}"
+        %td
+          -if @address
+            = "#{@address.street}, #{@address.city}, #{@address.state} #{@address.zip}, #{@address.country}"
       %tr
         %td
           %i.icon-home
