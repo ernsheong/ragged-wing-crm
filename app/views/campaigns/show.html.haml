@@ -1,0 +1,21 @@
+%p#notice= notice
+    
+%h1= @campaign.name
+%br
+%br
+
+%div.row
+  %div.span12
+    %div.tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{:href => "#1", :data => {:toggle => "tab"}} Details
+        %li
+          %a{:href => "#2", :data => {:toggle => "tab"}} Donations
+    %div.tab-content
+      %div.tab-pane.active#1
+        = render 'profile'
+      %div.tab-pane#2
+        = render 'donations'
+
+= link_to 'Back', campaigns_path, :class => "btn"

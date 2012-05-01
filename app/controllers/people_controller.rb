@@ -30,27 +30,20 @@ class PeopleController < ApplicationController
     redirect_to :action => "index"
   end
 
-  def auto
-    if params[:term]
-      @people = Person.find_all_by_full_name(params[:term].downcase).select("id, first_name, last_name")
-    else
-      @people = []
-    end
-    respond_to do |format|
-      format.html { render "index" }
-      format.json { render json: @people }
-    end
-  end
-
   def search
     if params[:q]
-      @people = Kaminari.paginate_array(Person.search(params[:q])).page(params[:page])
-    else     
-      @people = Person.order(sort_column + " " + sort_direction).page(params[:page])
+      @people = Person.search(params[:q]) # Array
+    else
+      @people = []      
     end
+    @results = {}
+    @results[:total] = @people.count
+    @results[:people] = @people
+  
+    @people = Kaminari.paginate_array(@people).page(params[:page])
     respond_to do |format|
       format.html { render "index" }
-      format.json { render json: @people }
+      format.json { render json: @results }
     end
   end
 

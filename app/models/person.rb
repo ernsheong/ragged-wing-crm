@@ -55,6 +55,9 @@ class Person < ActiveRecord::Base
 
   def save_relationships(update)
     if update.nil?
+      self.relationships.each do |elt|
+        Relationship.destroy(elt.id)
+      end
       return
     end
 

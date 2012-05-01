@@ -22,6 +22,7 @@ class EventsController < ApplicationController
     else 
       flash[:notice] = "Showing all events in #{@selected}"
     end
+    @events = Kaminari.paginate_array(@events).page(params[:page])
     render "index"
   end
 

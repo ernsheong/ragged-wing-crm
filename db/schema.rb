@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416060730) do
+ActiveRecord::Schema.define(:version => 20120501052952) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -23,18 +23,27 @@ ActiveRecord::Schema.define(:version => 20120416060730) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "campaigns", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "donations", :force => true do |t|
     t.integer  "person_id"
     t.integer  "organization_id"
     t.float    "amount"
     t.date     "date"
     t.string   "payment_method"
-    t.string   "campaign"
     t.string   "solicitation_method"
     t.integer  "perk_id"
     t.integer  "point_of_contact_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "campaign_id"
   end
 
   create_table "events", :force => true do |t|
@@ -104,8 +113,9 @@ ActiveRecord::Schema.define(:version => 20120416060730) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "identifier_url"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "admin",          :default => false
   end
 
 end

@@ -19,7 +19,6 @@ Background: donations have been added to database
   | 1981-06-12   | 100000 | Check          | 3        | Internet            |
   | 2000-06-21   | 100000 | Credit Card    | 1        | Internet            |
 
-  And I am logged in
   And I visit "/donations"
 
 Scenario: sort donations by amount
@@ -44,9 +43,9 @@ Scenario: sort donations by campaign
 
 Scenario: sort donations by date
   When I click "Date"
-  Then I should see "21 June 2000" before "6 April 1968"
-  And I should see "10 August 2011" before "5 November 2004"
-  When I click "Date"
   And I should see "5 November 2004" before "10 August 2011"
   Then I should see "6 April 1968" before "21 June 2000"
+  When I click "Date"
+  Then I should see "21 June 2000" before "6 April 1968"
+  And I should see "10 August 2011" before "5 November 2004"
   

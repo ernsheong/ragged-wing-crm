@@ -12,7 +12,6 @@ Background: contacts have been added to database
   | Gala Dinner       | 2005-03-03    |
   | Concert          	| 2006-03-03    |
   | Performance       | 2007-03-03    |
-  And I am logged in
   And I visit "/events"
   
 Scenario: no year selected

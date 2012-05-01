@@ -9,12 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  * deactivated automatic adding of files (removed equal sign after the asterix)
- * require_self
- * require_tree .
+ *=require_self
+ *=require_tree .
 */
 
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 
-/* compensate the overlap caused by bootstrap top navigation, min. 40px at the top! */
-body { padding: 60px 0 10px 0; }
+/* compensate the overlap caused by bootstrap top navigation */
+@media (min-width:980px) {
+	body { padding: 60px 0 10px 0; }
+}

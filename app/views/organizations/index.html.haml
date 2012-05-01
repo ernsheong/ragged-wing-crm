@@ -19,10 +19,12 @@
           = link_to "#{organization.name}", organization
         %td
           = organization.org_type
-        %td 
-          = organization.person
         %td
-          = "#{organization.address.street}, #{organization.address.city}, #{organization.address.state} #{organization.address.zip}, #{organization.address.country}"
+          - if organization.person
+            = link_to "#{organization.person.first_name} #{organization.person.last_name}", person_path(organization.person)
+        %td
+          - if organization.address
+            = organization.address.to_s
         %td
           = content_tag(:a, "#{organization.website}", :href => "http://www.#{organization.website}")
         %td

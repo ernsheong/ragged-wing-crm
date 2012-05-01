@@ -13,7 +13,6 @@ Background: contacts have been added to database
   | Kevin          | Tham      | Donor        |
   | Peter          | Hu        | Volunteer    |
 
-  And I am logged in
   And I visit "/people"
   
 Scenario: no relationships selected

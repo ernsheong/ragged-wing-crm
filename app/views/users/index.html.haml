@@ -1,0 +1,24 @@
+%h1 Users
+%br
+
+%h3#notice= notice  
+
+%table.table.table-striped
+  %thead 
+    %tr
+      %th= sortable "email", "Email"
+      %th= sortable "admin", "Admin?"
+      %th
+      %th
+
+  %tbody
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= user.admin
+      %td
+      %td
+        = link_to 'Edit', edit_user_path(user), :class => "btn btn-mini"
+        = link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
+
+= paginate @users

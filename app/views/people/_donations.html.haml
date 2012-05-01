@@ -6,10 +6,18 @@
     %tr
       %th Date
       %th Amount
+      %th Point-of-Contact
+      %th Actions
     - @person.donations.each do |d|
       %tr
-        %td= d.date
+        %td= link_to "#{d.date}",  donation_path(d)
         %td= number_to_currency(d.amount)
+        %td
+          -if d.point_of_contact
+            = link_to "#{d.point_of_contact.first_name} #{d.point_of_contact.last_name}", person_path(d.point_of_contact)
+        %td
+          = link_to 'Edit', edit_donation_path(d), :class => "btn btn-mini"
+          = link_to 'Delete', d, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
   %div
     %center               
       %img{:src => @amount_graph, :style => ""}

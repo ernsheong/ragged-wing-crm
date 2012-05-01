@@ -25,4 +25,9 @@ module AuthenticationHelper
   def ensure_admin
     head 401 and return unless current_user.admin?
   end
+
+  def signed_in_as_admin?
+    signed_in? && current_user.admin?
+  end
+
 end

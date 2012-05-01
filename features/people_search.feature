@@ -12,7 +12,6 @@ Background:
   | Jonathan       | Lin       | 
   | Kevin          | Tham      | 
   | Peter          | Hu        |
-  And I am logged in
   
 
 Scenario: Find existing person
