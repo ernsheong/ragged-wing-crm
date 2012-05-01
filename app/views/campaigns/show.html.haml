@@ -1,0 +1,31 @@
+%p#notice= notice
+    
+%h1= @campaign.name
+%br
+%div.row
+  %div.span12
+    = link_to 'Edit Campaign', edit_campaign_path(@campaign), :class => "btn btn-primary"
+%br
+
+%div.row
+  %div.span12
+    %table.table.table-condensed
+      %tr 
+        %h2 Details  
+      %tr
+        %td
+          %i.icon-pencil
+          Description
+        %td= @campaign.description
+      %tr
+        %td
+          %i.icon-calendar
+          Start Date
+        %td= @campaign.start_date.strftime('%A, %d %B %Y')
+      %tr
+        %td
+          %i.icon-calendar
+          End Date
+        %td= @campaign.end_date.strftime('%A, %d %B %Y')
+
+= link_to 'Back', campaigns_path, :class => "btn"
