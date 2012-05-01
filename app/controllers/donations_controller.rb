@@ -16,7 +16,18 @@ class DonationsController < ApplicationController
 
   def download    
     Donation.generate_donation_csv          
-    send_file("#{Rails.root}/public/donations.csv", :type => "application/csv")    
+    send_file("#{Rails.root}/public/temp/donations.csv", :type => "application/csv")    
+  end
+
+  def upload    
+    uploaded_file = params[:file]    
+    success = Donation.import_donations(uploaded_file)
+    if success    
+      flash[:notice] = uploaded_file.original_filename + "'s contents was imported successfully."
+    else
+      flash[:notice] = "Import failed." 
+    end
+    redirect_to :action => "index" 
   end
 
   def search_by_amount

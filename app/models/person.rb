@@ -196,6 +196,25 @@ class Person < ActiveRecord::Base
   end
   
   def self.import_people(file)
-    File.open("public/peopletemp.csv", "wb") { |f| f.write(file.read) }  
+    if file == nil
+      return 2
+    end
+    begin 
+      File.open("public/peopletemp.csv", "wb") { |f| f.write(file.read) }
+      csv_text = File.read("public/peopletemp.csv")
+      csv = CSV.parse(csv_text, :headers => true)
+      csv.each do |row|
+        #row = row.to_hash.with_indifferent_access
+        #Moulding.create!(row.to_hash.symbolize_keys)
+        # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
+        # http://satishonrails.wordpress.com/2007/07/18/how-to-import-csv-file-in-rails/
+        # http://www.tutorialspoint.com/ruby-on-rails/rails-file-uploading.htm
+      end
+      return 1
+    rescue SystemCallError
+      #shouldn't get here
+      return 2
+    end         
+    return 3
   end
 end

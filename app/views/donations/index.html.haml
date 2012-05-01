@@ -1,6 +1,12 @@
 %h1 Donations 
-= button_to "Download as CSV", "/donations/download"
-
+%center
+  %h1
+    = flash[:notice]
+  
+= button_to "Download all Donations to CSV", "/donations/download"
+= form_tag({:action => "upload"}, :multipart => "true") do
+  = file_field_tag 'file'
+  = submit_tag("Upload")
 
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})

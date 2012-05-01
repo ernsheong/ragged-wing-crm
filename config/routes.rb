@@ -12,6 +12,7 @@ RaggedWing::Application.routes.draw do
   match 'donations/search_by_date_range' => 'donations#search_by_date_range'
   match 'donations/filter_donations' => 'donations#filter_donations'
   match 'donations/download' => 'donations#download'
+  match 'donations/upload' => 'donations#upload'
   resources :donations
 
   resources :notes
@@ -21,6 +22,7 @@ RaggedWing::Application.routes.draw do
   match 'people/search' => 'people#search'
   match 'people/auto'
   match 'people/download' => 'people#download'
+  match 'people/upload' => 'people#upload'
   resources :people
 
   # for login

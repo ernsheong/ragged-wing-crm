@@ -46,7 +46,7 @@ class Donation < ActiveRecord::Base
   end   
   
   def self.generate_donation_csv
-    CSV.open("public/donations.csv", "wb") do |csv|
+    CSV.open("public/temp/donations.csv", "wb") do |csv|
       csv << ["Donor", "Amount", "Date", "Payment Method", "Campaign", "Solicitation Method"]
       Donation.find(:all).each do |d|
         if d.donor        
@@ -56,5 +56,20 @@ class Donation < ActiveRecord::Base
         end        
       end
     end    
-  end    
+  end
+  
+  def self.import_donations(file)    
+    File.open("public/donationtemp.csv", "wb") { |f| f.write(file.read) }
+    csv_text = File.read("public/donationtemp.csv")
+    #csv = CSV.parse(csv_text, :headers => true)
+    #csv.each do |row|
+      #row = row.to_hash.with_indifferent_access
+      #Moulding.create!(row.to_hash.symbolize_keys)
+      # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
+      # http://satishonrails.wordpress.com/2007/07/18/how-to-import-csv-file-in-rails/
+      # http://www.tutorialspoint.com/ruby-on-rails/rails-file-uploading.htm
+    #end
+    return true
+  end
+      
 end

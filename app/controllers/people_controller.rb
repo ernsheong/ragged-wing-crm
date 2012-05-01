@@ -14,7 +14,20 @@ class PeopleController < ApplicationController
   
   def download    
     Person.generate_people_csv          
-    send_file("#{Rails.root}/public/people.csv", :type => "application/csv")    
+    send_file("#{Rails.root}/public/temp/people.csv", :type => "application/csv")
+  end
+
+  def upload
+    uploaded_file = params[:file]    
+    success = Person.import_people(uploaded_file)
+    if success == 1    
+      flash[:notice] = uploaded_file.original_filename + "'s contents was imported successfully."
+    elsif success == 3
+      flash[:notice] = "Import failed." 
+    else
+      flash[:notice] = "System error"
+    end
+    redirect_to :action => "index"
   end
 
   def auto
