@@ -1,8 +1,8 @@
 class Campaign < ActiveRecord::Base
   has_many :donations
 
-  def graph_donations_by_year
-    @donations = self.donations
+  def graph_donations_by_year(campaign)
+    @donations = Donation.where(:campaign_id => campaign)
     if not @donations.empty?
       @donations_by_date = @donations.order("date")              
       earliest_date = @donations_by_date.first.date.year
@@ -28,8 +28,8 @@ class Campaign < ActiveRecord::Base
     end
   end
   
-  def donation_freq_by_year
-    @donations = self.donations
+  def donation_freq_by_year(campaign)
+    @donations = Donation.where(:campaign_id => campaign)
     if not @donations.empty?
       @donations_by_date = @donations.order("date")              
       earliest_date = @donations_by_date.first.date.year

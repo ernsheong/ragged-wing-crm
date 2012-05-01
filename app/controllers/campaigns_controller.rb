@@ -16,8 +16,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1.json
   def show
     @campaign = Campaign.find(params[:id])
-    @amount_graph = @campaign.graph_donations_by_year
-    @freq_graph = @campaign.donation_freq_by_year
+    @amount_graph = @campaign.graph_donations_by_year(params[:id])
+    @freq_graph = @campaign.donation_freq_by_year(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
