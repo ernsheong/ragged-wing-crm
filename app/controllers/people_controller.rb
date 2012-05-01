@@ -13,23 +13,18 @@ class PeopleController < ApplicationController
     end
   end
 
-  def auto
-    if params[:term]
-      @people = Person.find_all_by_full_name(params[:term].downcase).select("id, first_name, last_name")
-    else
-      @people = []
-    end
-    respond_to do |format|
-      format.html { render "index" }
-      format.json { render json: @people }
-    end
-  end
-
   def search
-    @people = Person.search(params[:q]) # Array
+    if params[:q]
+      @people = Person.search(params[:q]) # Array
+    else
+      @people = []      
+    end
+    @results = {}
+    @results[:total] = @people.count
+    @results[:people] = @people
     respond_to do |format|
       format.html { render "index" }
-      format.json { render json: @people }
+      format.json { render json: @results }
     end
   end
 

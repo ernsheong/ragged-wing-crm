@@ -48,10 +48,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @address = Address.create!(params[:address])
-    org = params[:organization]
-    new_organization = {name: org['name'], website: org['website'], org_type: org['org_type'], 
-      address_id: @address.id}
-    @organization = Organization.new(new_organization)
+    @organization = Organization.new(params[:organization])
     
     respond_to do |format|
       if @organization.save
@@ -68,16 +65,15 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1.json
   def update
     @organization = Organization.find(params[:id])
-    @address = Address.find_by_id(@organization.address_id)
-    org = params[:organization]
-    if @address
-      updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: @address.id}
-    else
-      updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: nil}
-    end
+    #@address = Address.find_by_id(params[address_id])
+    #if @address
+      #updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: @address.id}
+    #else
+      #updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: nil}
+    #end
 
     respond_to do |format|
-      if @organization.update_attributes(updated_attributes) and @address.update_attributes(params[:address])
+      if @organization.update_attributes(params[:organization])# and @address.update_attributes(params[:address])
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { head :no_content }
       else

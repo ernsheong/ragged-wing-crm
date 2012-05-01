@@ -1,3 +1,29 @@
+:javascript
+  function format(person) {
+    if (person.first_name !== undefined) { return person.first_name + " " + person.last_name; }
+    else { return "Search for a contact person"; }
+  }
+
+  $(document).ready(function () {
+    $('#organization_person_id').select2({
+      placeholder: {title: "Search for a contact person", id: ""},
+      minimumInputLength: 1,
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+          url: "/people/search.json",
+          dataType: 'json',
+          data: function (term, page) {
+              return {
+                  q: term, // search term
+              };
+          },
+          results: function (data, page) { // parse the results into the format expected by Select2.
+              return {results: data.people};
+          }
+      },
+      formatResult: format, 
+      formatSelection: format
+    });
+  });
 = form_for(@organization, html: {:class => 'form-horizontal'}) do |f|
   - if @organization.errors.any?
     %div#iderror_explanation
@@ -16,15 +42,17 @@
   %div.control-group
     = f.label :org_type, 'Organization Type', :class => "control-label"
     %div.controls 
-      = f.select :org_type, Organization.org_types, :class => "input-xlarge"
+      = f.select :org_type, Organization.org_types, {}, :class => "input-xlarge"
   %div.control-group
-    = f.label :person, 'Contact Person', :class => "control-label"
+    = f.label :person_id, 'Contact Person', :class => "control-label"
     %div.controls
-      = f.text_field :person, :class => "input-xlarge"
+      -#= f.select :person, [], {}, {:multiple => "true"}
+      -#= f.text_field :person, {:class => "input-xlarge", :data => {:provide => "typeahead"}}
+      = f.text_field :person_id, {:class => "input-xlarge", :type => "hidden"}
   %div.control-group
     = f.label :website, :class => "control-label"
     %div.controls
-      = f.text_field :website, :class => "input-xlarge"
+      = f.text_field :website, {:class => "input-xlarge", :m => "t"}
 
   %legend Address
   %div.control-group
