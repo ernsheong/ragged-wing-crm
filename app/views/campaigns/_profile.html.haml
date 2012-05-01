@@ -1,0 +1,21 @@
+%div.pull-right= link_to 'Edit Information', edit_campaign_path(@campaign), :class => "btn", :id => "edit"
+
+%h2
+  = "#{@campaign.name}"
+
+%table.table.table-condensed
+  %tr
+    %td
+      %i.icon-pencil
+      Description
+    %td= @campaign.description
+  %tr
+    %td
+      %i.icon-calendar
+      Start Date
+    %td= @campaign.start_date.strftime('%A, %d %B %Y')
+  %tr
+    %td
+      %i.icon-calendar
+      End Date
+    %td= @campaign.end_date.strftime('%A, %d %B %Y')

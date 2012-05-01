@@ -1,0 +1,31 @@
+%h1 Campaigns
+%br
+= link_to 'Add New Campaign', new_campaign_path, :class => "btn btn-primary", :id => "new_campaign"
+%br
+%br
+
+%h3#notice= notice  
+
+%table.table.table-striped
+  %thead 
+    %tr
+      %th= sortable "name", "Name"
+      %th= sortable "description", "Description"
+      %th= sortable "start_date", "Start Date"
+      %th= sortable "end_date", "End Date"
+      %th
+      %th
+
+  %tbody
+  - @campaigns.each do |campaign|
+    %tr
+      %td= link_to "#{campaign.name}", campaign
+      %td{:style => "width:45%;"}= campaign.description
+      %td= campaign.start_date.strftime('%d %B %Y')
+      %td= campaign.end_date.strftime('%d %B %Y')
+      %td
+      %td
+        = link_to 'Edit', edit_campaign_path(campaign), :class => "btn btn-mini"
+        = link_to 'Delete', campaign, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
+
+= paginate @campaigns

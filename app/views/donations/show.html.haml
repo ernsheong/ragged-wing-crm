@@ -37,7 +37,7 @@
         %td
           %i.icon-th-list
           Campaign
-        %td= @donation.campaign
+        %td= link_to @donation.campaign.name, campaign_path(@donation.campaign)
       %tr
         %td
           %i.icon-th-list

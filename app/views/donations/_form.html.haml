@@ -47,8 +47,8 @@
   = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ], {}, :class => "controls docs-input-sizes span2"
   %br
   -# TODO: Have a Campaign table to store all campaigns?
-  = label :donation, :campaign, 'Campaign'
-  = select :donation, :campaign, ['Fund Raiser', 'Lovely Dinner'], {}, :class => "controls docs-input-sizes span2"
+  = label :donation, :campaign_id, 'Campaign'
+  = select :donation, :campaign_id, Campaign.all.collect {|c| [ c.name, c.id ] }, { :include_blank => true }, :class => "controls docs-input-sizes span2"
   -#@campaigns
   %br
   = label :donation, :solicitation_method, 'Solicitation Method'
