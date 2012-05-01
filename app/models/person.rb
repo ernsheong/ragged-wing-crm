@@ -146,12 +146,13 @@ class Person < ActiveRecord::Base
       end
       data = Hash[data.sort]
       max_donation = data.values.max
-      bc = GoogleChart::BarChart.new('600x350', "", :vertical, false)      
+      bc = GoogleChart::LineChart.new('600x350', "Donation Amount by Year", false)      
       bc.data "donations", data.values, '0000ff'      
-      bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
-      bc.axis :y, :range => [0,max_donation], :color => 'ff00ff', :font_size => 16          
-      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)      
-      bc.show_legend = false;               
+      bc.axis :x, :range => [earliest_date, latest_date], :color => '0064cd', :font_size => 16         
+      bc.axis :y, :range => [0,max_donation], :color => '9d261d', :font_size => 16          
+      #bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)
+      bc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10      
+      bc.show_legend = false;                    
       @graph = bc.to_url
     end
   end
@@ -173,18 +174,18 @@ class Person < ActiveRecord::Base
       end      
       data = Hash[data.sort]      
       max_freq = data.values.max
-      bc = GoogleChart::BarChart.new('600x350', "", :vertical, false)      
+      bc = GoogleChart::LineChart.new('600x350', "Donation Frequency by Year", false)           
       bc.data "donations", data.values, '0000ff'      
-      bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
-      bc.axis :y, :range => [0,max_freq], :color => 'ff00ff', :font_size => 16
-      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)            
-      bc.show_legend = false;               
+      bc.axis :x, :range => [earliest_date, latest_date], :color => '0064cd', :font_size => 16         
+      bc.axis :y, :range => [0,max_freq], :color => '9d261d', :font_size => 16
+      bc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10      
+      bc.show_legend = false;
       @graph = bc.to_url
     end
   end
   
   def self.generate_people_csv
-    CSV.open("public/people.csv", "wb") do |csv|
+    CSV.open("public/temp/people.csv", "wb") do |csv|
       csv << ["Name", "Title", "Role", "Email1", "Email2", "Cell Phone", "Home Phone", "Work Phone", 
         "Address1", "Address2", "Website1", "Website2", "Company"]
       Person.find(:all).each do |p|
@@ -192,5 +193,9 @@ class Person < ActiveRecord::Base
           p.phone_home, p.phone_office, p.address1, p.address2, p.website1, p.website2, p.company]
       end
     end
+  end
+  
+  def self.import_people(file)
+    File.open("public/peopletemp.csv", "wb") { |f| f.write(file.read) }  
   end
 end

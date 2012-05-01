@@ -1,7 +1,7 @@
 %div.pull-right= link_to 'Add a donation', new_donation_path(:person_id => @person.id), :id => "new_donation", :class => "btn"
 
 %h2 Donations Made
-- if @person.donations
+- if not @person.donations.empty?
   %table.table.table-condensed
     %tr
       %th Date
@@ -11,12 +11,8 @@
         %td= d.date
         %td= number_to_currency(d.amount)
   %div
-    %center
-      Donation Amount by Year
-      %br/                               
+    %center               
       %img{:src => @amount_graph, :style => ""}
-      %br/                         
-      Donation Frequency by Year
       %br/ 
       %img{:src => @freq_graph}       
 - else
