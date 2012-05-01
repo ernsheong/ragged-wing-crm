@@ -14,12 +14,12 @@
 %table.table.table-striped
   %thead 
     %tr
-      %th Name
-      %th Type
-      %th Description
-      %th Date
-      %th Start Time
-      %th End Time
+      %th= sortable "name", "Name"
+      %th= sortable "event_type", "Type"
+      %th= sortable "description", "Description"
+      %th= sortable "date", "Date"
+      %th= sortable "start_time", "Start Time"
+      %th= sortable "end_time", "End Time"
       %th
       %th
 
@@ -37,3 +37,4 @@
         = link_to 'Edit', edit_event_path(event), :class => "btn btn-mini"
         = link_to 'Delete', event, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
 
+= paginate @events

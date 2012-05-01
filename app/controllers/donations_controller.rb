@@ -1,5 +1,3 @@
-require 'date'
-
 class DonationsController < ApplicationController
   before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
@@ -7,13 +5,18 @@ class DonationsController < ApplicationController
   # GET /donations
   # GET /donations.json
   def index
-    @donations = Donation.order(sort_column + " " + sort_direction)
+    @donations = Donation.order(sort_column + " " + sort_direction).page(params[:page])
     # @donations = Donation.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @donations }
     end
+  end
+
+  def download    
+    Donation.generate_donation_csv          
+    send_file("#{Rails.root}/public/donations.csv", :type => "application/csv")    
   end
 
   def search_by_amount
@@ -111,7 +114,7 @@ class DonationsController < ApplicationController
   private
   
   def sort_column
-    Donation.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    Donation.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
   end
   
   def sort_direction

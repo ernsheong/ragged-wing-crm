@@ -1,8 +1,10 @@
 class EventsController < ApplicationController
+  before_filter :ensure_signed_in
+  helper_method :sort_column, :sort_direction
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order(sort_column + " " + sort_direction).page(params[:page])
     @years = (2005..Time.now.year).entries
 
     respond_to do |format|
@@ -97,4 +99,15 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+  def sort_column
+    Event.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

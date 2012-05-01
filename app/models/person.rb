@@ -1,4 +1,5 @@
 require 'google_chart'
+require 'csv'
 
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
@@ -11,10 +12,14 @@ class Person < ActiveRecord::Base
   validates_presence_of :last_name, :message => "must have a last name!"
 
   def self.search(q)
-    q = q.downcase
-    results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
-    results << Person.find_all_by_full_name(q)
-    results.flatten.uniq
+    if q
+      q = q.downcase
+      results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
+      results << Person.find_all_by_full_name(q)
+      results.flatten.uniq
+    else 
+      Person.all
+    end
   end
 
   # searches for all persons with the full name in small case
@@ -141,17 +146,51 @@ class Person < ActiveRecord::Base
       end
       data = Hash[data.sort]
       max_donation = data.values.max
-      bc = GoogleChart::BarChart.new('600x350', "Donation Amount by Year", :vertical, false)      
+      bc = GoogleChart::BarChart.new('600x350', "", :vertical, false)      
       bc.data "donations", data.values, '0000ff'      
       bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
       bc.axis :y, :range => [0,max_donation], :color => 'ff00ff', :font_size => 16          
-      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)           
+      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)      
       bc.show_legend = false;               
       @graph = bc.to_url
     end
   end
   
-  def self.countries
-    ["", "USA", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua & Deps", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Rep", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Congo {Democratic Rep}", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland {Republic}", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea North", "Korea South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar, {Burma}", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russian Federation", "Rwanda", "St Kitts & Nevis", "St Lucia", "Saint Vincent & the Grenadines", "Samoa", "San Marino", "Sao Tome & Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
+  def donation_freq_by_year(person)
+    @donations = Donation.where(:person_id => person)
+    if not @donations.empty?
+      @donations_by_date = @donations.order("date")              
+      earliest_date = @donations_by_date.first.date.year
+      latest_date = @donations_by_date.last.date.year
+      data = Hash.new(0)            
+      @donations_by_date.each do |donation|
+        data[donation.date.year] += 1                
+      end                 
+      (earliest_date..latest_date).each do |year|
+        if data[year] == 0
+          data[year] = 0
+        end
+      end      
+      data = Hash[data.sort]      
+      max_freq = data.values.max
+      bc = GoogleChart::BarChart.new('600x350', "", :vertical, false)      
+      bc.data "donations", data.values, '0000ff'      
+      bc.axis :x, :range => [earliest_date, latest_date], :color => '00ffff', :font_size => 16         
+      bc.axis :y, :range => [0,max_freq], :color => 'ff00ff', :font_size => 16
+      bc.width_spacing_options(:bar_width => 40, :bar_spacing => 100)            
+      bc.show_legend = false;               
+      @graph = bc.to_url
+    end
+  end
+  
+  def self.generate_people_csv
+    CSV.open("public/people.csv", "wb") do |csv|
+      csv << ["Name", "Title", "Role", "Email1", "Email2", "Cell Phone", "Home Phone", "Work Phone", 
+        "Address1", "Address2", "Website1", "Website2", "Company"]
+      Person.find(:all).each do |p|
+        csv << [p.first_name + " " + p.last_name, p.title, p.role, p.email1, p.email2, p.phone_cell,
+          p.phone_home, p.phone_office, p.address1, p.address2, p.website1, p.website2, p.company]
+      end
+    end
   end
 end

@@ -1,4 +1,6 @@
-%h1 Donations
+%h1 Donations 
+= button_to "Download as CSV", "/donations/download"
+
 
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
@@ -34,3 +36,5 @@
         %td
           = link_to 'Edit', edit_donation_path(donation), :class => "btn btn-mini"
           = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+
+= paginate @donations

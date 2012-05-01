@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.2'
+gem 'kaminari'
 gem 'jquery-rails'
 gem 'haml'
 gem 'paperclip'
