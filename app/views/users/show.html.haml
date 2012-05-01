@@ -1,0 +1,42 @@
+%p#notice= notice
+    
+%h1= @event.name
+%h2= @event.date.strftime('%A, %d %B %Y')
+%br
+%div.row
+  %div.span12
+    = link_to 'Edit Event', edit_event_path(@event), :class => "btn btn-primary"
+%br
+
+%div.row
+  %div.span12
+    %table.table.table-condensed
+      %tr 
+        %h2 Details  
+      %tr
+        %td
+          %i.icon-star
+          Event Type
+        %td= @event.event_type
+      %tr
+        %td
+          %i.icon-pencil
+          Description
+        %td= @event.description
+      %tr
+        %td
+          %i.icon-calendar
+          Date
+        %td= @event.date.strftime('%A, %d %B %Y')
+      %tr
+        %td
+          %i.icon-time
+          Start Time
+        %td= @event.start_time.strftime('%l:%M %p')
+      %tr
+        %td
+          %i.icon-time
+          End Time
+        %td= @event.end_time.strftime('%l:%M %p')
+
+= link_to 'Back', events_path, :class => "btn"

@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   include AuthenticationHelper
-  before_filter :ensure_signed_in
+  before_filter :ensure_admin
 
 end
