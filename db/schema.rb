@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501044320) do
+ActiveRecord::Schema.define(:version => 20120501052952) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -38,12 +38,12 @@ ActiveRecord::Schema.define(:version => 20120501044320) do
     t.float    "amount"
     t.date     "date"
     t.string   "payment_method"
-    t.string   "campaign"
     t.string   "solicitation_method"
     t.integer  "perk_id"
     t.integer  "point_of_contact_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "campaign_id"
   end
 
   create_table "events", :force => true do |t|
