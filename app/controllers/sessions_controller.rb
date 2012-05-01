@@ -19,7 +19,8 @@ class SessionsController < ApplicationController
         ax = OpenID::AX::FetchResponse.from_success_response(openid)
         user = User.where(:identifier_url => openid.display_identifier).first
         user ||= User.create!(:identifier_url => openid.display_identifier,
-                              :email => ax.get_single('http://axschema.org/contact/email'))
+                              :email => ax.get_single('http://axschema.org/contact/email'),
+                              :admin => User.all.empty?)
         if user
           session[:user_id] = user.id
         else
