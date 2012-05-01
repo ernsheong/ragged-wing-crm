@@ -1,10 +1,11 @@
 class OrganizationsController < ApplicationController
   before_filter :ensure_signed_in
+  helper_method :sort_column, :sort_direction
 
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    @organizations = Organization.order(sort_column + " " + sort_direction).page(params[:page])
 
     respond_to do |format|
       format.html
@@ -94,4 +95,15 @@ class OrganizationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+  def sort_column
+    Organization.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

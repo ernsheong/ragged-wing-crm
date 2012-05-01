@@ -6,11 +6,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Organization Type
-      %th Contact Person
+      %th= sortable "name", "Name"
+      %th= sortable "org_type", "Organization Type"
+      %th= sortable "person_id", "Contact Person"
       %th Address
-      %th Website
+      %th= sortable "website", "Website"
       %th Actions
   %tbody
     - @organizations.each do |organization|
@@ -30,3 +30,5 @@
         %td
           = link_to 'Edit', edit_organization_path(organization), :class => "btn btn-mini"
           = link_to 'Delete', organization, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
+
+= paginate @organizations

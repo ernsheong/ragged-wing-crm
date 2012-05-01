@@ -1,16 +1,20 @@
-require 'google_chart'
-
 class PeopleController < ApplicationController
   before_filter :ensure_signed_in
+  helper_method :sort_column, :sort_direction
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = Person.order(sort_column + " " + sort_direction).page(params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }
     end
+  end
+  
+  def download    
+    Person.generate_people_csv          
+    send_file("#{Rails.root}/public/people.csv", :type => "application/csv")    
   end
 
   def search
@@ -22,6 +26,8 @@ class PeopleController < ApplicationController
     @results = {}
     @results[:total] = @people.count
     @results[:people] = @people
+  
+    @people = Kaminari.paginate_array(@people).page(params[:page])
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @results }
@@ -29,7 +35,7 @@ class PeopleController < ApplicationController
   end
 
   def filter
-    @people = Person.filter(params[:filter])
+    @people = Kaminari.paginate_array(Person.filter(params[:filter])).page(params[:page])
     @selected = params[:filter]
     render "index"
   end
@@ -40,7 +46,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @address1 = @person.address1
     @address2 = @person.address2
-    @graph = @person.graph_donations_by_year(params[:id])    
+    @amount_graph = @person.graph_donations_by_year(params[:id])
+    @freq_graph = @person.donation_freq_by_year(params[:id])    
                
     respond_to do |format|
       format.html # show.html.erb
@@ -141,6 +148,16 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  
+  def sort_column
+    Person.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end

@@ -1,10 +1,12 @@
 :javascript
   function format(person) {
+    console.log("format() is called");
     if (person.first_name !== undefined) { return person.first_name + " " + person.last_name; }
-    else { return "Search for a contact person"; }
+    else { return person.title; }
   }
 
   $(document).ready(function () {
+    
     $('#organization_person_id').select2({
       placeholder: {title: "Search for a contact person", id: ""},
       minimumInputLength: 1,
@@ -46,13 +48,11 @@
   %div.control-group
     = f.label :person_id, 'Contact Person', :class => "control-label"
     %div.controls
-      -#= f.select :person, [], {}, {:multiple => "true"}
-      -#= f.text_field :person, {:class => "input-xlarge", :data => {:provide => "typeahead"}}
       = f.text_field :person_id, {:class => "input-xlarge", :type => "hidden"}
   %div.control-group
     = f.label :website, :class => "control-label"
     %div.controls
-      = f.text_field :website, {:class => "input-xlarge", :m => "t"}
+      = f.text_field :website, {:class => "input-xlarge"}
 
   %legend Address
   %div.control-group
