@@ -43,5 +43,12 @@
           %i.icon-th-list
           Solicitation Method
         %td= @donation.solicitation_method
+      %tr
+        %td
+          %i.icon-map-marker
+          Point of Contact (within RWE)
+        %td
+          - if @donation.point_of_contact
+            = "#{@donation.point_of_contact.first_name} #{@donation.point_of_contact.last_name}"
 
 = link_to 'Back', donations_path, :class => "btn"

@@ -1,3 +1,31 @@
+:javascript
+  function format(person) {
+    console.log("format() is called");
+    if (person.first_name !== undefined && person.last_name !== undefined) { return person.first_name + " " + person.last_name; }
+    else { return person.title; }
+  }
+
+  $(document).ready(function () {
+    
+    $('#donation_point_of_contact_id').select2({
+      placeholder: {title: "Search for a contact person", id: ""},
+      minimumInputLength: 1,
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+          url: "/people/search.json",
+          dataType: 'json',
+          data: function (term, page) {
+              return {
+                  q: term, // search term
+              };
+          },
+          results: function (data, page) { // parse the results into the format expected by Select2.
+              return {results: data.people};
+          }
+      },
+      formatResult: format, 
+      formatSelection: format
+    });
+  });
 = form_for(@donation) do |f|
   - if @donation.errors.any?
     %div#iderror_explanation
@@ -15,7 +43,6 @@
   = label :donation, :date, 'Date'
   = date_select :donation, :date, {}, :class => "controls docs-input-sizes span2"
   %br
-
   = label :donation, :payment_method, 'Payment Method'
   = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ], {}, :class => "controls docs-input-sizes span2"
   %br
@@ -26,6 +53,10 @@
   %br
   = label :donation, :solicitation_method, 'Solicitation Method'
   = select :donation, :solicitation_method, ['Internet', 'E-mail', 'Phone', 'Donor Event'], {}, :class => "controls docs-input-sizes span2"
-
+  %br
+  = label :donation, :point_of_contact_id, 'Point of Contact (within RWE)'
+  = text_field :donation, :point_of_contact_id, {:class => "controls input-xlarge"}
+  %br
+  %br
   %div.actions
     = f.submit(:class => "btn btn-primary")

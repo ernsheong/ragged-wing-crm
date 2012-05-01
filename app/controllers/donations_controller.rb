@@ -36,7 +36,15 @@ class DonationsController < ApplicationController
 
   def filter_donations
     @donations = Donation.filter_donations(params[:min], params[:max], params[:start], params[:end])
-    render "index"
+    @results = {}
+    @results[:total] = @donations.count
+    @results[:donations] = @donations
+
+    @donations = Kaminari.paginate_array(@donations).page(params[:page])
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @results }
+    end
   end
 
   # GET /donations/1
