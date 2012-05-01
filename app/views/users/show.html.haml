@@ -3,12 +3,12 @@
 %h1= @event.name
 %h2= @event.date.strftime('%A, %d %B %Y')
 %br
-%div.row
+%div.row-fluid
   %div.span12
     = link_to 'Edit Event', edit_event_path(@event), :class => "btn btn-primary"
 %br
 
-%div.row
+%div.row-fluid
   %div.span12
     %table.table.table-condensed
       %tr 

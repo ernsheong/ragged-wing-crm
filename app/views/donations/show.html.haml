@@ -3,12 +3,12 @@
 
 %h1= "#{@donation.donor.first_name} #{@donation.donor.last_name}'s Donation Details"
 %br
-%div.row
+%div.row-fluid
   %div.span12
     = link_to 'Edit Donation', edit_donation_path(@donation), :class => "btn btn-primary"
 %br 
 
-%div.row
+%div.row-fluid
   %div.span12
     %table.table.table-condensed
       %tr 
@@ -37,7 +37,9 @@
         %td
           %i.icon-th-list
           Campaign
-        %td= link_to @donation.campaign.name, campaign_path(@donation.campaign)
+        %td
+          -if @donation.campaign
+            = link_to @donation.campaign.name, campaign_path(@donation.campaign)
       %tr
         %td
           %i.icon-th-list
