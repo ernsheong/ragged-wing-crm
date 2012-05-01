@@ -30,7 +30,8 @@
         %td
           = donation.payment_method
         %td
-          = link_to donation.campaign.name, campaign_path(donation.campaign)
+          -if donation.campaign
+            = link_to donation.campaign.name, campaign_path(donation.campaign)
         %td
           = donation.solicitation_method
         %td
