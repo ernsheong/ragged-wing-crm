@@ -1,5 +1,3 @@
-require 'google_chart'
-
 class PeopleController < ApplicationController
   before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
@@ -32,7 +30,11 @@ class PeopleController < ApplicationController
   end
 
   def search
-    @people = Person.search(params[:q]) # Array
+    if params[:q]
+      @people = Kaminari.paginate_array(Person.search(params[:q])).page(params[:page])
+    else     
+      @people = Person.order(sort_column + " " + sort_direction).page(params[:page])
+    end
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @people }
@@ -40,7 +42,7 @@ class PeopleController < ApplicationController
   end
 
   def filter
-    @people = Person.filter(params[:filter])
+    @people = Kaminari.paginate_array(Person.filter(params[:filter])).page(params[:page])
     @selected = params[:filter]
     render "index"
   end

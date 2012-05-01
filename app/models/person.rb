@@ -1,4 +1,5 @@
 require 'google_chart'
+require 'csv'
 
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
@@ -11,10 +12,14 @@ class Person < ActiveRecord::Base
   validates_presence_of :last_name, :message => "must have a last name!"
 
   def self.search(q)
-    q = q.downcase
-    results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
-    results << Person.find_all_by_full_name(q)
-    results.flatten.uniq
+    if q
+      q = q.downcase
+      results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
+      results << Person.find_all_by_full_name(q)
+      results.flatten.uniq
+    else 
+      Person.all
+    end
   end
 
   # searches for all persons with the full name in small case

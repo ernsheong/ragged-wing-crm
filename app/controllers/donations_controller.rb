@@ -1,6 +1,3 @@
-require 'date'
-require 'csv'
-
 class DonationsController < ApplicationController
   before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
