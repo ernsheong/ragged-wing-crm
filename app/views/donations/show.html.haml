@@ -17,7 +17,7 @@
         %td
           %i.icon-user
           Donor Name
-        %td= "#{@donation.donor.first_name} #{@donation.donor.last_name}"
+        %td= link_to "#{@donation.donor.first_name} #{@donation.donor.last_name}", person_path(@donation.donor)
       %tr
         %td
           %i.icon-plus
@@ -49,6 +49,7 @@
           Point of Contact (within RWE)
         %td
           - if @donation.point_of_contact
-            = "#{@donation.point_of_contact.first_name} #{@donation.point_of_contact.last_name}"
+            = link_to "#{@donation.point_of_contact.first_name} #{@donation.point_of_contact.last_name}", person_path(@donation.point_of_contact)
 
-= link_to 'Back', donations_path, :class => "btn"
+= link_to "Back to #{@donation.donor.first_name} #{@donation.donor.last_name}", person_path(@donation.donor), :class => "btn btn-primary"
+= link_to 'Back to Donations', donations_path, :class => "btn"
