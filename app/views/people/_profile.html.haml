@@ -1,4 +1,6 @@
-%div.pull-right= link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
+%div.pull-right
+  = link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
+  = link_to 'Delete Person', @person, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 
 %h2
   = "#{@person.title}"
