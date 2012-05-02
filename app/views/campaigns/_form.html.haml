@@ -2,6 +2,7 @@
   $(function() {
     var dates = $( "#campaign_start_date, #campaign_end_date" ).datepicker({
       defaultDate: "+1w",
+      dateFormat: "yy-mm-dd",
       changeMonth: true,
       numberOfMonths: 1,
       onSelect: function( selectedDate ) {
