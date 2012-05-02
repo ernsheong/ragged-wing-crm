@@ -41,6 +41,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'ruby-debug19', :require => 'ruby-debug'       
   gem "ruby-debug-base19", "~> 0.11.25"
+  gem "factory_girl_rails", "~> 3.0"
   gem 'ffi', '1.0.9'
   # TODO: fix this ugliness
   #if RUBY_VERSION.include? '1.9.3'
