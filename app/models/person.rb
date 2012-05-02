@@ -4,6 +4,7 @@ require 'csv'
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
   belongs_to :address2, :class_name => 'Address', :foreign_key => "address_id_2"
+  has_many :members
   has_many :organizations, :through => :members
   has_many :relationships, :dependent => :destroy, :autosave => true  # delete relationship in Relationship table if person deleted
   has_many :donations

@@ -1,0 +1,39 @@
+%div.pull-right
+  = link_to 'Edit Organization', edit_organization_path(@organization), :class => "btn btn-primary"
+  = link_to 'Delete Organization', @organization, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
+%h2
+  = "Details for #{@organization.name}"
+
+%table.table.table-condensed
+  %tr 
+    %h2 Details
+  %tr
+    %td
+      %i.icon-book
+      Organization Name
+    %td= "#{@organization.name}"
+  %tr
+    %td
+      %i.icon-user
+      Contact Person
+    %td
+      - if @organization.person
+        = link_to "#{@organization.person.first_name} #{@organization.person.last_name}", person_path(@organizati.person)
+  %tr
+    %td
+      %i.icon-th-list
+      Address
+    %td
+      -if @address
+        = @address.to_s
+  %tr
+    %td
+      %i.icon-home
+      Website
+    %td= content_tag(:a, "#{@organization.website}", :href => "http://www.#{@organization.website}")
+  %tr
+    %td
+      %i.icon-cog
+      Organization Type
+    %td= @organization.org_type
