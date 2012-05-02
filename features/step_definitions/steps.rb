@@ -101,12 +101,14 @@ Then /^the following should be checked: (.*)$/ do |selection|
   end
 end
 
-When /^I select "([^"]*)"$/ do |arg1|
-  select arg1, :from => "filter"
+When /^I select "([^"]*)" from "([^"]*)"$/ do |arg1, filter_name|
+  select arg1, :from => filter_name
 end
 
 When /^I filter$/ do 
   click_button "filter"
 end
 
-
+Then /^I pause for a while$/ do
+  sleep 30
+end
