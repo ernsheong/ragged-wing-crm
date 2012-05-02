@@ -189,35 +189,73 @@ class Person < ActiveRecord::Base
   
   def self.generate_people_csv
     CSV.open("public/temp/people.csv", "wb") do |csv|
-      csv << ["Name", "Title", "Role", "Email1", "Email2", "Cell Phone", "Home Phone", "Work Phone", 
-        "Address1", "Address2", "Website1", "Website2", "Company"]
-      Person.find(:all).each do |p|
-        csv << [p.first_name + " " + p.last_name, p.title, p.role, p.email1, p.email2, p.phone_cell,
-          p.phone_home, p.phone_office, p.address1, p.address2, p.website1, p.website2, p.company]
+      csv << ["Name", "Email1", "Email2", "Cell Phone", "Home Phone", "Work Phone", "Address1", "Address2", 
+        "Title", "Role", "Company", "Company Website", "Organization Website", "Personal Profile1", 
+        "Personal Profile2", "Relationship to RWE"]
+      Person.find(:all).each do |p|        
+        csv << [p.first_name + " " + p.last_name, p.email1, p.email2, p.phone_cell, p.phone_home, p.phone_office, 
+          p.address1, p.address2, p.title, p.role, p.company, p.website1, p.website2, p.website3, 
+          p.website4, p.print_relationships]
       end
     end
   end
   
+  def self.parse_for_addressID(address)  
+    address = address.split(",")      
+    if address#.length == 5
+      street = address[0]
+      city = address[1]
+      state = address[2]
+      zip = address[3]
+      country = address[4]
+    else
+      # validation
+    end
+    address = Address.create!(:street => street, :city => city, :state => state, :zip => zip, :country => country)
+    address.id
+  end
+  
   def self.import_people(file)
     if file == nil
-      return 2
+      return "Please provide a file and try again."
     end
     begin 
       File.open("public/peopletemp.csv", "wb") { |f| f.write(file.read) }
       csv_text = File.read("public/peopletemp.csv")
       csv = CSV.parse(csv_text, :headers => true)
       csv.each do |row|
-        #row = row.to_hash.with_indifferent_access
-        #Moulding.create!(row.to_hash.symbolize_keys)
-        # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
-        # http://satishonrails.wordpress.com/2007/07/18/how-to-import-csv-file-in-rails/
-        # http://www.tutorialspoint.com/ruby-on-rails/rails-file-uploading.htm
+        row = row.to_hash.with_indifferent_access
+        params = Hash.new        
+        name = row["Name"].split(" ")      
+        first_name = name[0]
+        last_name = name[1]                
+        params["first_name"] = first_name
+        params["last_name"] = last_name
+        params["email1"] = row["Email1"]
+        params["email2"] =row["Email2"]
+        params["phone_cell"] = row["Cell Phone"]
+        params["phone_home"] = row["Home Phone"]
+        params["phone_office"] = row["Work Phone"]
+        address1_id = parse_for_addressID(row["Address1"])
+        address2_id = parse_for_addressID(row["Address2"])
+        params["address_id_1"] = address1_id
+        params["address_id_2"] = address2_id
+        params["title"] = row["Title"]
+        params["role"] = row["Role"]
+        params["company"] = row["Company"]
+        params["website1"] = row["Company Website"]
+        params["website2"] = row["Organization Website"]
+        params["website3"] = row["Personal Profile1"]
+        params["website4"] = row["Personal Profile2"]
+        p = Person.create!(params.symbolize_keys)    
+        p.save_relationships(row["Relationship to RWE"].split(","))
       end
-      return 1
-    rescue SystemCallError
-      #shouldn't get here
-      return 2
+      File.delete("public/peopletemp.csv")
+      return file.original_filename + "'s contents were imported successfully."
+    rescue ActiveRecord::UnknownAttributeError      
+      return "Please double check the headers in your CSV file and try again."
+    #rescue ActiveRecord::
     end         
-    return 3
+    return "Import Failed."
   end
 end

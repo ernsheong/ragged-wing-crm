@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
+  #rescue_from ActiveRecord::UnknownAttributeError, :with => :improper_format
 
   # GET /people
   # GET /people.json
@@ -19,15 +20,9 @@ class PeopleController < ApplicationController
 
   def upload
     uploaded_file = params[:file]    
-    success = Person.import_people(uploaded_file)
-    if success == 1    
-      flash[:notice] = uploaded_file.original_filename + "'s contents was imported successfully."
-    elsif success == 3
-      flash[:notice] = "Import failed." 
-    else
-      flash[:notice] = "System error"
-    end
-    redirect_to :action => "index"
+    result = Person.import_people(uploaded_file)
+    flash[:notice] = result
+    redirect_to :action => "index" and return    
   end
 
   def search
@@ -137,7 +132,7 @@ class PeopleController < ApplicationController
       @person.address2 = @address2
       @person.save!
     end
-
+    
     @person.save_relationships(params[:relationships])
 
     # Update person
@@ -171,6 +166,5 @@ class PeopleController < ApplicationController
   
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-  
+  end   
 end
