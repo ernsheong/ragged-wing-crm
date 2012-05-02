@@ -30,7 +30,8 @@
         %td
           = link_to "#{donation.date.strftime('%-d %B %Y')}", donation
         %td
-          = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
+          -if donation.donor
+            = link_to "#{donation.donor.first_name} #{donation.donor.last_name}", donation.donor
         %td
           = number_to_currency(donation.amount)
         %td

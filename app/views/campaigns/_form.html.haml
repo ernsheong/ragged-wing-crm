@@ -1,3 +1,22 @@
+:javascript
+  $(function() {
+    var dates = $( "#campaign_start_date, #campaign_end_date" ).datepicker({
+      defaultDate: "+1w",
+      dateFormat: "yy-mm-dd",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onSelect: function( selectedDate ) {
+        var option = this.id == "campaign_start_date" ? "minDate" : "maxDate",
+          instance = $( this ).data( "datepicker" ),
+          date = $.datepicker.parseDate(
+            instance.settings.dateFormat ||
+            $.datepicker._defaults.dateFormat,
+            selectedDate, instance.settings );
+        dates.not( this ).datepicker( "option", option, date );
+      }
+    });
+  });
+
 = form_for(@campaign, html: {:class => 'form-horizontal'}) do |f|
   - if @campaign.errors.any?
     %div#iderror_explanation
@@ -22,10 +41,12 @@
   %div.control-group
     = f.label :start_date, :class => "control-label"
     %div.controls.docs-input-sizes
-      = f.date_select :start_date, {}, :class => "span2"
+      -#= f.date_select :start_date, {}, :class => "span2"
+      = f.text_field :start_date, :class => "span2"
   %div.control-group
     = f.label :end_date, :class => "control-label"
     %div.controls.docs-input-sizes
-      = f.date_select :end_date, {}, :class => "span2"
+      -#= f.date_select :end_date, {}, :class => "span2"
+      = f.text_field :end_date, :class => "span2"
   %div.actions
     = f.submit(:class => "btn btn-primary")

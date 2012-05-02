@@ -1,3 +1,8 @@
+:javascript
+  $(function() {
+    $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
+  });
+
 = form_for(@event, html: {:class => 'form-horizontal'}) do |f|
   - if @event.errors.any?
     %div#iderror_explanation
@@ -26,7 +31,8 @@
   %div.control-group
     = f.label :date, :class => "control-label"
     %div.controls.docs-input-sizes
-      = f.date_select :date, {}, :class => "span2"
+      -#= f.date_select :date, {}, :class => "span2"
+      =f.text_field :date, {:class => "span2", :id => "datepicker"}
   %div.control-group
     = f.label :start_time, :class => "control-label"
     %div.controls.docs-input-sizes

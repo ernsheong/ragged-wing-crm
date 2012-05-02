@@ -29,9 +29,9 @@
       %td= link_to "#{event.name}", event
       %td= event.event_type
       %td{:style => "width:45%;"}= event.description
-      %td= event.date.strftime('%d %B %Y')
-      %td= event.start_time.strftime('%l:%M %p')
-      %td= event.end_time.strftime('%l:%M %p')
+      %td= event.date.strftime('%d %B %Y') unless event.date.nil?
+      %td= event.start_time.strftime('%l:%M %p') unless event.start_time.nil?
+      %td= event.end_time.strftime('%l:%M %p') unless event.end_time.nil?
       %td
       %td
         = link_to 'Edit', edit_event_path(event), :class => "btn btn-mini"
