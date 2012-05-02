@@ -13,6 +13,23 @@ class EventsController < ApplicationController
     end
   end
 
+  def search
+    if params[:q]
+      @events = Event.where("lower(name) LIKE ?", "%#{q}%").all
+    else
+      @events = []      
+    end
+    @results = {}
+    @results[:total] = @events.count
+    @results[:events] = @events
+  
+    @events = Kaminari.paginate_array(@events).page(params[:page])
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @results }
+    end
+  end
+
   def filter
     @events = Event.filter(params[:filter])
     @years = (2005..Time.now.year).entries

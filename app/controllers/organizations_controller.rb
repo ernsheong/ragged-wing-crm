@@ -13,6 +13,23 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def search
+    if params[:q]
+      @organizations = Organization.where("lower(name) LIKE ?", "%#{q}%").all
+    else
+      @organizations = []      
+    end
+    @results = {}
+    @results[:total] = @organizations.count
+    @results[:organizations] = @organizations
+  
+    @organizations = Kaminari.paginate_array(@organizations).page(params[:page])
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @results }
+    end
+  end
+
   # GET /organizations/1
   # GET /organizations/1.json
   def show

@@ -12,6 +12,23 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def search
+    if params[:q]
+      @campaigns = Campaign.where("lower(name) LIKE ?", "%#{q}%").all
+    else
+      @campaigns = []      
+    end
+    @results = {}
+    @results[:total] = @campaigns.count
+    @results[:campaigns] = @campaigns
+  
+    @campaigns = Kaminari.paginate_array(@campaigns).page(params[:page])
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @results }
+    end
+  end
+
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
