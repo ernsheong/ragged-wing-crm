@@ -11,6 +11,14 @@
   %fieldset
     %legend Admin
     %div.control-group
+      = f.label :first_name, :class => "control-label"
+      %div.controls
+        = f.text_field :first_name, :class => "input-xlarge"
+    %div.control-group
+      = f.label :last_name, :class => "control-label"
+      %div.controls
+        = f.text_field :last_name, :class => "input-xlarge"
+    %div.control-group
       %div.controls
         %label.checkbox
           = "This person is an Admin"

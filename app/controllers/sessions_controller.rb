@@ -26,7 +26,11 @@ class SessionsController < ApplicationController
         else
           flash[:error] = "Invalid Username/Password"
         end
-        redirect_to root_path
+        if user.first_name.blank? || user.last_name.blank?
+          redirect_to(user_additional_info_path(user))
+        else
+          redirect_to root_path
+        end
       when :failure
         render :action => 'problem'
       else
