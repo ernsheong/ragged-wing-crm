@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
 
   unless Rails.env.test?
     before_filter :ensure_admin
-    before_filter :ensure_signed_inp
+    before_filter :ensure_signed_in
   end
 end
