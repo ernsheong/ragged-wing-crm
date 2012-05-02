@@ -8,7 +8,7 @@
     %tr
       %th= sortable "first_name", "Name"
       %th= sortable "email", "Email"
-      %th= sortable "admin", "Admin?"
+      %th= sortable "admin", "Privileges"
       %th
       %th
 
@@ -19,7 +19,7 @@
         -if user.first_name && user.last_name
           = link_to "#{user.first_name} #{user.last_name}", edit_user_path(user)
       %td= user.email
-      %td= user.admin
+      %td= user.admin? ? "Admin" : "Not Admin"
       %td
       %td
         = link_to 'Edit', edit_user_path(user), :class => "btn btn-mini"
