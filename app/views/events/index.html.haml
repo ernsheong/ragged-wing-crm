@@ -6,7 +6,8 @@
       = link_to 'Add New Event', new_event_path, :class => "btn btn-primary", :id => "new_event"
     %div.span9
       %div.pull-right
-        = select_tag "filter", options_for_select(@years, @selected), {:prompt => "Filter by Year"}
+        = select_tag "filter_event", options_for_select(@event_types, @selected_event), {:prompt => "All Events"}
+        = select_tag "filter_year", options_for_select(@years, @selected_year), {:prompt => "All Years"}
         = submit_tag( "Go", {:class => "btn", :id => "filter"})
 
 %h3#notice= notice  

@@ -8,10 +8,19 @@ class Event < ActiveRecord::Base
       'Performance Traveling', 'Other']
   end
 
-  def self.filter(year)
-  	if year.blank?
+  def self.filter(year, event)
+  	if year.blank? && event.blank?
       return Event.all
+    elsif year && event.blank?
+      return Event.find(:all, :conditions => ["strftime('%Y', date) = ?", year])
+    elsif year.blank? && event
+      return Event.find(:all, :conditions => ["event_type like ?", "#{event}%"])
+    else
+      return Event.find(:all, :conditions => ["strftime('%Y', date) = ? AND event_type like ?", year, "#{event}%"])
     end
-    Event.find(:all, :conditions => ["strftime('%Y', date) = ?", year])
+  end
+
+  def self.event_types
+    [ 'Donor Events', 'Fundraisers', 'Workshops', 'Classes', 'Performances', 'Other' ]
   end
 end
