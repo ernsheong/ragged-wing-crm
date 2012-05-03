@@ -3,11 +3,30 @@
   
 %h1 Donations 
 
+:javascript
+  $(function() {
+    var dates = $( "#start, #end" ).datepicker({
+      defaultDate: "+1w",
+      dateFormat: "yy-mm-dd",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onSelect: function( selectedDate ) {
+        var option = this.id == "start" ? "minDate" : "maxDate",
+          instance = $( this ).data( "datepicker" ),
+          date = $.datepicker.parseDate(
+            instance.settings.dateFormat ||
+            $.datepicker._defaults.dateFormat,
+            selectedDate, instance.settings );
+        dates.not( this ).datepicker( "option", option, date );
+      }
+    });
+  });
+
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
-  = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
-  = text_field_tag(:max, nil, {:class => "search-query",:placeholder => "Max Amount..."})
-  = text_field_tag(:start, nil, {:class => "search-query",:placeholder => "Start Date..."})
-  = text_field_tag(:end, nil, {:class => "search-query",:placeholder => "End Date..."})
+  = text_field_tag(:min, nil, { :placeholder => "Min Amount..."})
+  = text_field_tag(:max, nil, { :placeholder => "Max Amount..."})
+  = text_field_tag(:start, nil, { :placeholder => "Start Date..."})
+  = text_field_tag(:end, nil, { :placeholder => "End Date..."})
   = submit_tag("Update Listing", {:class => "btn", :id => "filter"})
 
 %table.table.table-striped
