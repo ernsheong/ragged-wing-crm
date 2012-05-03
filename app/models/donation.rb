@@ -29,6 +29,16 @@ class Donation < ActiveRecord::Base
     Donation.where("date between ? and ?", start_date, end_date).all
   end
 
+  # returns an array of person_ids 
+  def self.search_people_by_range_amount(min,max)
+    donations = Donation.search_by_range_amount(min, max)
+    result = []
+    donations.each do |don|
+      result << don.person_id
+    end
+    result.uniq.sort
+  end
+
   def self.filter_donations(min, max, start_date, end_date)       
     min = 0 if min.blank?
     max = Donation.maximum('amount') if max.blank?
