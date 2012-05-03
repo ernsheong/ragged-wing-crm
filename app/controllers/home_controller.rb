@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   
   def index
     if signed_in?
+    	@numbers = Relationship.count_relationships
       render 'dashboard'
     else
       render 'login'
