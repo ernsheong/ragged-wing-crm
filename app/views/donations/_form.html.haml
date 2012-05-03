@@ -28,7 +28,7 @@
   });
 = form_for(@donation) do |f|
   - if @donation.errors.any?
-    %div#iderror_explanation
+    %div#error_explanation
       %h2
         =pluralize(@donation.errors.count, "error")
         prohibited this donation from being saved:

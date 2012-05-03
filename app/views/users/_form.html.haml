@@ -1,6 +1,6 @@
 = form_for(@user, html: {:class => 'form-horizontal'}) do |f|
   - if @user.errors.any?
-    %div#iderror_explanation
+    %div#error_explanation
       %h2
         =pluralize(@user.errors.count, "error") 
         prohibited this user from being saved:

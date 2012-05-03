@@ -19,7 +19,7 @@
 
 = form_for(@campaign, html: {:class => 'form-horizontal'}) do |f|
   - if @campaign.errors.any?
-    %div#iderror_explanation
+    %div#error_explanation
       %h2
         =pluralize(@campaign.errors.count, "error") 
         prohibited this campaign from being saved:
