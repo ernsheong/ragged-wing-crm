@@ -24,7 +24,7 @@ describe CampaignsController do
   # Campaign. As you add validations to Campaign, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:name => "Fundraiser", :start_date => "2012-02-03", :end_date => "2012-03-03"}
   end
   
   # This should return the minimal set of values that should be in the session
