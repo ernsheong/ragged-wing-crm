@@ -1,3 +1,11 @@
+%div.pull-right
+  = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
+    = text_field_tag(:min, nil, { :class => "span2", :placeholder => "Min Amount..."})
+    = text_field_tag(:max, nil, { :class => "span2", :placeholder => "Max Amount..."})
+    = text_field_tag(:start, nil, { :class => "span2", :placeholder => "Start Date..."})
+    = text_field_tag(:end, nil, { :class => "span2", :placeholder => "End Date..."})
+    = submit_tag("Update Listing", {:class => "btn btn-primary", :id => "filter"})
+
 - if notice
   %p#notice= notice
   
@@ -21,13 +29,6 @@
       }
     });
   });
-
-= form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
-  = text_field_tag(:min, nil, { :placeholder => "Min Amount..."})
-  = text_field_tag(:max, nil, { :placeholder => "Max Amount..."})
-  = text_field_tag(:start, nil, { :placeholder => "Start Date..."})
-  = text_field_tag(:end, nil, { :placeholder => "End Date..."})
-  = submit_tag("Update Listing", {:class => "btn", :id => "filter"})
 
 %table.table.table-striped
   %thead
@@ -60,9 +61,10 @@
           = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
 
 = paginate @donations
-
-= button_to "Download all Donations to CSV", "/donations/download"
-= form_tag({:action => "upload"}, :multipart => "true") do
-  = file_field_tag 'file'
-  = submit_tag("Upload")
+%hr
+%div.pull-right
+  = form_tag({:action => "upload"}, :multipart => "true") do
+    = file_field_tag 'file'
+    = submit_tag("Import from CSV", :class => "btn btn-mini")
+          
   
