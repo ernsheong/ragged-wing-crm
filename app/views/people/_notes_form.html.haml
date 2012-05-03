@@ -1,0 +1,12 @@
+= form_for(@note, html: { :class => 'form-horizontal modal hide fade'} ) do |f|
+  %div.modal-header
+    %button.close{ :data => { :dismiss => "modal"} } x
+    %h3 New Note
+  %div.modal-body{ :style => "height:300px;" }
+    = f.hidden_field :person_id, :value => @person.id
+    %br
+    = text_area :note, 'body', :rows => 14, :style => "width:500px"
+    
+  %div.modal-footer
+    %a.btn{ :href => "#",:data => { :dismiss => "modal"} } Close
+    = f.submit( :class => "btn btn-primary" )
