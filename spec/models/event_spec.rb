@@ -12,9 +12,9 @@ describe Event do
 
   describe ".filter" do 
   	it "should filter events according to year" do 
-  		Event.filter('2012').should eq([@event])
-  		Event.filter('2011').should eq([@event1])
-  		Event.filter('2010').should eq([@event2])
+  		Event.filter('2012', '').should eq([@event])
+  		Event.filter('2011', '').should eq([@event1])
+  		Event.filter('2010', '').should eq([@event2])
   	end
   end
 
