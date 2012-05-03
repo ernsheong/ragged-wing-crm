@@ -17,7 +17,7 @@
       %div.pull-right
         = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
         = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
-        
+
 %table.table.table-striped
   %thead
     %tr

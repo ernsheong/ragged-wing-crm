@@ -1,0 +1,8 @@
+%h1 People
+= render :partial => "people/search", :locals => { :people => @people }
+
+%h1 Organizations
+= render :partial => "organizations/search", :locals => { :organizations => @organizations }
+
+%h1 Events
+= render :partial => "events/search", :locals => { :events => @events }
