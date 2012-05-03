@@ -21,3 +21,19 @@
 @media (min-width:980px) {
 	body { padding: 60px 0 10px 0; }
 }
+
+.jquery_form_error_message {
+  display: block;
+  margin-top: 3px;
+}
+
+/* Modify Scaffold error classes to use Bootstrap styles */
+#error_explanation {
+  @extend .alert;
+  @extend .alert-error;
+}
+
+#error_explanation h2 {
+  font-size:14px;
+  line-height:1em;
+}
