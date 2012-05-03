@@ -1,0 +1,40 @@
+:javascript
+  function format(person) {
+    if (person.first_name !== undefined) { return person.first_name + " " + person.last_name; }
+    else { return person.title; }
+  }
+
+  $(document).ready(function () {
+    $('#target_person_id').select2({
+      placeholder: {title: "Search for a contact person", id: ""},
+      minimumInputLength: 1,
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+          url: "/people/search.json",
+          dataType: 'json',
+          data: function (term, page) {
+              return {
+                  q: term, // search term
+              };
+          },
+          results: function (data, page) { // parse the results into the format expected by Select2.
+              return {results: data.people};
+          }
+      },
+      formatResult: format, 
+      formatSelection: format
+    });
+  });
+
+= form_for(@target, html: { :class => 'form-horizontal modal hide fade'} ) do |f|
+  %div.modal-header
+    %button.close{ :data => { :dismiss => "modal"} } x
+    %h3 New Campaign Target
+  %div.modal-body{ :style => "height:300px;" }
+    = f.hidden_field :campaign_id, :value => @campaign.id
+    %div.control-group
+      %div.controls
+        = f.text_field :person_id, { :class => "input-xlarge", :type => "hidden" }
+    
+  %div.modal-footer
+    %a.btn{ :href => "#",:data => { :dismiss => "modal" } } Close
+    = f.submit( :class => "btn btn-primary" )

@@ -1,0 +1,56 @@
+:javascript
+  function format(person) {
+    if (person.first_name !== undefined) { return person.first_name + " " + person.last_name; }
+    else { return person.title; }
+  }
+
+  $(document).ready(function () {
+    $('#member_person_id').select2({
+      placeholder: {title: "Search for a contact person", id: ""},
+      minimumInputLength: 1,
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+          url: "/people/search.json",
+          dataType: 'json',
+          data: function (term, page) {
+              return {
+                  q: term, // search term
+              };
+          },
+          results: function (data, page) { // parse the results into the format expected by Select2.
+              return {results: data.people};
+          }
+      },
+      formatResult: format, 
+      formatSelection: format
+    });
+  });
+
+= form_for(@donation, html: { :class => 'form-horizontal modal hide fade'} ) do |f|
+  %div.modal-header
+    %button.close{ :data => { :dismiss => "modal"} } x
+    %h3 New Member
+  %div.modal-body{ :style => "height:450px;" }
+    = f.hidden_field :person_id, :value => @person.id
+
+    = label :donation, :amount, 'Amount'
+    = text_field :donation, 'amount'
+    = label :donation, :date, 'Date'
+    = date_select :donation, :date, {}, :class => "controls docs-input-sizes span2"
+    %br
+    = label :donation, :payment_method, 'Payment Method'
+    = select :donation, :payment_method, [ "Credit Card", "Check", "Cash" ], {}, :class => "controls docs-input-sizes span2"
+    %br
+    -# TODO: Have a Campaign table to store all campaigns?
+    = label :donation, :campaign_id, 'Campaign'
+    = select :donation, :campaign_id, Campaign.all.collect {|c| [ c.name, c.id ] }, { :include_blank => true }, :class => "controls docs-input-sizes span2"
+    -#@campaigns
+    %br
+    = label :donation, :solicitation_method, 'Solicitation Method'
+    = select :donation, :solicitation_method, ['Internet', 'E-mail', 'Phone', 'Donor Event'], {}, :class => "controls docs-input-sizes span2"
+    %br
+    = label :donation, :point_of_contact_id, 'Point of Contact (within RWE)'
+    = text_field :donation, :point_of_contact_id, {:class => "controls input-xlarge"}
+    
+  %div.modal-footer
+    %a.btn{ :href => "#",:data => { :dismiss => "modal"} } Close
+    = f.submit(:class => "actions btn btn-primary")
