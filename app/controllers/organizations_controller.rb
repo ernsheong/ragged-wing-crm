@@ -17,6 +17,7 @@ class OrganizationsController < ApplicationController
   def show
     @organization = Organization.find(params[:id])
     @address = @organization.address
+    @member = Member.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -94,6 +95,28 @@ class OrganizationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Link a person to an organization
+  def create_member
+    # Member.create!..
+
+    respond_to do |format|
+      format.html { redirect_to organization_path(params[:orgaid])}
+      format.json { head :no_content }
+    end
+  end
+
+  # Remove a link between a person and an organization
+  def destroy_member
+
+    #@member = Member.find
+    #@member.destroy
+    respond_to do |format|
+      format.html { redirect_to organizations_url }
+      format.json { head :no_content }
+    end
+  end
+
 
   private
   

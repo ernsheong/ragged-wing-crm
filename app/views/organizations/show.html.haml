@@ -6,16 +6,6 @@
   %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_member"}} Add a new member
   = link_to 'Delete Organization', @organization, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 
-%div.modal.hide.fade#new_member
-  %div.modal-header
-    %button.close{:data => {:dismiss => "modal"}} x
-    %h3 New Member
-  %div.modal-body
-    stuff goes here
-  %div.modal-footer
-    %a.btn{:href => "#"} Close
-    %a.btn.btn-primary{:href => "#"} Save Changes
-
 %h1= "#{@organization.name}"
 %br 
 
@@ -25,6 +15,6 @@
   %div.span6
     = render 'members'
 
-
+= render 'member_form'
 
 = link_to 'Back', organizations_path, :class => "btn"

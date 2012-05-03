@@ -3,10 +3,12 @@ RaggedWing::Application.routes.draw do
 
   resources :organizations
 
+  # Members Controller Mappings
+  resources :members
+
   # Event Controller Mappings
   match 'events/filter' => 'events#filter'
   resources :events
-  
   
   # Donation Controller Mappings
   match 'donations/search_by_amount' => 'donations#search_by_amount'
