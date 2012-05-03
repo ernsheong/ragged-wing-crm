@@ -21,6 +21,8 @@ en:
           attributes:
             name:
               blank: "is required!"
+            date:
+              blank: "is required!"
         person:
           attributes:
             first_name:
