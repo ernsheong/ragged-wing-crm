@@ -1,5 +1,7 @@
 class Campaign < ActiveRecord::Base
   has_many :donations
+  validates_presence_of :start_date, :message => "is required!"
+  validates_presence_of :end_date, :message => "is required!"
 
   def graph_donations_by_year(campaign)
     @donations = Donation.where(:campaign_id => campaign)
