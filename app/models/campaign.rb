@@ -1,3 +1,5 @@
+require 'google_chart'
+
 class Campaign < ActiveRecord::Base
   has_many :donations
   has_many :targets

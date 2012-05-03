@@ -57,7 +57,7 @@ class Donation < ActiveRecord::Base
   end   
   
   def self.generate_donation_csv
-    CSV.open("public/temp/donations.csv", "wb") do |csv|
+    CSV.open("public/donations.csv", "wb") do |csv|
       csv << ["Donor", "Donor Email", "Amount", "Date", "Payment Method", "Solicitation Method", 
         "Campaign Name", "Campaign Description", "Point of Contact (within RWE)"]
       Donation.find(:all).each do |d|
