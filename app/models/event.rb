@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
   validates_presence_of :name, :message => "must have a name!"
+  validates_presence_of :date
 
   def self.event_list
     [ 'Donor Event', 'Fundraiser', 'Workshop Youth', 'Workshop Adult', 'Class Youth', 'Class Adult', 
