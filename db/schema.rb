@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503040835) do
+ActiveRecord::Schema.define(:version => 20120503051555) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -53,14 +53,6 @@ ActiveRecord::Schema.define(:version => 20120503040835) do
     t.date     "date"
     t.time     "start_time"
     t.time     "end_time"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "lists", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "campaign_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -111,18 +103,19 @@ ActiveRecord::Schema.define(:version => 20120503040835) do
     t.string   "website4"
   end
 
-  create_table "relationship_person_lists", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "list_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "relationships", :force => true do |t|
     t.integer  "person_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+  end
+
+  create_table "targets", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "campaign_id"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,5 +1,6 @@
 class Campaign < ActiveRecord::Base
   has_many :donations
+  has_many :targets
   validates_presence_of :start_date, :message => "is required!"
   validates_presence_of :end_date, :message => "is required!"
 
