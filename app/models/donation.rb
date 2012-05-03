@@ -48,29 +48,104 @@ class Donation < ActiveRecord::Base
   
   def self.generate_donation_csv
     CSV.open("public/temp/donations.csv", "wb") do |csv|
-      csv << ["Donor", "Amount", "Date", "Payment Method", "Campaign", "Solicitation Method"]
+      csv << ["Donor", "Donor Email", "Amount", "Date", "Payment Method", "Solicitation Method", 
+        "Campaign Name", "Campaign Description", "Point of Contact (within RWE)"]
       Donation.find(:all).each do |d|
         if d.donor        
-          csv << [d.donor.first_name + " " + d.donor.last_name, d.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
+          name = d.donor.first_name + " " + d.donor.last_name
+          point_of_contact = Person.where(:id => d.point_of_contact_id)
+          if not point_of_contact.empty?
+            point_of_contact = point_of_contact.first
+            point_of_contact = point_of_contact.first_name + " " + point_of_contact.last_name
+          else
+            point_of_contact = ""
+          end
+          campaign_name = d.campaign.name unless d.campaign == nil
+          campaign_description = d.campaign.description unless d.campaign == nil 
+          csv << [name, d.donor.email1, d.amount, d.date, d.payment_method, d.solicitation_method, campaign_name, 
+            campaign_description, point_of_contact]
         elsif d.organization
-          csv << [d.organization.name.amount, d.date, d.payment_method, d.campaign, d.solicitation_method]
+          point_of_contact = Person.where(:id => d.organization.person_id)
+          point_of_contact = point_of_contact.empty? ? "" : point_of_contact.email1
+          csv << [d.organization.name, point_of_contact, d.amount, d.date, d.payment_method, d.solicitation_method, d.campaign]
         end        
       end
     end    
   end
   
-  def self.import_donations(file)    
-    File.open("public/donationtemp.csv", "wb") { |f| f.write(file.read) }
-    csv_text = File.read("public/donationtemp.csv")
-    #csv = CSV.parse(csv_text, :headers => true)
-    #csv.each do |row|
-      #row = row.to_hash.with_indifferent_access
-      #Moulding.create!(row.to_hash.symbolize_keys)
-      # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
-      # http://satishonrails.wordpress.com/2007/07/18/how-to-import-csv-file-in-rails/
-      # http://www.tutorialspoint.com/ruby-on-rails/rails-file-uploading.htm
-    #end
-    return true
+  # Returns array with first element "Person" or "Organization" and second element the ID
+  # ["Person", 1]
+  def self.parse_for_donor(name, email) 
+    o = Organization.where(:name => name)
+    if not o.empty?
+      ["Organization", o.first.id]            
+    else      
+      name = name.split(" ")      
+      d = Person.where(:first_name => name[0], :last_name => name[1], :email1 => email)
+      if not d.empty?
+        ["Person", d.first.id]      
+      else
+        ["Donor not found"]
+      end
+    end
+  end  
+  
+  def self.parse_for_campaign(name, description)
+    c = Campaign.where(:name => name, :description => description)
+    if not c.empty?
+      c.first.id
+    else
+      0       
+    end
   end
-      
+  
+  def self.parse_for_point_of_contact(name)    
+    if name
+      name = name.split(" ")
+      contact = Person.where(:first_name => name[0], :last_name => name[1])
+      if not contact.empty?
+        return contact.first.id
+      end              
+    end
+    0
+  end
+  
+  def self.import_donations(file)
+    if file == nil
+      return "Please provide a file and try again."
+    end
+    begin 
+      message = ""
+      File.open("public/donationtemp.csv", "wb") { |f| f.write(file.read) }
+      csv_text = File.read("public/donationtemp.csv")
+      csv = CSV.parse(csv_text, :headers => true)
+      csv.each do |row|
+        row = row.to_hash.with_indifferent_access
+        params = Hash.new                
+        donor = parse_for_donor(row["Donor"], row["Donor Email"])        
+        if donor[0] == "Person"          
+          params["person_id"] = donor[1] 
+        elsif donor[1] == "Organization"
+          params["organization_id"] = donor[1]
+        else
+          message << row["Donor"] + " was not found in list of People or Organizations.\n"
+        end
+        params["date"] = Date.strptime(row["Date"], "%m/%d/%Y")
+        params["amount"] = row["Amount"]
+        params["payment_method"] = row["Payment Method"]
+        params["solicitation_method"] = row["Solicitation Method"]
+        params["payment_method"] = row["Payment Method"]
+        params["campaign_id"] = parse_for_campaign(row["Campaign Name"], row["Campaign Description"])
+        params["point_of_contact_id"] = parse_for_point_of_contact(row["Point of Contact (within RWE)"])        
+        Donation.create!(params.symbolize_keys)            
+      end
+      File.delete("public/donationtemp.csv")
+      return message = file.original_filename + "'s contents were imported successfully."      
+    rescue ActiveRecord::UnknownAttributeError      
+      return message = "Please double check the headers in your CSV file and try again."           
+    #rescue ActiveRecord::
+    end         
+    message = "Import Failed."
+  end
+
 end

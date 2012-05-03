@@ -20,9 +20,9 @@ class PeopleController < ApplicationController
 
   def upload
     uploaded_file = params[:file]    
-    result = Person.import_people(uploaded_file)
-    flash[:notice] = result
-    redirect_to :action => "index" and return    
+    message = Person.import_people(uploaded_file)
+    flash[:notice] = message
+    redirect_to :action => "index"    
   end
 
   def search
