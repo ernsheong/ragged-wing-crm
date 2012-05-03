@@ -1,8 +1,10 @@
+%div.pull-right
+  = link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
+
+- if notice
+  %p#notice= notice
 %h1 Organizations
-%br
-= link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
-%br
-%br
+
 %table.table.table-striped
   %thead
     %tr

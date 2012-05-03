@@ -1,11 +1,13 @@
 - if notice
   %p#notice= notice
-    
-%h1= @campaign.name
-%br
-%br
 
-%div.row
+%div.pull-right
+  = link_to 'Edit Information', edit_campaign_path(@campaign), :class => "btn btn-primary", :id => "edit"
+  = link_to 'Delete Campaign', @campaign, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
+%h1= @campaign.name
+
+%div.row-fluid
   %div.span12
     %div.tabbable
       %ul.nav.nav-tabs
