@@ -19,7 +19,7 @@ Scenario: see campaigns
   
 Scenario: update campaigns
   When I click "Fundraiser"
-  And I press "Edit Information"
+  And I click "Edit Information"
   And I fill in "campaign_description" with "This is a desc"
   And I press "Update Campaign"
   Then I should see "This is a desc"

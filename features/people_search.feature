@@ -12,16 +12,16 @@ Background:
   | Jonathan       | Lin       | 
   | Kevin          | Tham      | 
   | Peter          | Hu        |
-  
+  And I visit "/people"
 
+@selenium
 Scenario: Find existing person
-  When I visit the home page
   When I enter "Kevin" in the searchbox
+  Then I pause for a while
   And  I press "Go"
   Then I should see "Kevin"
 
 Scenario: Find non-existing person
-  When I visit the home page
   When I enter "Ivan" in the searchbox
   And  I press "Go"
   Then I should not see "Ivan"

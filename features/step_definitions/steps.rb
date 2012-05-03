@@ -68,7 +68,7 @@ end
 
 
 When /^I enter "([^"]*)" in the searchbox$/ do |name|
-  fill_in 'q', :with => name
+  page.fill_in 'search_bar', :with => name
 end
 
 When /^I press "([^"]*)"$/ do |arg1|

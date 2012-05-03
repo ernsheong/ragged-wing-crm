@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 When /^I add a new note "([^"]*)"$/ do |body|
-  click_link('new_note') 
   fill_in('note_body', :with => body)
   click_button('Create Note')
 end

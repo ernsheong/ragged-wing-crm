@@ -4,8 +4,8 @@
 %div.pull-right
   = link_to 'Edit Information', edit_person_path(@person), :class => "btn btn-primary", :id => "edit"
   =# link_to 'Add a donation', new_donation_path(:person_id => @person.id), :id => "new_donation", :class => "btn btn-primary"
-  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_donation"}} Add a donation
-  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_note"}} Add a note
+  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_donation"}} Add a Donation
+  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_note"}, :id => "create_note"} Add a Note
   = link_to 'Delete Person', @person, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 
 - if notice
