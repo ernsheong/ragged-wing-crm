@@ -1,5 +1,3 @@
-%div.pull-right= link_to 'Add a donation', new_donation_path(:person_id => @person.id), :id => "new_donation", :class => "btn"
-
 %h2 Donations Made
 - if not @person.donations.empty?
   %table.table.table-condensed

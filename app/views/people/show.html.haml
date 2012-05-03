@@ -1,12 +1,21 @@
+= render 'notes_form'
+
+%div.pull-right
+  = link_to 'Edit Information', edit_person_path(@person), :class => "btn btn-primary", :id => "edit"
+  = link_to 'Add a donation', new_donation_path(:person_id => @person.id), :id => "new_donation", :class => "btn btn-primary"
+  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_note"}} Add a note
+  = link_to 'Delete Person', @person, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
 - if notice
   %p#notice= notice
+
 
 %h1= "#{@person.first_name} #{@person.last_name}"
 
 -@person.members.each do |m|
   -if m.role.empty?
     -m.role = "Employee"
-  %h4= "#{m.role} at #{m.organization.name}"
+  %h4= link_to "#{m.role} at #{m.organization.name}", m.organization
 
 %br
 
@@ -27,5 +36,3 @@
         = render 'notes'
       %div.tab-pane#3
         = render 'donations'
-
-= link_to 'Back', people_path, :class => "btn"
