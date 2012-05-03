@@ -1,7 +1,7 @@
+- if notice
+  %p#notice= notice
+  
 %h1 Donations 
-%center
-  %h1
-    = flash[:notice]
 
 = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
   = text_field_tag(:min, nil, {:class => "search-query",:placeholder => "Min Amount..."})
