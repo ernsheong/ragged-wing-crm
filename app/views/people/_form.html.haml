@@ -1,3 +1,8 @@
+:javascript
+  $(document).ready(function () {
+    $("#new_person").validateOnBlur();
+  });
+
 = form_for(@person, :html => { :class => "form-horizontal"} ) do |f|
   - if @person.errors.any?
     %div#error_explanation
@@ -88,7 +93,7 @@
     %div.control-group
       = label :person, :email1, 'Primary Email', :class => "control-label"
       %div.controls
-        = text_field :person, 'email1', :class => "input-xlarge"
+        = text_field :person, 'email1', {:class => "input-xlarge", :data => {:validation => "validate_email"} }
     %div.control-group
       = label :person, :email2, 'Other Email', :class => "control-label"
       %div.controls
