@@ -145,7 +145,7 @@ class Donation < ActiveRecord::Base
       return message = "Please double check the headers in your CSV file and try again."           
     #rescue ActiveRecord::
     end         
-    message = "Import Failed."
+    "Import Failed."
   end
 
 end

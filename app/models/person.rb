@@ -249,11 +249,11 @@ class Person < ActiveRecord::Base
         p.save_relationships(row["Relationship to RWE"].split(","))
       end
       File.delete("public/peopletemp.csv")
-      message = file.original_filename + "'s contents were imported successfully."
+      return file.original_filename + "'s contents were imported successfully."
     rescue ActiveRecord::UnknownAttributeError      
-      message = "Please double check the headers in your CSV file and try again."
+      return "Please double check the headers in your CSV file and try again."
     #rescue ActiveRecord::
     end         
-    message = "Import Failed."
+    return "Import Failed."
   end
 end
