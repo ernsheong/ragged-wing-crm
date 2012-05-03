@@ -76,7 +76,7 @@ class TargetsController < ApplicationController
     @target.destroy
 
     respond_to do |format|
-      format.html { redirect_to targets_url }
+      format.html { redirect_to @target.campaign }
       format.json { head :no_content }
     end
   end
