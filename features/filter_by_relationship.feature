@@ -20,13 +20,13 @@ Scenario: no relationships selected
   Then I should see: Winston Chow, Jonathan Lin, Kevin Tham, Peter Hu
   
 Scenario: restrict contacts to ones with a "Volunteer" relationship
-  When I select "Volunteer"
+  When I select "Volunteer" from "filter"
   And I filter
   Then I should see: Winston Chow, Peter Hu
   And I should not see: Jonathan Lin, Kevin Tham
   
 Scenario: restrict contacts to ones with a "Employee" relationship
-  When I select "Employee"
+  When I select "Employee" from "filter"
   And I filter
   Then I should see: Jonathan Lin
   And I should not see: Winston Chow, Kevin Tham, Peter Hu

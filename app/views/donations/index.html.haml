@@ -1,11 +1,11 @@
 %div.pull-right
-  = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get") do
+  = form_tag({:controller => "donations", :action => "filter_donations"}, :class => "form-inline", :method => "get") do
     = text_field_tag(:min, nil, { :class => "span2", :placeholder => "Min Amount..."})
     = text_field_tag(:max, nil, { :class => "span2", :placeholder => "Max Amount..."})
     = text_field_tag(:start, nil, { :class => "span2", :placeholder => "Start Date..."})
     = text_field_tag(:end, nil, { :class => "span2", :placeholder => "End Date..."})
     = submit_tag("Update Listing", {:class => "btn btn-primary", :id => "filter"})
-    %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#import"}} CSV Import
+    = link_to "CSV Import", {:data => {:toggle => "modal", :target => "#import"}}, :class => "btn"
 
 - if notice
   %p#notice= notice

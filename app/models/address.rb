@@ -6,7 +6,7 @@ class Address < ActiveRecord::Base
     address = ""         
     address << self.street << ', ' unless self.street.blank?  
     address << self.city << ', ' unless self.city.blank?  
-    address << self.state << ', ' unless self.state.blank?   
+    address << self.state << ' ' unless self.state.blank?   
     address << self.zip << ', '  unless self.zip.blank?             
     if self.country.blank?         
       index = address.index(',', -3)      

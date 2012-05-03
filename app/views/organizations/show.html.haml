@@ -2,7 +2,7 @@
   %p#notice= notice
 
 %div.pull-right
-  = link_to 'Edit Details', edit_organization_path(@organization), :class => "btn btn-primary"
+  = link_to 'Edit Details', edit_organization_path(@organization), :class => "btn btn-primary", :id => "edit_org"
   %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_member"}} Add a new member
   = link_to 'Delete Organization', @organization, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 

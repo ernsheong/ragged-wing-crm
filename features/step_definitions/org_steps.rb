@@ -17,7 +17,7 @@ end
 
 When /^I edit organization "([^"]*)"$/ do |arg1|
   click_link(arg1)
-  click_on("Edit Organization")
+  click_on("edit_org")
 end
 
 When /^I update "([^"]*)" to "([^"]*)"$/ do |arg1, arg2|

@@ -22,7 +22,6 @@ Background: contacts have been added to database
   | Event 12  | Performance Festival        | 2012-02-01  |
   | Event 13  | Performance Traveling       | 2012-02-01  |
   | Event 14  | Other                       | 2012-02-01  |
-  And I am logged in
   And I visit "/events"
 
 @none

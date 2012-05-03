@@ -10,13 +10,11 @@ Given /^the following donations exist:$/ do |table|
   end
 end
 
-When /^I add a new donation of "([^"]*)" on "([^"]*)"$/ do |amt, date|
-  click_link('new_donation') 
-  fill_in('Amount', :with => amt)
-  fill_in('Date', :with => date)
+When /^I add donation of "([^"]*)" on "([^"]*)"$/ do |amt, date|
+  fill_in('donation_amount', :with => amt)
+  fill_in('datepicker', :with => date)
   click_button('Create Donation')
 end
-
 
 When /^I fill in "([^"]*)" for min and "([^"]*)" for max$/ do |arg1, arg2|
   fill_in('min', :with => arg1)

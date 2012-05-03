@@ -14,10 +14,8 @@ Background:
   | Peter          | Hu        |
   And I visit "/people"
 
-@selenium
 Scenario: Find existing person
   When I enter "Kevin" in the searchbox
-  Then I pause for a while
   And  I press "Go"
   Then I should see "Kevin"
 

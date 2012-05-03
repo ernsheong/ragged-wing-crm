@@ -14,5 +14,5 @@ Background: contacts have been added to database
   
 Scenario: Add a donation
   When I view person "Kevin Tham"
-  When I add a new donation of "100.1" on "2012-04-04"
+  When I add donation of "100.1" on "2012-04-04"
   Then I should see "$100.10"

@@ -48,12 +48,6 @@ When /^I click "([^"]*)"$/ do |arg1|
   click_link arg1
 end
 
-When /^I edit "([^"]*)"$/ do |arg1|
-  visit('/people')
-  click_link arg1
-  click_link 'edit'
-end
-
 When /^I check: (.*)$/ do |selection|
   selection.split(/,\s*/).each do |item|
     check(item)
@@ -106,7 +100,7 @@ When /^I select "([^"]*)" from "([^"]*)"$/ do |arg1, filter_name|
 end
 
 When /^I filter$/ do 
-  click_button "filter"
+  click_on "filter"
 end
 
 Then /^I pause for a while$/ do
