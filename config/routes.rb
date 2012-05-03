@@ -4,7 +4,7 @@ RaggedWing::Application.routes.draw do
   resources :campaigns 
 
   # Campaign Targets...
-  resources :Targets
+  resources :targets
 
   resources :organizations
 

@@ -1,8 +1,11 @@
 - if notice
   %p#notice= notice
 
+= render 'target_form'
+
 %div.pull-right
   = link_to 'Edit Information', edit_campaign_path(@campaign), :class => "btn btn-primary", :id => "edit"
+  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_target"}} Add a new campaign target
   = link_to 'Delete Campaign', @campaign, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 
 %h1= @campaign.name
