@@ -8,7 +8,7 @@
     - @organization.members.each do |member|
       %tr
         %td= link_to "#{member.person.first_name} #{member.person.last_name}", member.person
-        %td= link_to 'Remove Member', member, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini"
+        %td= link_to 'Remove', member, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini"
 
 - else
   No Members
