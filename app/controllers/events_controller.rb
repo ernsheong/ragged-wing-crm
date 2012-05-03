@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
-  before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
   # GET /events
   # GET /events.json
   def index
     @events = Event.order(sort_column + " " + sort_direction).page(params[:page])
     @years = (2005..Time.now.year).entries
+    @event_types = Event.event_types
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,13 +14,25 @@ class EventsController < ApplicationController
   end
 
   def filter
-    @events = Event.filter(params[:filter])
+    @event_types = Event.event_types
     @years = (2005..Time.now.year).entries
-    @selected = params[:filter]
-    if params[:filter].blank?
+
+    @selected_event = params[:filter_event]
+    @selected_year = params[:filter_year]
+
+    event = @selected_event
+    year = @selected_year
+
+    @events = Event.filter(year, event[0..-3].downcase)
+
+    if year.blank? && event.blank?
       flash[:notice] = "Showing all events"
-    else 
-      flash[:notice] = "Showing all events in #{@selected}"
+    elsif year && event.blank?
+      flash[:notice] = "Showing all events in #{year}"
+    elsif year.blank? && event
+      flash[:notice] = "Showing all #{event}"
+    else
+      flash[:notice] = "Showing all #{event} in #{year}"
     end
     @events = Kaminari.paginate_array(@events).page(params[:page])
     render "index"

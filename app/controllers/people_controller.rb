@@ -1,5 +1,4 @@
 class PeopleController < ApplicationController
-  before_filter :ensure_signed_in
   helper_method :sort_column, :sort_direction
   #rescue_from ActiveRecord::UnknownAttributeError, :with => :improper_format
 

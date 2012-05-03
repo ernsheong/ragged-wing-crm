@@ -21,6 +21,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
+      if params[:user][:admin].nil?
+        @user.admin = false
+        @user.save!
+      end
       redirect_to users_path
     else
       render :action => :edit

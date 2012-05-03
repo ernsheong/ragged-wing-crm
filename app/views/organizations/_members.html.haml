@@ -1,0 +1,32 @@
+%h2 Members
+
+- if @organization.people
+  %table.table.table-condensed
+    %tr
+      %th= sortable "first_name", "Name"
+      %th Role(s)
+      %th Address
+      %th= sortable "email1", "Email"
+      %th= sortable "phone_cell", "Phone"
+      %th Actions
+    - @organization.people.each do |n|
+      %tr
+        %td
+          = link_to "#{person.first_name} #{person.last_name}", person
+        %td
+          - unless person.members.collect.empty?
+            - person.members.collect.each do |m|
+              -if m.ogranization == @organization
+                = m.role
+              %br
+        %td
+          - if person.address1
+            = person.address1.to_s
+        %td
+          = mail_to person.email1
+        %td
+          = person.phone_cell
+        %td
+          = link_to 'Edit', edit_person_path(person), :class => "btn btn-mini"
+- else
+  No Members
