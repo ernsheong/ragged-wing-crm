@@ -1,4 +1,5 @@
 class AdditionalInfosController < ApplicationController
+  skip_filter :ensure_admin
   
   def show
     @user = User.find(params[:user_id])
