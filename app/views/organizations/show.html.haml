@@ -1,22 +1,29 @@
 - if notice
   %p#notice= notice
 
+%div.pull-right
+  = link_to 'Edit Details', edit_organization_path(@organization), :class => "btn btn-primary"
+  %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#new_member"}} Add a new member
+  = link_to 'Delete Organization', @organization, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
+%div.modal.hide.fade#new_member
+  %div.modal-header
+    %button.close{:data => {:dismiss => "modal"}} x
+    %h3 New Member
+  %div.modal-body
+    stuff goes here
+  %div.modal-footer
+    %a.btn{:href => "#"} Close
+    %a.btn.btn-primary{:href => "#"} Save Changes
+
 %h1= "#{@organization.name}"
 %br 
 
 %div.row-fluid
-  %div.span12
-    %div.tabbable
-      %ul.nav.nav-tabs
-        %li.active
-          %a{:href => "#1", :data => {:toggle => "tab"}} Details
-        %li
-          %a{:href => "#2", :data => {:toggle => "tab"}} Members
-    %div.tab-content
-      %div.tab-pane.active#1
-        = render 'profile'
-      %div.tab-pane#2
-        = render 'members'
+  %div.span6
+    = render 'profile'
+  %div.span6
+    = render 'members'
 
 
 

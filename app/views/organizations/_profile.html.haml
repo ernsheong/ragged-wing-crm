@@ -1,13 +1,7 @@
-%div.pull-right
-  = link_to 'Edit Organization', edit_organization_path(@organization), :class => "btn btn-primary"
-  = link_to 'Delete Organization', @organization, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
 
-%h2
-  = "Details for #{@organization.name}"
+%h2= "Details for #{@organization.name}"
 
 %table.table.table-condensed
-  %tr 
-    %h2 Details
   %tr
     %td
       %i.icon-book
