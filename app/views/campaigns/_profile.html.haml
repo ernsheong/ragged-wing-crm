@@ -23,10 +23,10 @@
       %table.table.table-condensed
         %tr
           %th Name
-          %th Status
+          -#%th Status
           %th Actions
         - @campaign.targets.each do |target|
           %tr
             %td= link_to "#{target.person.first_name} #{target.person.last_name}", target.person
-            %td= target.status
+            -#%td= target.status
             %td= link_to 'Remove', target, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini"
