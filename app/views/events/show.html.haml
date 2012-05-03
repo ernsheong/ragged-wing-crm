@@ -1,13 +1,11 @@
-%p#notice= notice
-    
+- if notice
+  %p#notice= notice
+
+%div.pull-right
+  = link_to 'Edit Event', edit_event_path(@event), :class => "btn btn-primary"
+  = link_to 'Delete Event', @event, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
 %h1= @event.name
-%h2= @event.date.strftime('%A, %d %B %Y')
-%br
-%div.row-fluid
-  %div.span12
-    = link_to 'Edit Event', edit_event_path(@event), :class => "btn btn-primary"
-    = link_to 'Delete Event', @event, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
-%br
 
 %div.row-fluid
   %div.span12
