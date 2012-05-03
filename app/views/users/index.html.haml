@@ -18,7 +18,7 @@
       %td
         -if user.first_name && user.last_name
           = link_to "#{user.first_name} #{user.last_name}", edit_user_path(user)
-      %td= user.email
+      %td= mail_to user.email
       %td= user.admin? ? "Admin" : "Not Admin"
       %td
       %td
