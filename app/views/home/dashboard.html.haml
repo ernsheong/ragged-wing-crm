@@ -1,11 +1,26 @@
 %h2 Home
 
 %div.row-fluid
-  %div.span9
+  %div.span12
     %h3 Recent Donations
-  %div.span3
     %div.row-fluid
-      pie chart demographic
-    %div.row-fluid
-      pie chart 2
-  
+      %div.span4
+        %h3 Numbers At a Glance
+        %table.table.table-bordered.table-striped.table.table-condensed
+          %thead 
+            %tr
+              %th Relationship with RWE
+              %th No.
+          %tbody
+            - @numbers.each do |key, value|
+              %tr
+                %td= link_to "#{key}", people_filter_path + "?filter=#{key}"
+                %td= value
+      %div.span4
+        %h3 Something else 1 
+      %div.span4
+        %h3 Something else 2
+-#%div.span4
+-#  %div.row-fluid
+-#    pie chart demographic
+-#    pie chart 2

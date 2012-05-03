@@ -15,4 +15,13 @@ class Relationship < ActiveRecord::Base
 		list = self.external + self.internal
 		list.sort
 	end
+
+	  # returns a hash of { Relationship Name : Count } 
+  def self.count_relationships
+    result = {}
+    Relationship.list.each do |rel|
+    	result[rel] = Relationship.where(:name => rel).count
+    end
+    result
+  end
 end
