@@ -1,10 +1,11 @@
 %div.pull-right
-  = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get", :class => "navbar-search") do
+  = form_tag({:controller => "donations", :action => "filter_donations"}, :method => "get") do
     = text_field_tag(:min, nil, { :class => "span2", :placeholder => "Min Amount..."})
     = text_field_tag(:max, nil, { :class => "span2", :placeholder => "Max Amount..."})
     = text_field_tag(:start, nil, { :class => "span2", :placeholder => "Start Date..."})
     = text_field_tag(:end, nil, { :class => "span2", :placeholder => "End Date..."})
     = submit_tag("Update Listing", {:class => "btn btn-primary", :id => "filter"})
+    %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#import"}} CSV Import
 
 - if notice
   %p#notice= notice
@@ -63,8 +64,6 @@
 = paginate @donations
 %hr
 %div.pull-right
-  = form_tag({:action => "upload"}, :multipart => "true") do
+  = form_tag({:action => "upload"}, {:multipart => "true", :id => 'import', :class => 'form-horizontal modal hide fade'}) do
     = file_field_tag 'file'
     = submit_tag("Import from CSV", :class => "btn btn-mini")
-          
-  
