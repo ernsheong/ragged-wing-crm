@@ -199,6 +199,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.parse_for_addressID(address)  
+    return unless address != nil
     address = address.split(",")      
     if address#.length == 5
       street = address[0]
