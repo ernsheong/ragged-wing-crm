@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
   
   def download    
     Person.generate_people_csv          
-    send_file("#{Rails.root}/public/temp/people.csv", :type => "application/csv")
+    send_file("#{Rails.root}/public/people.csv", :type => "application/csv")
   end
 
   def upload
