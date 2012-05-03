@@ -57,7 +57,7 @@ class Donation < ActiveRecord::Base
   end   
   
   def self.generate_donation_csv
-    CSV.open("public/temp/donations.csv", "wb") do |csv|
+    CSV.open("public/donations.csv", "wb") do |csv|
       csv << ["Donor", "Donor Email", "Amount", "Date", "Payment Method", "Solicitation Method", 
         "Campaign Name", "Campaign Description", "Point of Contact (within RWE)"]
       Donation.find(:all).each do |d|
@@ -140,7 +140,7 @@ class Donation < ActiveRecord::Base
         else
           message << row["Donor"] + " was not found in list of People or Organizations.\n"
         end
-        params["date"] = Date.strptime(row["Date"], "%m/%d/%Y")
+        params["date"] = Date.strptime(row["Date"], "%Y-%m-%d")
         params["amount"] = row["Amount"]
         params["payment_method"] = row["Payment Method"]
         params["solicitation_method"] = row["Solicitation Method"]

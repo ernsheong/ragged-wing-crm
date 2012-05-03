@@ -1,3 +1,5 @@
+require 'google_chart'
+
 class Person < ActiveRecord::Base
   belongs_to :address1, :class_name => 'Address', :foreign_key => "address_id_1"
   belongs_to :address2, :class_name => 'Address', :foreign_key => "address_id_2"
@@ -186,7 +188,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.generate_people_csv
-    CSV.open("public/temp/people.csv", "wb") do |csv|
+    CSV.open("public/people.csv", "wb") do |csv|
       csv << ["Name", "Email1", "Email2", "Cell Phone", "Home Phone", "Work Phone", "Address1", "Address2", 
         "Title", "Role", "Company", "Company Website", "Organization Website", "Personal Profile1", 
         "Personal Profile2", "Relationship to RWE"]

@@ -1,26 +1,60 @@
-%h2 Home
-
-%div.row-fluid
-  %div.span12
-    %h3 Recent Donations
-    %div.row-fluid
-      %div.span4
-        %h3 Numbers At a Glance
-        %table.table.table-bordered.table-striped.table.table-condensed
-          %thead 
-            %tr
-              %th Relationship with RWE
-              %th No.
-          %tbody
-            - @numbers.each do |key, value|
+%div.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#tab1", :data => {:toggle => "tab"}} Dashboard
+    %li
+      %a{:href => "#tab2", :data => {:toggle => "tab"}} Settings
+  %div.tab-content
+    %div.tab-pane.active#tab1
+      %div.row-fluid
+        %div.span4
+          %h3 Numbers At a Glance
+          %table.table.table-bordered.table-striped.table.table-condensed
+            %thead 
               %tr
-                %td= link_to "#{key}", people_filter_path + "?filter=#{key}"
-                %td= value
-      %div.span4
-        %h3 Something else 1 
-      %div.span4
-        %h3 Something else 2
--#%div.span4
--#  %div.row-fluid
--#    pie chart demographic
--#    pie chart 2
+                %th Relationship with RWE
+                %th No.
+            %tbody
+              - @numbers.each do |key, value|
+                %tr
+                  %td= link_to "#{key}", people_filter_path + "?filter=#{key}"
+                  %td= value
+        %div.span4
+          %h3 Something else 1 
+        %div.span4
+          %h3 Something else 2
+    %div.tab-pane#tab2
+      %div.row-fluid
+        %div.span6
+          %h3 Users
+          %table.table.table-striped
+            %thead 
+              %tr
+                %th Name
+                %th Email
+                %th Priviledges
+                %th
+                %th
+
+            %tbody
+            - @users.each do |user|
+              %tr
+                %td
+                  -if user.first_name && user.last_name
+                    = link_to "#{user.first_name} #{user.last_name}", edit_user_path(user)
+                %td= mail_to user.email
+                %td= user.admin? ? "Admin" : "Not Admin"
+                %td
+                %td
+                  = link_to 'Edit', edit_user_path(user), :class => "btn btn-mini"
+                  = link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
+        %div.span6
+          %h3 Data 
+          %div.well
+            %h4 Download all People data as CSV
+            = button_to "Download People", "/people/download", :class => "btn btn-primary"
+            %br
+            %h4 Download all Donations data as CSV
+            = button_to "Download Donations", "/donations/download", :class => "btn btn-primary"
+
+

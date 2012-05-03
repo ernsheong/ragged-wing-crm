@@ -15,7 +15,7 @@ class DonationsController < ApplicationController
 
   def download    
     Donation.generate_donation_csv          
-    send_file("#{Rails.root}/public/temp/donations.csv", :type => "application/csv")    
+    send_file("#{Rails.root}/public/donations.csv", :type => "application/csv")    
   end
 
   def upload        
