@@ -50,6 +50,7 @@ class OrganizationsController < ApplicationController
   def create
     @address = Address.create!(params[:address])
     @organization = Organization.new(params[:organization])
+    @organization.address = @address
     
     respond_to do |format|
       if @organization.save
@@ -66,7 +67,7 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1.json
   def update
     @organization = Organization.find(params[:id])
-    #@address = Address.find_by_id(params[address_id])
+    @organization.address.update_attributes(params[:address])
     #if @address
       #updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: @address.id}
     #else
