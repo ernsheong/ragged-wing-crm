@@ -1,10 +1,10 @@
-%h1 Campaigns
-%br
-= link_to 'Add New Campaign', new_campaign_path, :class => "btn btn-primary", :id => "new_campaign"
-%br
-%br
+%div.pull-right
+  = link_to 'Add New Campaign', new_campaign_path, :class => "btn btn-primary", :id => "new_campaign"
 
-%h3#notice= notice  
+-if notice
+  %p#notice= notice
+
+%h1 Campaigns
 
 %table.table.table-striped
   %thead 

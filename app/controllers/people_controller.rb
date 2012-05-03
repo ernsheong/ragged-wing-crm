@@ -52,6 +52,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @note = Note.new
+    @donation = Donation.new
     @address1 = @person.address1
     @address2 = @person.address2
     @amount_graph = @person.graph_donations_by_year(params[:id])
