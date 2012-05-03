@@ -1,5 +1,10 @@
 RaggedWing::Application.routes.draw do
-  resources :campaigns
+
+  # Campaigns...
+  resources :campaigns 
+
+  # Campaign Targets...
+  resources :targets
 
   resources :organizations
 

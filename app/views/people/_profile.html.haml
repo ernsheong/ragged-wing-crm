@@ -1,18 +1,9 @@
-%div.pull-right
-  = link_to 'Edit Information', edit_person_path(@person), :class => "btn", :id => "edit"
-  = link_to 'Delete Person', @person, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
-
 %h2
   = "#{@person.title}"
   -if not @person.company.blank?
     = "at #{@person.company}" 
 
 %table.table.table-condensed
-  %trw
-    %td
-      %i.icon-home
-      Role
-    %td= @person.role
   %tr
     %td
       %i.icon-home
@@ -52,16 +43,6 @@
       %i.icon-comment
       Work Phone
     %td= @person.phone_office
-  %tr
-    %td
-      %i.icon-list-alt
-      Company Website
-    %td= content_tag(:a, "#{@person.website1}", :href => "http://www.#{@person.website1}")
-  %tr
-    %td
-      %i.icon-list-alt
-      Organization Website
-    %td= content_tag(:a, "#{@person.website2}", :href => "http://www.#{@person.website2}")
   %tr
     %td
       %i.icon-list-alt
