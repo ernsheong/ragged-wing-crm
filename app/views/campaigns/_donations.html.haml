@@ -20,14 +20,14 @@
         %td
           = link_to 'Edit', edit_donation_path(d), :class => "btn btn-mini"
           = link_to 'Delete', d, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
-  %div
-    %center
-      Donation Amount by Year
-      %br/                               
-      %img{:src => @amount_graph, :style => ""}
-      %br/                         
-      Donation Frequency by Year
-      %br/ 
-      %img{:src => @freq_graph}       
+  -#%div
+  -#  %center
+  -#    Donation Amount by Year
+  -#    %br/                               
+  -#    %img{:src => @amount_graph, :style => ""}
+  -#    %br/                         
+  -#    Donation Frequency by Year
+  -#    %br/ 
+  -#    %img{:src => @freq_graph}       
 - else
   No donations...
