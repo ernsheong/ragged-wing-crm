@@ -1,5 +1,5 @@
 %h2= "Donations"
-- if @campaign.donations
+- if not @campaign.donations.empty?
   %table.table.table-condensed
     %tr
       %th Date

@@ -65,7 +65,7 @@ class Person < ActiveRecord::Base
     # - run through all existing relationships
     # - if relationship does not exist in update, delete
 
-    if self.relationships(true).nil?
+    if self.relationships(true).nil?      
       update.each do |elt|
         Relationship.create!(:person_id => self.id, :name => elt)
       end
@@ -245,7 +245,8 @@ class Person < ActiveRecord::Base
         params["website2"] = row["Organization Website"]
         params["website3"] = row["Personal Profile1"]
         params["website4"] = row["Personal Profile2"]
-        p = Person.create!(params.symbolize_keys)    
+        p = Person.create!(params.symbolize_keys)
+        p.save
         p.save_relationships(row["Relationship to RWE"].split(","))
       end
       File.delete("public/peopletemp.csv")
