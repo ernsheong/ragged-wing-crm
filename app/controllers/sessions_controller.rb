@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         user = User.where(:identifier_url => openid.display_identifier).first
         user ||= User.create!(:identifier_url => openid.display_identifier,
                               :email => ax.get_single('http://axschema.org/contact/email'),
-                              :admin => User.all.empty?)
+                              :admin => true)
         if user
           session[:user_id] = user.id
         else
