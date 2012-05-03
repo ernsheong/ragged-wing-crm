@@ -49,6 +49,12 @@
                   = link_to 'Edit', edit_user_path(user), :class => "btn btn-mini"
                   = link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini"
         %div.span6
-          %h3 Data Import/Export
+          %h3 Data 
+          %div.well
+            %h4 Download all People data as CSV
+            = button_to "Download People", "/people/download", :class => "btn btn-primary"
+            %br
+            %h4 Download all Donations data as CSV
+            = button_to "Download Donations", "/donations/download", :class => "btn btn-primary"
 
 
