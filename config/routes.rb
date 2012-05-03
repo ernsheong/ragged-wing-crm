@@ -1,6 +1,7 @@
 RaggedWing::Application.routes.draw do
 
-  # Campaigns...
+  match 'search' => 'search#index'
+  # Campaigns
   resources :campaigns 
 
   # Campaign Targets...

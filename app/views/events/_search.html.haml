@@ -1,0 +1,18 @@
+%table.table.table-striped
+  %thead 
+    %tr
+      %th Name
+      %th Type
+      %th Description
+      %th Date
+      %th Start Time
+      %th End Time
+  %tbody
+  - @events.each do |event|
+    %tr
+      %td= link_to "#{event.name}", event
+      %td= event.event_type
+      %td= event.description
+      %td= event.date.strftime('%d %B %Y') unless event.date.nil?
+      %td= event.start_time.strftime('%l:%M %p') unless event.start_time.nil?
+      %td= event.end_time.strftime('%l:%M %p') unless event.end_time.nil?
