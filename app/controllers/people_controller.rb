@@ -94,9 +94,8 @@ class PeopleController < ApplicationController
     @person = Person.new(params[:person])
     @person.address1 = Address.create!(params[:address1])
     @person.address2 = Address.create!(params[:address2])
+    @person.save
     @person.save_relationships(params[:relationships])
-
-    
 
     respond_to do |format|
       if @person.save
