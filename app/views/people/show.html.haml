@@ -3,10 +3,11 @@
 
 %h1= "#{@person.first_name} #{@person.last_name}"
 
-%h2
-  = "#{@person.title}"
-  -if not @person.company.blank?
-    = "at #{@person.company}"
+-@person.members.each do |m|
+  -if m.role.empty?
+    -m.role = "Employee"
+  %h4= "#{m.role} at #{m.organization.name}"
+
 %br
 
 %div.row-fluid

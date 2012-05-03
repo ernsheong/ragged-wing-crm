@@ -4,10 +4,12 @@
   %table.table.table-condensed
     %tr
       %th Name
+      %th Role
       %th Actions
     - @organization.members.each do |member|
       %tr
         %td= link_to "#{member.person.first_name} #{member.person.last_name}", member.person
+        %td= member.role
         %td= link_to 'Remove', member, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini"
 
 - else

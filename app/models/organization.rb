@@ -1,5 +1,5 @@
 class Organization < ActiveRecord::Base
-	has_many :members
+	has_many :members, :dependent => :destroy
 	has_many :people, :through => :members
 	has_many :donations
 	belongs_to :address
