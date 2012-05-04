@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   def self.search(q)
     if q
       q = q.downcase
-      results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{q}%", "%#{q}%")
+      results = Person.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "#{q}%", "#{q}%")
       results << Person.find_all_by_full_name(q)
       results.flatten.uniq
     else 

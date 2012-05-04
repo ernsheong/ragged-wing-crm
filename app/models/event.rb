@@ -15,9 +15,9 @@ class Event < ActiveRecord::Base
     elsif year && event.blank?
       return Event.find(:all, :conditions => ["strftime('%Y', date) = ?", year])
     elsif year.blank? && event
-      return Event.find(:all, :conditions => ["event_type like ?", "#{event}%"])
+      return Event.find(:all, :conditions => ["lower(event_type) like ?", "#{event}%"])
     else
-      return Event.find(:all, :conditions => ["strftime('%Y', date) = ? AND event_type like ?", year, "#{event}%"])
+      return Event.find(:all, :conditions => ["strftime('%Y', date) = ? AND lower(event_type) like ?", year, "#{event}%"])
     end
   end
 
