@@ -5,8 +5,8 @@ class SearchController < ApplicationController
 		if params[:q]
 			q = params[:q]
 			@people = Person.search(q)
-			@organizations = Organization.where("lower(name) LIKE ?", "%#{q}%")
-			@events = Event.where("lower(name) LIKE ?", "%#{q}%")
+			@organizations = Organization.where("lower(name) LIKE ?", "#{q}%")
+			@events = Event.where("lower(name) LIKE ?", "#{q}%")
 		else
 			@people = []
 			@organizations = []
