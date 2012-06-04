@@ -81,6 +81,12 @@ GEM
     gchartrb (0.8)
     gherkin (2.9.3)
       json (>= 1.4.6)
+    growl (1.0.3)
+    guard (0.10.0)
+      ffi (>= 0.5.0)
+      thor (~> 0.14.6)
+    guard-rspec (0.7.3)
+      guard (>= 0.10.0)
     haml (3.1.4)
     hike (1.2.1)
     hpricot (0.8.6)
@@ -144,6 +150,7 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
+    rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
     rspec (2.9.0)
@@ -228,6 +235,9 @@ DEPENDENCIES
   factory_girl_rails (~> 3.0)
   ffi (= 1.0.9)
   gchartrb (~> 0.8)
+  growl
+  guard (= 0.10.0)
+  guard-rspec
   haml
   jquery-rails
   kaminari
@@ -237,6 +247,7 @@ DEPENDENCIES
   rack-openid
   rails (= 3.2.2)
   rails3-jquery-autocomplete
+  rb-fsevent
   rspec-rails
   ruby-debug-base19 (~> 0.11.25)
   ruby-debug19

@@ -43,6 +43,9 @@ group :development, :test do
   gem "ruby-debug-base19", "~> 0.11.25"
   gem "factory_girl_rails", "~> 3.0"
   gem 'ffi', '1.0.9'
+  gem 'guard','0.10.0'
+  gem 'guard-rspec'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/
   # TODO: fix this ugliness
   #if RUBY_VERSION.include? '1.9.3'
   #  gem 'linecache19', '0.5.13'
@@ -53,6 +56,7 @@ end
 
 group :test do 
   gem 'cucumber-rails'
+  gem 'growl'
 end
 
 # gems used in production
