@@ -44,7 +44,10 @@ class PeopleController < ApplicationController
   def filter
     @people = Kaminari.paginate_array(Person.filter(params[:filter])).page(params[:page])
     @selected = params[:filter]
-    render "index"
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @results }
+    end
   end
 
   # GET /people/1
