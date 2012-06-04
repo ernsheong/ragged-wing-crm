@@ -7,6 +7,7 @@ RaggedWing::Application.routes.draw do
   # Campaign Targets...
   resources :targets
 
+  match 'organizations/filter' => 'organizations#filter'
   resources :organizations
 
   # Members Controller Mappings
