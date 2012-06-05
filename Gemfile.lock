@@ -77,7 +77,7 @@ GEM
     factory_girl_rails (3.2.0)
       factory_girl (~> 3.2.0)
       railties (>= 3.0.0)
-    ffi (1.0.9)
+    ffi (1.0.10)
     gchartrb (0.8)
     gherkin (2.9.3)
       json (>= 1.4.6)
@@ -233,7 +233,7 @@ DEPENDENCIES
   eventmachine
   execjs
   factory_girl_rails (~> 3.0)
-  ffi (= 1.0.9)
+  ffi (= 1.0.10)
   gchartrb (~> 0.8)
   growl
   guard (= 0.10.0)
