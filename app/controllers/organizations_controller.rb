@@ -76,7 +76,11 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1.json
   def update
     @organization = Organization.find(params[:id])
-    @organization.address.update_attributes(params[:address])
+    unless params[:address].nil?
+      if @organization.address
+        @organization.address.update_attributes(params[:address])
+      end
+    end
     #if @address
       #updated_attributes = {name: org['name'], website: org['website'], org_type: org['org_type'], address_id: @address.id}
     #else

@@ -1,16 +1,15 @@
 require 'spec_helper'
 
 feature "Organization" do
-
   background do
-    Organization.create!( name: "Org A", org_type: "Foundation" )
-    Organization.create!( name: "Org B", org_type: "Arts Organization" )
-    Organization.create!( name: "Org C", org_type: "Corporation" )
-    Organization.create!( name: "Org D", org_type: "Public Entity" )
-    Organization.create!( name: "Org E", org_type: "Foundation" )
+    FactoryGirl.create( :organization, name: "Org A", org_type: "Foundation" )
+    FactoryGirl.create( :organization, name: "Org B", org_type: "Arts Organization" )
+    FactoryGirl.create( :organization, name: "Org C", org_type: "Corporation" )
+    FactoryGirl.create( :organization, name: "Org D", org_type: "Public Entity" )
+    FactoryGirl.create( :organization, name: "Org E", org_type: "Foundation" )
   end
 
-  scenario "view all organizations" do
+  it "should view all organizations" do
     visit '/organizations'
     within_table "table" do 	
   	  page.should have_content "Org A"
@@ -21,7 +20,7 @@ feature "Organization" do
   	end
   end
 
-  scenario "filter organizations by type" do 
+  it "should filter organizations by type" do 
   	visit '/organizations'
   	page.select 'Foundation', :from => 'filter'
   	click_on "Update Listing"
@@ -32,6 +31,36 @@ feature "Organization" do
   		page.should_not have_content "Org C"
   		page.should_not have_content "Org D"
   	end
+  end
+
+  context "should validate organization URL" do 
+    it "appends http://" do 
+      visit '/organizations'
+      click_on "Org A"
+      click_on "Edit Details"
+      fill_in "Website", :with => "berkeley.edu"
+      click_on "Update Organization"
+      page.should have_link "http://berkeley.edu"
+    end
+
+    it "handles www" do
+      visit '/organizations'
+      click_on "Org A"
+      click_on "Edit Details"
+      fill_in "Website", :with => "www.berkeley.edu"
+      click_on "Update Organization"
+      page.should have_link "http://www.berkeley.edu"
+    end
+
+    it "does fine with http://" do 
+      visit '/organizations'
+      click_on "Org A"
+      click_on "Edit Details"
+      fill_in "Website", :with => "http://www.berkeley.edu"
+      click_on "Update Organization"
+      page.should have_link "http://www.berkeley.edu"
+    end
+
   end
 
 end

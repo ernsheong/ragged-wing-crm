@@ -33,11 +33,12 @@ gem "gchartrb", "~> 0.8"
 
 # gems used for testing and development
 group :development, :test do
+  gem "spork-rails"
   gem 'sqlite3'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
-  gem 'rspec-rails'
+  gem 'rspec-rails', "~> 2.0"
   gem 'simplecov'
   gem 'ruby-debug19', :require => 'ruby-debug'       
   gem "ruby-debug-base19", "~> 0.11.25"
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'ffi', '1.0.10'
   gem 'guard','0.10.0'
   gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/
   # TODO: fix this ugliness

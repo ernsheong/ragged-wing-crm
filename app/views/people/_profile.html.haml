@@ -46,13 +46,23 @@
   %tr
     %td
       %i.icon-list-alt
+      Company Website
+    %td= link_to URI.parse("#{@person.website1}").host, "#{@person.website1}"
+  %tr
+    %td
+      %i.icon-list-alt
+      Organization Website
+    %td= link_to URI.parse("#{@person.website2}").host, "#{@person.website2}"
+    %tr
+    %td
+      %i.icon-list-alt
       Personal Profile 1
-    %td= "#{@person.website3}"
+    %td= link_to URI.parse("#{@person.website3}").host, "#{@person.website3}"
   %tr
     %td
       %i.icon-list-alt
       Personal Profile 2
-    %td= "#{@person.website4}"
+    %td= link_to URI.parse("#{@person.website4}").host, "#{@person.website4}"
   %tr
     %td
       %i.icon-user

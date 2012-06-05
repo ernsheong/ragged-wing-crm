@@ -8,8 +8,13 @@ class Person < ActiveRecord::Base
   has_many :relationships, :dependent => :destroy, :autosave => true  # delete relationship in Relationship table if person deleted
   has_many :donations
   has_many :notes, :dependent => :destroy
+  before_validation :smart_add_url_protocol
   validates_presence_of :first_name, :message => "must have a first name!"
   validates_presence_of :last_name, :message => "must have a last name!"
+  validates :website1, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  validates :website2, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  validates :website3, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  validates :website4, :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 
   def self.search(q)
     if q
@@ -244,7 +249,7 @@ class Person < ActiveRecord::Base
         params["title"] = row["Title"]
         params["role"] = row["Role"]
         params["company"] = row["Company"]
-        params["website1"] = row["Company Website"]
+        params["website1"] = row["Company Website"] 
         params["website2"] = row["Organization Website"]
         params["website3"] = row["Personal Profile1"]
         params["website4"] = row["Personal Profile2"]
@@ -260,4 +265,22 @@ class Person < ActiveRecord::Base
     end         
     return "Import Failed."
   end
+
+  protected
+
+  def smart_add_url_protocol
+    unless self.website1.blank? or self.website1[/^(http|https):\/\//]
+      self.website1 = 'http://' + self.website1
+    end
+    unless self.website2.blank? or self.website2[/^(http|https):\/\//]
+      self.website2 = 'http://' + self.website2
+    end
+    unless self.website3.blank? or self.website3[/^(http|https):\/\//]
+      self.website3 = 'http://' + self.website3
+    end
+    unless self.website4.blank? or self.website4[/^(http|https):\/\//]
+      self.website4 = 'http://' + self.website4
+    end
+  end
+
 end
