@@ -1,4 +1,3 @@
-
 %h2= "Details for #{@organization.name}"
 
 %table.table.table-condensed
@@ -25,7 +24,7 @@
     %td
       %i.icon-home
       Website
-    %td= "#{@organization.website}"
+    %td= link_to "#{@organization.website}", "#{@organization.website}"
   %tr
     %td
       %i.icon-cog
