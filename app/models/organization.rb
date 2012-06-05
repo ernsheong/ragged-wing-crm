@@ -11,4 +11,11 @@ class Organization < ActiveRecord::Base
 			"Public Entity", "Private Entity"]
 	end
 
+	def self.filter(option)
+    if option.blank?
+      return Organization.all
+    end 
+    Organization.all( :conditions => {:org_type => option} )
+	end
+
 end

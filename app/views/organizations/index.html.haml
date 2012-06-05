@@ -1,11 +1,14 @@
 %div.pull-right
-  = link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
-
+  = form_tag({:controller => "organizations", :action => "filter"}, :method => "get", :class => "form-horizontal") do
+    = link_to 'Add New Organization', new_organization_path, :class => "btn btn-primary", :id => "new_organization"
+    = select_tag "filter", options_for_select(Organization.org_types, @selected), {:prompt => "Filter by Org Type"}
+    = submit_tag( "Update Listing", :class => "btn" )
+    
 - if notice
   %p#notice= notice
 %h1 Organizations
 
-%table.table.table-striped
+%table.table.table-striped#table
   %thead
     %tr
       %th= sortable "name", "Name"

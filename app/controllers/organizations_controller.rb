@@ -12,6 +12,15 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def filter
+    @organizations = Kaminari.paginate_array(Organization.filter(params[:filter])).page(params[:page])
+    @selected = params[:filter]
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @organizations }
+    end
+  end
+
   # GET /organizations/1
   # GET /organizations/1.json
   def show

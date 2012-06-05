@@ -12,7 +12,7 @@ feature "Organization" do
 
   scenario "view all organizations" do
     visit '/organizations'
-    within "table" do 	
+    within_table "table" do 	
   	  page.should have_content "Org A"
   	  page.should have_content "Org B"
   	  page.should have_content "Org C"
@@ -25,12 +25,12 @@ feature "Organization" do
   	visit '/organizations'
   	page.select 'Foundation', :from => 'filter'
   	click_on "Update Listing"
-  	within "table" do 
+  	within_table "table" do 
   		page.should have_content "Org A"
+  		page.should have_content "Org E"
   		page.should_not have_content "Org B"
   		page.should_not have_content "Org C"
   		page.should_not have_content "Org D"
-  		page.should_not have_content "Org E"
   	end
   end
 
