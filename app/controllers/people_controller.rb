@@ -71,8 +71,7 @@ class PeopleController < ApplicationController
   # GET /people/new.json
   def new
     @person = Person.new
-    @internal = Relationship.internal
-    @external = Relationship.external
+    load_view_variables
 
     respond_to do |format|
       format.html # new.html.erb
@@ -89,8 +88,7 @@ class PeopleController < ApplicationController
     @state2 = @address2.state unless @address2 == nil
     @country1 = @address1.country unless @address1 == nil
     @country2 = @address2.country unless @address2 == nil
-    @internal = Relationship.internal
-    @external = Relationship.external
+    load_view_variables
   end
 
   # POST /people
@@ -107,8 +105,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render json: @person, status: :created, location: @person }
       else
-        @internal = Relationship.internal
-        @external = Relationship.external
+        load_view_variables 
         format.html { render action: "new" }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -125,7 +122,6 @@ class PeopleController < ApplicationController
     else
       @address1 = Address.create!(params[:address1])
       @person.address1 = @address1
-      @person.save!
     end
 
     if @person.address2
@@ -133,17 +129,17 @@ class PeopleController < ApplicationController
     else
       @address2 = Address.create!(params[:address2])
       @person.address2 = @address2
-      @person.save!
     end
     
     @person.save_relationships(params[:relationships])
 
     # Update person
     respond_to do |format|
-      if @person.update_attributes(params[:person])
+      if @person.update_attributes(params[:person]) and @person.save
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
+        load_view_variables
         format.html { render action: "edit" }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -162,6 +158,11 @@ class PeopleController < ApplicationController
   end
 
   private
+
+  def load_view_variables
+    @internal = Relationship.internal
+    @external = Relationship.external
+  end
   
   def sort_column
     Person.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
