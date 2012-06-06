@@ -5,7 +5,6 @@
     = text_field_tag(:start, nil, { :class => "span2", :placeholder => "Start Date..."})
     = text_field_tag(:end, nil, { :class => "span2", :placeholder => "End Date..."})
     = submit_tag("Update Listing", {:class => "btn btn-primary", :id => "filter"})
-    = link_to "CSV Import", {:data => {:toggle => "modal", :target => "#import"}}, :class => "btn"
 
 - if notice
   %p#notice= notice
@@ -61,9 +60,4 @@
           = link_to 'Edit', edit_donation_path(donation), :class => "btn btn-mini"
           = link_to 'Delete', donation, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini"
 
-= paginate @donations
-%hr
-%div.pull-right
-  = form_tag({:action => "upload"}, {:multipart => "true", :id => 'import', :class => 'form-horizontal modal hide fade'}) do
-    = file_field_tag 'file'
-    = submit_tag("Import from CSV", :class => "btn btn-mini")
+= paginate @donations  

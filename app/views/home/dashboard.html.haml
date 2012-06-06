@@ -51,10 +51,22 @@
         %div.span6
           %h3 Data 
           %div.well
-            %h4 Download all People data as CSV
-            = button_to "Download People", "/people/download", :class => "btn btn-primary"
+            %h4 People:
             %br
-            %h4 Download all Donations data as CSV
-            = button_to "Download Donations", "/donations/download", :class => "btn btn-primary"
-
+            = form_tag({:controller => "people", :action => "upload"}, {:multipart => "true", :id => 'peo_import', :class => 'form-horizontal modal hide fade'}) do
+              = file_field_tag 'file'
+              = submit_tag("Import from CSV", :class => "btn btn-mini")
+            %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#peo_import"}} Import/Upload People (CSV)
+            %br
+            %br
+            = button_to "Download People (CSV)", "/people/download", :class => "btn btn-primary"
+            %h4 Donations:
+            %br
+            = form_tag({:controller => "donations", :action => "upload"}, {:multipart => "true", :id => 'don_import', :class => 'form-horizontal modal hide fade'}) do
+              = file_field_tag 'file'
+              = submit_tag("Import from CSV", :class => "btn btn-mini")
+            %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#don_import"}} Import/Upload Donations (CSV)
+            %br
+            %br
+            = button_to "Download Donations (CSV)", "/donations/download", :class => "btn btn-primary"
 

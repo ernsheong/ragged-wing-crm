@@ -3,15 +3,13 @@
 
 %div.pull-right
   = form_tag({:controller => "people", :action => "filter"}, :method => "get", :class => "form-inline") do
+    = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
     = select_tag "filter", options_for_select(Relationship.list, @selected), {:prompt => "Filter by Relationship"}
     = submit_tag( "Update Listing", {:class => "btn", :id => "filter"})
-    = link_to 'Add New Person', new_person_path, :class => "btn btn-primary"
-    %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#import"}} CSV Import
-
-
+    
 %h1 People     
 
-%table.table.table-striped
+%table.table.table-striped#table
   %thead
     %tr
       %th= sortable "first_name", "Name"
@@ -43,8 +41,3 @@
 
 = paginate @people
 %hr
-%div.pull-right
-  = form_tag({:action => "upload"}, {:multipart => "true", :id => 'import', :class => 'form-horizontal modal hide fade'}) do
-    = file_field_tag 'file'
-    = submit_tag("Import from CSV", :class => "btn btn-mini")
-
