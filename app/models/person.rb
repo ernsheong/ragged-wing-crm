@@ -40,12 +40,18 @@ class Person < ActiveRecord::Base
   end
 
   def has_relationship?(name)
-    self.relationships.each do |rel|
+    self.relationships(true).each do |rel|
         if rel.name == name
             return true
         end
     end
     false
+  end
+
+  def add_relationship(rel)
+    unless has_relationship?(rel)
+      Relationship.create!(:person_id => self.id, :name => rel)
+    end
   end
 
 

@@ -88,6 +88,7 @@ class DonationsController < ApplicationController
 
     respond_to do |format|
       if @donation.save
+        Person.find(params[:donation][:person_id]).add_relationship("Donor")
         format.html { redirect_to @donation, notice: 'Donation was successfully created.' }
         format.json { render json: @donation, status: :created, location: @donation }
       else

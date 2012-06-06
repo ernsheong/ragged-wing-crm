@@ -25,13 +25,14 @@ describe DonationsController do
 
     # Hack, TODO: remove and add a fixture for a User
     User.stub(:find_by_id).and_return(true)
+    FactoryGirl.create(:person)
   end
 
   # This should return the minimal set of attributes required to create a valid
   # Donation. As you add validations to Donation, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {:amount => "20", :date => "4/4/2012", :payment_method => "Cash"}
+    {:amount => "20", :date => "4/4/2012", :payment_method => "Cash", :person_id => 1}
   end
   
   # This should return the minimal set of values that should be in the session

@@ -85,6 +85,22 @@ describe Person do
     end
   end
 
+  describe "#add_relationship" do 
+    context "when relationship not in list" do
+      it "should add the specified relationship" do 
+        @person1.add_relationship("Donor")
+        @person1.has_relationship?("Donor").should be_true
+      end
+    end
+    
+    context "when relationship is present in list" do
+      it "should not add the relationship" do 
+        @person.add_relationship("Donor")
+        @person.relationship_list.should eq(['Audience', 'Donor', 'Volunteer'])
+      end
+    end
+  end
+
   describe "#save_relationships" do 
     it "should not delete or add relationships they are not updated" do 
       @person.save_relationships(['Donor', 'Volunteer', 'Audience'])
