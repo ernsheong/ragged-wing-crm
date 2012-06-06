@@ -32,6 +32,7 @@
           %div.nav-collapse
             %ul.nav
               -if signed_in_as_admin?
+                %li.divider-vertical
                 %li= link_to "People", people_path
                 %li.dropdown
                   %a.dropdown-toggle{ data: {toggle: "dropdown", "bitly-type" => "bitly_hover_card", href: "#" }}
@@ -39,6 +40,7 @@
                   %ul.dropdown-menu
                     - Relationship.list.each do |rel|
                       %li= link_to rel, "/people/filter?filter=#{rel.split.join("+")}"
+                %li.divider-vertical
                 %li= link_to "Organizations", organizations_path
                 %li.dropdown
                   %a.dropdown-toggle{ data: {toggle: "dropdown", "bitly-type" => "bitly_hover_card", href: "#" }}
@@ -46,10 +48,15 @@
                   %ul.dropdown-menu
                     - Organization.org_types.each do |typ|
                       %li= link_to typ, "/organizations/filter?filter=#{typ.split.join("+")}"
+                %li.divider-vertical
                 %li= link_to "Donations", donations_path
+                %li.divider-vertical
                 %li= link_to "Events", events_path
+                %li.divider-vertical
                 %li= link_to "Campaigns", campaigns_path
+                %li.divider-vertical
                 %li= link_to "Users", users_path
+                %li.divider-vertical
             %ul.nav.pull-right
               - if signed_in_as_admin?
                 %li
