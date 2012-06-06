@@ -33,6 +33,12 @@
             %ul.nav
               -if signed_in_as_admin?
                 %li= link_to "People", people_path
+                %li.dropdown
+                  %a.dropdown-toggle{ data: {toggle: "dropdown", "bitly-type" => "bitly_hover_card", href: "#" }}
+                    %b{:class => "caret"}
+                  %ul.dropdown-menu
+                    - Relationship.list.each do |rel|
+                      %li= link_to rel, "/people/filter?filter=#{rel.split.join("+")}"
                 %li= link_to "Organizations", organizations_path
                 %li= link_to "Donations", donations_path
                 %li= link_to "Events", events_path

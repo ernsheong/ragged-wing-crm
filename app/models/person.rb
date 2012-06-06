@@ -128,7 +128,7 @@ class Person < ActiveRecord::Base
     if relationship.blank?
       return Person.all
     end 
-    Person.all(:joins => :relationships, :conditions => {:relationships => { :name => relationship }})
+    Person.all(:joins => :relationships, :conditions => { :relationships => { :name => relationship }})
   end
 
   def get_donations_between_dates(start_date, end_date)
