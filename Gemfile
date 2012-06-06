@@ -48,7 +48,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'growl'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/
+  gem 'rb-fsevent'#, :require => false if RUBY_PLATFORM =~ /darwin/
   # TODO: fix this ugliness
   #if RUBY_VERSION.include? '1.9.3'
   #  gem 'linecache19', '0.5.13'
