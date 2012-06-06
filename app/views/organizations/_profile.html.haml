@@ -24,7 +24,7 @@
     %td
       %i.icon-home
       Website
-    %td= link_to "#{@organization.website}", "#{@organization.website}"
+    %td= link_to URI.parse("#{@organization.website}").host, "#{@organization.website}"
   %tr
     %td
       %i.icon-cog

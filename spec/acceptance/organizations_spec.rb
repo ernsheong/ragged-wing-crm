@@ -40,7 +40,7 @@ feature "Organization" do
       click_on "Edit Details"
       fill_in "Website", :with => "berkeley.edu"
       click_on "Update Organization"
-      page.should have_link "http://berkeley.edu"
+      page.should have_link "berkeley.edu", href: "http://berkeley.edu"
     end
 
     it "handles www" do
@@ -49,7 +49,7 @@ feature "Organization" do
       click_on "Edit Details"
       fill_in "Website", :with => "www.berkeley.edu"
       click_on "Update Organization"
-      page.should have_link "http://www.berkeley.edu"
+      page.should have_link "berkeley.edu", href: "http://www.berkeley.edu"
     end
 
     it "does fine with http://" do 
@@ -58,7 +58,7 @@ feature "Organization" do
       click_on "Edit Details"
       fill_in "Website", :with => "http://www.berkeley.edu"
       click_on "Update Organization"
-      page.should have_link "http://www.berkeley.edu"
+      page.should have_link "www.berkeley.edu", href: "http://www.berkeley.edu"
     end
 
   end
