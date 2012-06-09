@@ -11,13 +11,29 @@ feature "Campaigns" do
 	end
 
 	context "when targeting a group of People from Donations" do 
-		it "adds the searched People into a Campaign" do 
-			visit "/donations"
+
+		def add_people
 			select "Campaign Name", from: "campaign_id"
 			click_on "Add People"
-			visit "/campaigns/1"
+		end
+
+		it "adds the searched People into a Campaign" do 
+			visit "/donations"
+			add_people
 			within_table "targets" do
 				page.should have_content "jon lin"
+				page.should have_content "jeremy lin"
+			end
+		end
+
+		it "adds only certain people into campaign" do 
+			visit "/donations"
+			fill_in "min", with: 9
+			fill_in "max", with: 11
+			click_on "Update Listing"
+			add_people
+			within_table "targets" do
+				page.should_not have_content "jon lin"
 				page.should have_content "jeremy lin"
 			end
 		end

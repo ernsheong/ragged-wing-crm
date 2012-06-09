@@ -49,6 +49,7 @@ describe CampaignsController do
     it "adds people from donor_list to the Target database" do 
       Target.should_receive(:create!).twice
       post :target, { :campaign => {:id => 1}, :donations => [ @donation1.id, @donation2.id] }, valid_session
+      response.should be_success
     end
 
     it "should not add if target relationship already exists" do 
