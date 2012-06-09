@@ -7,6 +7,15 @@ class Donation < ActiveRecord::Base
   belongs_to :campaign
   validates_presence_of :amount, :date
 
+  # donation_array is an Array of Strings: ["1", "3"] of IDs of donations
+  def self.donor_list(donation_array)
+    unless donation_array.nil?
+      donor_list = donation_array.collect { |elt| Donation.find(elt).person_id }
+      return donor_list.sort.uniq
+    end
+    nil
+  end
+
 	def self.search_by_specific_amount(amount)
 		Donation.where("amount = ?", amount).all
 	end

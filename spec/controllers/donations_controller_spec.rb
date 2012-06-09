@@ -42,6 +42,10 @@ describe DonationsController do
     { }
   end
 
+  describe "target" do 
+
+  end
+
   describe "GET index" do
     it "assigns all donations as @donations" do
       donation = Donation.create! valid_attributes

@@ -41,6 +41,28 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
   end
 
+  def target
+    donors = Donation.donor_list(params[:donations]) # returns array of Person IDs
+    unless donors.nil?
+      donors.each do |id|
+        begin 
+          Target.create!({ person_id: id, campaign_id: params[:campaign][:id] })
+        rescue
+          next
+        end
+      end
+    end 
+
+    @campaign = Campaign.find(params[:campaign][:id])
+    @target = Target.new
+    @amount_graph = @campaign.graph_donations_by_year(params[:campaign][:id])
+    @freq_graph = @campaign.donation_freq_by_year(params[:campaign][:id])
+
+    respond_to do |format|
+      format.html { render "show" }  
+    end
+  end
+
   # POST /campaigns
   # POST /campaigns.json
   def create

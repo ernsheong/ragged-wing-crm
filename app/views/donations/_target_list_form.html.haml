@@ -1,0 +1,13 @@
+= form_tag({:controller => "campaigns", :action => "target"}, {:multipart => "true", :id => 'campaign_target', :class => 'form-horizontal modal hide fade'}) do
+  %div.modal-header
+    %button.close{ :data => { :dismiss => "modal"} } X
+    %h3 Add Donors to a Campaign
+    %h4 All donors from all donations on this page will be added to the following Campaign:
+  %div.modal-body{ :style => "height:100px;" }
+    = label :campaign, :id, 'Select a Campaign'
+    = select :campaign, :id, Campaign.all.collect {|c| [ c.name, c.id ] }, { :include_blank => true }, :class => "span2"
+  %div.modal-footer
+    %a.btn{ :href => "#",:data => { :dismiss => "modal"} } Close
+    -@donations.each do |don|
+      = hidden_field_tag "donations[]", don.id
+    = submit_tag "Add People", :class => "actions btn btn-primary"

@@ -1,5 +1,8 @@
+= render 'target_list_form'
+
 %div.pull-right
   = form_tag({:controller => "donations", :action => "filter_donations"}, :class => "form-inline", :method => "get") do
+    %a.btn.btn-primary{:data => {:toggle => "modal", :target => "#campaign_target"}} Add Donors to Campaign
     = text_field_tag(:min, nil, { :class => "span2", :placeholder => "Min Amount..."})
     = text_field_tag(:max, nil, { :class => "span2", :placeholder => "Max Amount..."})
     = text_field_tag(:start, nil, { :class => "span2", :placeholder => "Start Date..."})

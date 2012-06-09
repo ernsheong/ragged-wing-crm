@@ -11,6 +11,22 @@ describe Donation do
     @donation4 = Donation.create!(:amount => 80, :date => '2008-07-09', :person_id => @person3.id)
   end
 
+  describe ".donor_list" do 
+    it "returns an array of Person IDs" do 
+      Donation.donor_list([ @donation1.id.to_s]).should eq [1]
+      Donation.donor_list([ "1", "2" ]).should eq [1,2]
+      Donation.donor_list([ @donation1.id.to_s, @donation2.id.to_s, @donation3.id.to_s ]).should eq [1, 2, 3]
+    end
+
+    it "does not return duplicate Person IDs" do 
+      Donation.donor_list([ "3", "4" ]).should eq [3]
+    end
+
+    it "returns nil if there is no donor list" do 
+      Donation.donor_list(nil).should eq nil
+    end
+  end
+
   describe ".search_by_specific_amount" do
     it "returns donations with a specified amount" do
       Donation.search_by_specific_amount(10).should eq([@donation1])

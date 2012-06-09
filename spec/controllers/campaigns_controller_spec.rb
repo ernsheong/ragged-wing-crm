@@ -34,6 +34,36 @@ describe CampaignsController do
     {}
   end
 
+  describe "POST target" do 
+    before :each do 
+      FactoryGirl.create(:campaign) # campaign with ID=1
+      @donation1 = FactoryGirl.create(:donation)
+      @donation2 = FactoryGirl.create(:donation, person_id: 2)
+    end
+
+    it "calls Donations.donor_list with an array of donation IDs" do
+      Donation.should_receive(:donor_list).with(["1", "2"]).and_return(["1"])
+      post :target, { :campaign => {:id => 1}, :donations => [ @donation1.id , @donation2.id] }, valid_session
+    end
+
+    it "adds people from donor_list to the Target database" do 
+      Target.should_receive(:create!).twice
+      post :target, { :campaign => {:id => 1}, :donations => [ @donation1.id, @donation2.id] }, valid_session
+    end
+
+    it "should not add if target relationship already exists" do 
+      2.times do 
+        post :target, { :campaign => {:id => 1}, :donations => [ @donation1.id ] }, valid_session
+      end
+      Target.count.should eq 1
+    end
+
+    it "should do nothing if no donations on page" do 
+      post :target, { :campaign => {:id => 1}, :donations => nil }, valid_session
+    end
+
+  end
+
   describe "GET index" do
     it "assigns all campaigns as @campaigns" do
       campaign = Campaign.create! valid_attributes
